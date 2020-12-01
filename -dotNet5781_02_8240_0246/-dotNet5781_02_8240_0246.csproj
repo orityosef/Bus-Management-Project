@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Bus.cs" />
     <Compile Include="BusLine.cs" />
-    <Compile Include="Buslines4.cs" />
+    <Compile Include="BusCompany.cs" />
     <Compile Include="BusStation.cs" />
     <Compile Include="enum.cs" />
     <Compile Include="Program.cs" />

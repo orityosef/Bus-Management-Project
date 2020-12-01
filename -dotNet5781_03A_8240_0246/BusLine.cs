@@ -4,7 +4,8 @@ using System.Collections;
 
 namespace _dotNet5781_03A_8240_0246
 {
-    public class BusLine : IComparable <BusLine>
+    public class BusLine : IComparable <BusLine> 
+
     {
         private List<BusStation> busstations = new List<BusStation>();
         public List<BusStation> BusStations
@@ -25,7 +26,9 @@ namespace _dotNet5781_03A_8240_0246
         /// <summary>
         /// Line number
         /// </summary>
-        public int Number { get; set; }
+        private int number;
+        public int Number {get=>number;set=>number= value;}
+
         public double Time
         {
             get { return Time; }
