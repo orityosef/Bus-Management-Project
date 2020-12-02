@@ -10,88 +10,86 @@ using System.Collections;
 
 namespace _dotNet5781_03A_8240_0246
 {
-    public class BusCompany : IEnumerable 
+    public class BusCompany : IEnumerable
 
     {
-        List<BusLine> BusLines = new List<BusLine>();
-        public BusLine this[int lineNumber]
+        private List<BusLine> busLines = new List<BusLine>();
+        public List<BusLine> BusLiness
+        {
+            get => busLines;
+        }
+        public BusLine this[int lineNumber]//indexrt
         {
             get
             {
                 int index1 = FindIndex(lineNumber);
-                return BusLines[index1];
+                if (index1 != -1)
+                {
+                    return busLines[index1];
+                }
+                else throw new IndexOutOfRangeException("not valid index");
             }
             set
             {
                 int index1 = FindIndex(lineNumber);
-                BusLines[index1] = value;
+                if (index1 == -1)
+                {
+                    busLines.Add(value);
+                }
             }
         }
-      /*public List<BusLine> BusLiness
-        {
-            get;
-            set;
-        }*/
-
-        public int BusLineNum (int x)
-        {
-            int y = Find(x);
-            return y;
-         
-        }
-        public int counterLine
+        
+        static int counterLine// num of the bus
         {
             get;
             set;
         }
-        public IEnumerable GetEnumerator()
-            {return BusLines.GetEnumerator();}
-
-        public void add(BusLine x)
+  
+        public void addbus(BusLine x)//add bus line
         {
-            if (BusLines == null)
+            if (busLines.Count== 0)
             {
-                BusLines.Add((BusCompany)x);
+                busLines.Add(x);
                 counterLine++;
                 return;
 
             }
             int counter = 0;
-            foreach (BusLine y in BusLines)
+            foreach (BusLine y in busLines)
             {
-                if (y == x)
+                if (y.Number == x.Number)
                 {
                     counter++;
                 }
             }
             if (counter == 1)
             {
-                BusLine temp = x;
-                temp.BusStations.Clear();
-                foreach (Station p in x.BusStations)
+                BusLine temp = new BusLine();
+                temp.Number = x.Number;
+                foreach (BusStation p in x.BusStations)
                 {
-                    temp.BusStations.Add((BusStation)p);
+                    temp.BusStations.Add(p);
                 }
-                BusLines.Add((BusCompany)temp);
-                counterLine++;
+                busLines.Add(temp);
+                
                 return;
             }
             if (counter > 1)
             {
                 throw new ArgumentException("The bus already exists");
             }
-            BusLines.Add((BusCompany)x);
-            counterLine++;
+            busLines.Add(x);
+            
         }
-        public void remove(BusLine x)
+        public void remove(BusLine x)//remove bus
         {
-            foreach (BusLine y in BusLines)
+            foreach (BusLine y in busLines)
             {
-                if (x == y)
+                if (x.Number == y.Number)
                 {
                     if (x.BusStations == y.BusStations)
                     {
-                        BusLiness.Remove((BusCompany)x);
+                        BusLiness.Remove(x);
                         counterLine--;
                         return;
                     }
@@ -99,25 +97,37 @@ namespace _dotNet5781_03A_8240_0246
             }
             throw new ArgumentException("The bus line does not exist");
         }
-        public int Find(int x)
+        public int Find(int x)//Check the index of the busline
         {
             int counter = 0;
-            foreach (BusLine y in BusLines)
+            foreach (BusLine y in busLines)
             {
                 counter++;
                 if (x == y.Number)
                 {
 
-                    return counter;
+                    return (counter-1);
 
                 }
             }
             throw new ArgumentException("The bus line does not exist");
         }
+        public void addStationToLine(int bus, BusStation s)
+        {//add station to line
+            foreach (BusLine item in BusLiness)
+            {
+                if (item.Number == bus)
+                {
+                    item.AddLast(s);
+                    return;
+                }
+            }
+        }
+
         public void searchStation(int w)
         {
 
-            foreach (BusLine y in BusLines)
+            foreach (BusLine y in busLines)
             {
 
                 if (y.SearchStationKey1(w))
@@ -133,17 +143,14 @@ namespace _dotNet5781_03A_8240_0246
             x.BusLiness.Sort();
             return x;
         }
-        public BusLine FindLine(int index)
-        {
-            if (index < counterLine)
+        public BusLine searchLine(int key)
+        {//return the bus line by the line number 
+            foreach (BusLine item in BusLiness)
             {
-                return BusLiness[index];
+                if (item.Number == key)
+                    return item;
             }
-            else
-            {
-                throw new ArgumentException("The index exceeds the limits of the list");
-
-            }
+            return null;
         }
         public BusCompany check(BusStation x, BusStation y)
         {
@@ -152,9 +159,9 @@ namespace _dotNet5781_03A_8240_0246
             {
                 x = i.SearchStationKey(x.BusStationKey);//find index
                 y = i.SearchStationKey(y.BusStationKey);//find index
-                if (i.search(x) && i.search(y))
+                if (i.searchStation(x) && i.searchStation(y))
                 {
-                    sub_list.add(i);
+                    sub_list.addbus(i);
                 }
             }
             return sub_list;
@@ -179,40 +186,9 @@ namespace _dotNet5781_03A_8240_0246
 
             }
         }
-       
-        public BusCompany constractor()
-        {
-            BusCompany collection_line = new BusCompany();//Create a collection of lines
-            List<BusStation> stations = new List<BusStation>();//List of stations
-                                                              
-            BusLine bus = new BusLine();
-            for (int j = 0; j < 10; j++)
-            {
-                Random r = new Random();
-                bus.Number = r.Next(0, 1000000);
-                for (int i = 0; i < 40; i++)
-                {
-                    BusStation x = MewStation();
-                    try
-                    {
-                        bus.Add(i, x);
-                    }
-                    catch (Exception exception)
-                    {
-                        Console.WriteLine(exception.Message);
-                    }
-                }
-                try
-                {
-                    collection_line.add(bus);
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception.Message);
-                }
-            }
-            return collection_line;
-        }
+
+
+        
         private static BusStation MewStation()
         {
             BusStation x = new BusStation();
@@ -222,38 +198,25 @@ namespace _dotNet5781_03A_8240_0246
             x.BusStationKey = r.Next(0, 1000000);
             return x;
         }
- 
-       /* public BusLine this[int index]
-        { 
-             
-            get 
-            {
-                if (index > -1 && index < counterLine)
-                {
-                    return BusLiness[index];
-                }
-                return null;
-            } 
-            set { BusLiness[index] = value; } 
-        }*/
 
-        private int FindIndex(int lineNumber)
+
+        private int FindIndex(int lineNumber)//chek if the bus line found
         {
             var index = BusLiness.FindIndex((BusLine line) => { return line.Number == lineNumber; });
             try
             {
                 if (index == -1)
                 {
-                    throw new Exception("Error: not found");//לזרוק חריגה אם האינדקס קטן מאפס
+                    throw new Exception("Error: not found");//an valid index
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             return index;
+        }
 
-
+        public IEnumerator GetEnumerator()
+        {
+            return busLines.GetEnumerator();
         }
     }
 }
-
-
-
