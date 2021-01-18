@@ -51,7 +51,7 @@
     <Compile Include="DO\LineStation.cs" />
     <Compile Include="DO\LineTrip.cs" />
     <Compile Include="DO\Station.cs" />
-    <Compile Include="DO\Statue.cs" />
+    <Compile Include="DO\Status.cs" />
     <Compile Include="DO\Trip.cs" />
     <Compile Include="DO\User.cs" />
     <Compile Include="DLFactory.cs" />

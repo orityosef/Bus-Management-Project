@@ -25,7 +25,7 @@ namespace BL.BLAPI
             busDo.TotalTrip = busBo.TotalTrip;
             busDo.FuelRemain = busBo.FuelRemain;
             busDo.Refuel = busBo.Refuel;
-            busDo.Status = (DO.Statue)busBo.Status;
+            busDo.Status = (DO.Status)busBo.Status;
             return (busDo);
     }
         private Bus ConvertDtoB(DO.Bus busDo)

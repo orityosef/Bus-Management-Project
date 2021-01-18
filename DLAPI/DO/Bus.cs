@@ -13,7 +13,7 @@ namespace DO
         public double TotalTrip { get; set; }
         public double FuelRemain { get; set; }
         public int Refuel { get; set; }
-        public Statue Status { get; set; }
+        public Status Status { get; set; }
 
     }
 }

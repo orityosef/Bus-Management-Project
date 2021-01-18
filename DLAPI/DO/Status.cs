@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DO
 {
 
-        public enum Statue
+        public enum Status
     {
             ReadyToGo, MidRide, Refueling, Treatment
         }

@@ -56,7 +56,7 @@ namespace DS
                 Fromdate = DateTime.Today.AddYears(-3),
                 TotalTrip = 5000,
                 FuelRemain = 1200,
-                Status = Statue.ReadyToGo
+                Status = Status.ReadyToGo
             });
             listBus.Add(new Bus
             {
@@ -64,7 +64,7 @@ namespace DS
                 Fromdate = DateTime.Today.AddYears(-20),
                 TotalTrip = 5000,
                 FuelRemain = 1200,
-                Status = Statue.ReadyToGo
+                Status = Status.ReadyToGo
             });
             listBus.Add(new Bus
             {
@@ -72,7 +72,7 @@ namespace DS
                 Fromdate = DateTime.Today.AddYears(-2),
                 TotalTrip = 5000,
                 FuelRemain = 1200,
-                Status = Statue.ReadyToGo
+                Status = Status.ReadyToGo
             });
             listBus.Add(new Bus
             {
@@ -80,7 +80,7 @@ namespace DS
                 Fromdate = DateTime.Today.AddYears(-1),
                 TotalTrip = 5000,
                 FuelRemain = 1200,
-                Status = Statue.ReadyToGo
+                Status = Status.ReadyToGo
             });
         }
         public static void InitBusLine()
