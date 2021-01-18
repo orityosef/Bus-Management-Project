@@ -354,8 +354,8 @@ namespace DL
                 throw new AdjacentStationException(AdjacentStationNew.Station1, AdjacentStationNew.Station2 );
                 //return false;
             }
-
-            DataSource.listAdjacentStation.Add(AdjacentStationNew.Clone());
+            var cloned = AdjacentStationNew.Clone();
+            DataSource.listAdjacentStation.Add(cloned);
             return true;
         }
 
