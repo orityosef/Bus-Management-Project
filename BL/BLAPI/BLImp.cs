@@ -40,7 +40,7 @@ namespace BL.BLAPI
                 Refuel = busDo.Refuel,
                 Status = (Status)busDo.Status
             };
-            
+
             return (busBo);
         }
         //הוספת אוטובוס 
@@ -60,7 +60,7 @@ namespace BL.BLAPI
             return true;
         }
         //מחיקה אוטובוס
-            public bool deleteBus(Bus busNew)
+        public bool deleteBus(Bus busNew)
         {
             DO.Bus busDo = new DO.Bus();
             busDo = ConvertBtoD(busNew);
@@ -101,7 +101,7 @@ namespace BL.BLAPI
         public Bus GetOneBus(int License)
         {
             DO.Bus busDo = new DO.Bus();
-           Bus busBo = new Bus();
+            Bus busBo = new Bus();
             try
             {
                 busDo = dl.GetOneBus(License);
@@ -123,7 +123,7 @@ namespace BL.BLAPI
                        let bobus = ConvertDtoB(item)
                        where busCondition(bobus)
                        select bobus;
-           }
+            }
 
             catch (DO.BusException ex)
             {
@@ -215,19 +215,19 @@ namespace BL.BLAPI
         public IEnumerable<Line> GetAllBusesLine()
         {
             var result = from l in dl.GetAllBusesLine()
-                   select new Line
-                   {
-                       Id = l.Id,
-                       LineNumber = l.LineNumber,
-                       Aera = (Areas)l.Area,
-                       FirstStation = l.FirstStation,
-                       LastStation = l.LastStation,
-                       StationList = ((from ls in dl.GetAllLineStation()
-                                      let bls = ConvertDtoB(ls)
-                                      where bls.LineNumber == l.LineNumber
-                                      select bls).OrderBy(linestation => linestation.LineStationIndex))
-                                      .Select( item =>GetOneSation(item.StationID)).ToList()
-                   };
+                         select new Line
+                         {
+                             Id = l.Id,
+                             LineNumber = l.LineNumber,
+                             Aera = (Areas)l.Area,
+                             FirstStation = l.FirstStation,
+                             LastStation = l.LastStation,
+                             StationList = ((from ls in dl.GetAllLineStation()
+                                             let bls = ConvertDtoB(ls)
+                                             where bls.LineNumber == l.LineNumber
+                                             select bls).OrderBy(linestation => linestation.LineStationIndex))
+                                            .Select(item => GetOneSation(item.StationID)).ToList()
+                         };
             return result;
         }
         public IEnumerable<Line> GetPartOfBusesLine(Predicate<Line> LineCondition)
@@ -235,9 +235,9 @@ namespace BL.BLAPI
             try
             {
                 return from item in dl.GetAllBusesLine()
-                       let bobus = ConvertDtoB(item)
-                       where LineCondition(bobus)
-                       select bobus;
+                       let boLine = ConvertDtoB(item)
+                       where LineCondition(boLine)
+                       select boLine;
             }
 
             catch (DO.LineException ex)
@@ -265,9 +265,18 @@ namespace BL.BLAPI
         #endregion Line
 
         #region Station
-
-
-         private Station ConvertDtoB(DO.Station st)
+        //המרה מ-BלD
+        private DO.Station ConvertBtoD(Station StationBo)
+        {
+            DO.Station StationDo = new DO.Station();
+            StationDo.Code = StationBo.Code;
+            StationDo.Name = StationBo.Name;
+            StationDo.Latitude = StationBo.Latitude;
+            StationDo.Longitude = StationBo.Longitude;
+            return (StationDo);
+        }
+        //המרה מ-DלB
+        private Station ConvertDtoB(DO.Station st)
         {
             Station StationBo = new Station();
 
@@ -278,50 +287,229 @@ namespace BL.BLAPI
             StationBo.StationInLineList = ((from ls in dl.GetAllLineStation()
                                             let bls = ConvertDtoB(ls)
                                             where (bls.StationID == st.Code)
-                                            select bls.LineNumber).ToList());             
+                                            select bls.LineNumber).ToList());
             return (StationBo);
         }
 
-
-
         private Station GetOneSation(int stationID)
         {
-            return ConvertDtoB(dl.GetOneStation(stationID));
+
+            DO.Station StationDo = new DO.Station();
+            Station StationBo = new Station();
+            try
+            {
+                StationDo = dl.GetOneStation(stationID);
+                StationBo = ConvertDtoB(StationDo);
+                return StationBo;
+
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException("Station license is illegal", ex);
+            }
         }
 
         public bool addStation(Station StationNew)
         {
-            throw new NotImplementedException();
+            DO.Station StationDo = new DO.Station();
+            StationDo = ConvertBtoD(StationNew);
+            try
+            {
+                dl.addStation(StationDo);
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException("Station license is illegal", ex);
+                //return false
+            }
+            return true;
         }
 
         public bool updatingStation(Station StationNew)
         {
-            throw new NotImplementedException();
+            DO.Station StationDo = new DO.Station();
+            StationDo = ConvertBtoD(StationNew);
+            try
+            {
+                dl.updatingStation(StationDo);
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException("Station license is illegal", ex);
+                //return false
+            }
+            return true;
         }
 
         public bool deleteStation(Station StationNew)
         {
-            throw new NotImplementedException();
+            DO.Station StationDo = new DO.Station();
+            StationDo = ConvertBtoD(StationNew);
+            try
+            {
+                dl.deleteStation(StationDo);
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException("Station license is illegal", ex);
+                //return false
+            }
+            return true;
         }
 
         public IEnumerable<Station> GetAllStation()
         {
-            throw new NotImplementedException();
+            return from Station in dl.GetAllStation()
+                   select ConvertDtoB(Station);
         }
 
-        public IEnumerable<Line> GetPartOfStation(Predicate<Station> StationCondition)
+        public IEnumerable<Station> GetPartOfStation(Predicate<Station> StationCondition)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return from item in dl.GetAllStation()
+                       let boStation = ConvertDtoB(item)
+                       where StationCondition(boStation)
+                       select boStation;
+            }
+
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException("Station license is illegal", ex);
+            }
         }
 
-        public Line GetOneStation(int code)
+        public Station GetOneStation(int code)
         {
-            throw new NotImplementedException();
+            DO.Station StationDo = new DO.Station();
+            Station StationBo = new Station();
+            try
+            {
+                StationDo = dl.GetOneStation(code);
+                StationBo = ConvertDtoB(StationDo);
+                return StationBo;
+
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException("Station license is illegal", ex);
+            }
         }
+
         #endregion Station
-        
 
-        #region LineStation
+
+        #region AdjacentStation
+        //המרה מ-BלD
+        private DO.AdjacentStation ConvertBtoD(AdjacentStation AdjacentStationBo)
+        {
+            DO.AdjacentStation AdjacentStationDo = new DO.AdjacentStation();
+            AdjacentStationDo.Station1 = AdjacentStationBo.Station1ID;
+            AdjacentStationDo.Station2 = AdjacentStationBo.Station2ID;
+            AdjacentStationDo.Time = AdjacentStationBo.Time;
+            AdjacentStationDo.Distance = AdjacentStationBo.Distance;
+            return (AdjacentStationDo);
+        }
+        //המרה מ-DלB
+        private AdjacentStation ConvertDtoB(DO.AdjacentStation AdjacentStationDo)
+        {
+            AdjacentStation AdjacentStationBo = new AdjacentStation
+            {
+                Station1ID = AdjacentStationDo.Station1,
+                Station2ID = AdjacentStationDo.Station2,
+                Time = AdjacentStationDo.Time,
+                Distance = AdjacentStationDo.Distance,
+            };
+
+            return (AdjacentStationBo);
+        }
+        public bool addAdjacentStation(AdjacentStation AdjacentStationNew)
+        {
+            DO.AdjacentStation AdjacentStationDo = new DO.AdjacentStation();
+            AdjacentStationDo = ConvertBtoD(AdjacentStationNew);
+            try
+            {
+                dl.addAdjacentStation(AdjacentStationDo);
+            }
+            catch (DO.AdjacentStationException ex)
+            {
+                throw new BO.AdjacentStationException("Adjacent Station license is illegal", ex);
+                //return false
+            }
+            return true;
+        }
+
+        public bool updatingAdjacentStation(AdjacentStation AdjacentStationNew)
+        {
+            DO.AdjacentStation AdjacentStationDo = new DO.AdjacentStation();
+            AdjacentStationDo = ConvertBtoD(AdjacentStationNew);
+            try
+            {
+                dl.updatingAdjacentStation(AdjacentStationDo);
+            }
+            catch (DO.AdjacentStationException ex)
+            {
+                throw new BO.AdjacentStationException("Adjacent Station license is illegal", ex);
+                //return false
+            }
+            return true;
+        }
+
+        public bool deleteAdjacentStation(AdjacentStation AdjacentStationNew)
+        {
+            DO.AdjacentStation AdjacentStationDo = new DO.AdjacentStation();
+            AdjacentStationDo = ConvertBtoD(AdjacentStationNew);
+            try
+            {
+                dl.deleteAdjacentStation(AdjacentStationDo);
+            }
+            catch (DO.AdjacentStationException ex)
+            {
+                throw new BO.AdjacentStationException("Adjacent Station license is illegal", ex);
+                //return false
+            }
+            return true;
+        }
+
+        public IEnumerable<AdjacentStation> GetAllAdjacentStation()
+        {
+            return from AdjacentStation in dl.GetAllAdjacentStation()
+                   select ConvertDtoB(AdjacentStation);
+        }
+        public IEnumerable<AdjacentStation> GetPartOfAdjacentStation(Predicate<AdjacentStation> AdjacentStationCondition)
+        {
+            try
+            {
+                return from item in dl.GetAllAdjacentStation()
+                       let boGetAllAdjacentStation = ConvertDtoB(item)
+                       where AdjacentStationCondition(boGetAllAdjacentStation)
+                       select boGetAllAdjacentStation;
+            }
+
+            catch (DO.AdjacentStationException ex)
+            {
+                throw new BO.AdjacentStationException("Adjacent Station license is illegal", ex);
+            }
+        }
+
+        public AdjacentStation GetOneAdjacentStation(int Station1, int Station2)
+        {
+            DO.AdjacentStation AdjacentStationDo = new DO.AdjacentStation();
+            AdjacentStation AdjacentStationBo = new AdjacentStation();
+            try
+            {
+                AdjacentStationDo = dl.GetOneAdjacentStation(Station1, Station2);
+                AdjacentStationBo = ConvertDtoB(AdjacentStationDo);
+                return AdjacentStationBo;
+
+            }
+            catch (DO.AdjacentStationException ex)
+            {
+                throw new BO.AdjacentStationException("Adjacent Station license is illegal", ex);
+            }
+        }
+        #endregion AdjacentStation
+
         private LineStation ConvertDtoB(DO.LineStation linestation)
         {
             var result = new LineStation
@@ -333,6 +521,5 @@ namespace BL.BLAPI
             };
             return result;
         }
-        #endregion LineStation
     }
 }

@@ -33,8 +33,27 @@ namespace BL.BLAPI
         bool updatingStation(Station StationNew);
         bool deleteStation(Station StationNew);
         IEnumerable<Station> GetAllStation();
-        IEnumerable<Line> GetPartOfStation(Predicate<Station> StationCondition);
-        Line GetOneStation(int code);
+        IEnumerable<Station> GetPartOfStation(Predicate<Station> StationCondition);
+        Station GetOneStation(int code);
         #endregion
+        //תחנות סמוכות
+        #region AdjacentStation
+        bool addAdjacentStation(AdjacentStation AdjacentStationNew);
+        bool updatingAdjacentStation(AdjacentStation AdjacentStationNew);
+        bool deleteAdjacentStation(AdjacentStation AdjacentStationNew);
+        IEnumerable<AdjacentStation> GetAllAdjacentStation();
+        AdjacentStation GetOneAdjacentStation(int Station1, int Station2);
+        IEnumerable<AdjacentStation> GetPartOfAdjacentStation(Predicate<AdjacentStation> AdjacentStationCondition);
+        #endregion AdjacentStation
+        //רשימת תחנות
+        #region LineStation
+        bool addLineStation(LineStation LineStationNew);
+        bool updatingLineStation(LineStation LineStationNew);
+        bool deleteLineStation(LineStation SLineStationNew);
+        IEnumerable<LineStation> GetAllLineStation();
+        IEnumerable<LineStation> GetPartOfLineStation(Predicate<LineStation> LineStationCondition);
+        LineStation GetOneLineStation(int LineNumber);
+
+        #endregion LineStation
     }
 }

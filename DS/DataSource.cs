@@ -221,8 +221,8 @@ namespace DS
             listLineStation.Add(new LineStation
             {
                 LineNumber = 836,
-                Station =234567,//טבריה
-                LineStationIndex =1,
+                Station = 234567,//טבריה
+                LineStationIndex = 1,
                 PrevStation = 0,// תחנה ראשונה
                 NextStation = 852340//יקנעם
             });
@@ -230,7 +230,7 @@ namespace DS
             {
                 LineNumber = 836,
                 Station = 303999,// תל אביב
-                LineStationIndex =3,
+                LineStationIndex = 3,
                 PrevStation = 852340,//יקנעם
                 NextStation = 0//תחנה אחרונה
             });
@@ -251,7 +251,7 @@ namespace DS
                 LineStationIndex = 1,
                 PrevStation = 0,
                 NextStation = 965320//מגדל
-            });            
+            });
             listLineStation.Add(new LineStation
             {
                 LineNumber = 450,
@@ -281,7 +281,7 @@ namespace DS
             listLineStation.Add(new LineStation
             {
                 LineNumber = 56,
-                Station =  303988,//באר שבע
+                Station = 303988,//באר שבע
                 LineStationIndex = 3,
                 PrevStation = 764581,//נבטים
                 NextStation = 0
@@ -303,7 +303,7 @@ namespace DS
                 LineStationIndex = 1,
                 PrevStation = 0,
                 NextStation = 673029//לטרון
-            });            
+            });
             listLineStation.Add(new LineStation
             {
                 LineNumber = 480,
