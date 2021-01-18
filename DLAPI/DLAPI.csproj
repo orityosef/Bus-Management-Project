@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="DLConfig.cs" />
     <Compile Include="DO\AdjacentStation.cs" />
-    <Compile Include="DO\Aeras.cs" />
+    <Compile Include="DO\Areas.cs" />
     <Compile Include="DO\Bus.cs" />
     <Compile Include="DO\DOExceptions.cs" />
     <Compile Include="DO\BusOnTrip.cs" />

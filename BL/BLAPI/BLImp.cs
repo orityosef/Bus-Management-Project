@@ -16,7 +16,7 @@ namespace BL.BLAPI
 
 
         #region Bus
-
+        //המרה מ-BלD
         private DO.Bus ConvertBtoD(Bus busBo)
         {
             DO.Bus busDo = new DO.Bus();
@@ -27,7 +27,8 @@ namespace BL.BLAPI
             busDo.Refuel = busBo.Refuel;
             busDo.Status = (DO.Status)busBo.Status;
             return (busDo);
-    }
+        }
+        //המרה מ-DלB
         private Bus ConvertDtoB(DO.Bus busDo)
         {
             Bus busBo = new Bus
@@ -42,6 +43,7 @@ namespace BL.BLAPI
             
             return (busBo);
         }
+        //הוספת אוטובוס 
         public bool addBus(Bus busNew)
         {
             DO.Bus busDo = new DO.Bus();
@@ -57,7 +59,7 @@ namespace BL.BLAPI
             }
             return true;
         }
-
+        //מחיקה אוטובוס
             public bool deleteBus(Bus busNew)
         {
             DO.Bus busDo = new DO.Bus();
@@ -73,6 +75,7 @@ namespace BL.BLAPI
             }
             return true;
         }
+        //עדכון אוטובס
         public bool updatingBus(Bus busNew)
         {
             DO.Bus busDo = new DO.Bus();
@@ -88,13 +91,13 @@ namespace BL.BLAPI
             }
             return true;
         }
-
+        //הבאת כל הרשימה של האוטובוסים
         public IEnumerable<Bus> GetAllBuses()
         {
             return from Bus in dl.GetAllBuses()
                    select ConvertDtoB(Bus);
         }
-
+        //הבאת אוטובוס בודד
         public Bus GetOneBus(int License)
         {
             DO.Bus busDo = new DO.Bus();
@@ -111,10 +114,9 @@ namespace BL.BLAPI
                 throw new BO.BusException("bus license is illegal", ex);
             }
         }
-
+        //הבאת אוטובס אחד עפ"י תנאי
         public IEnumerable<Bus> GetPartOfBuses(Predicate<Bus> busCondition)
         {
-            //please remove GetPartOfBuses from DalObject vechu
             try
             {
                 return from item in dl.GetAllBuses()
@@ -129,24 +131,85 @@ namespace BL.BLAPI
             }
         }
 
-        public IEnumerable<Bus> GetPartOfBuses(Predicate<DO.Bus> BusCondition)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion Bus
 
+        #region Line
+        //המרה מ-BלD
+        private DO.Line ConvertBtoD(Line LineBo)
+        {
+            DO.Line LineDo = new DO.Line();
+            LineDo.Id = LineBo.Id;
+            LineDo.FirstStation = LineBo.FirstStation;
+            LineDo.LastStation = LineBo.LastStation;
+            LineDo.LineNumber = LineBo.LineNumber;
+            LineDo.Area = (DO.Areas)LineBo.Aera;
+            return (LineDo);
+        }
+        //המרה מ-DלB
+        private Line ConvertDtoB(DO.Line LineDo)
+        {
+            Line LineBo = new Line
+            {
+                Id = LineDo.Id,
+                LineNumber = LineDo.LineNumber,
+                FirstStation = LineDo.FirstStation,
+                LastStation = LineDo.LastStation,
+                Aera = (Areas)LineDo.Area,
+                //הוספה לרשימת הלשדה חדש-רשימת תחנות בהם עובר הקו
+                StationList = ((from ls in dl.GetAllLineStation()
+                                let bls = ConvertDtoB(ls)
+                                where bls.LineNumber == LineDo.LineNumber
+                                select bls).OrderBy(linestation => linestation.LineStationIndex))
+                                      .Select(item => GetOneSation(item.StationID)).ToList()
+            };
+            return (LineBo);
+        }
         public bool addLine(Line LineNew)
         {
-            throw new NotImplementedException();
+            DO.Line LineDo = new DO.Line();
+            LineDo = ConvertBtoD(LineNew);
+            try
+            {
+                dl.addBusLine(LineDo);
+            }
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException("Line license is illegal", ex);
+                //return false
+            }
+            return true;
         }
 
         public bool updatingLine(Line LineNew)
         {
-            throw new NotImplementedException();
+            DO.Line LineDo = new DO.Line();
+            LineDo = ConvertBtoD(LineNew);
+            try
+            {
+                dl.updatingBusLine(LineDo);
+            }
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException("Line license is illegal", ex);
+                //return false
+            }
+            return true;
         }
 
         public bool deleteLine(Line LineNew)
         {
-            throw new NotImplementedException();
+            DO.Line LineDo = new DO.Line();
+            LineDo = ConvertBtoD(LineNew);
+            try
+            {
+                dl.deleteBusLine(LineDo);
+            }
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException("Line license is illegal", ex);
+                //return false
+            }
+            return true;
         }
 
         public IEnumerable<Line> GetAllBusesLine()
@@ -156,7 +219,7 @@ namespace BL.BLAPI
                    {
                        Id = l.Id,
                        LineNumber = l.LineNumber,
-                       Aera = (Areas)l.Aera,
+                       Aera = (Areas)l.Area,
                        FirstStation = l.FirstStation,
                        LastStation = l.LastStation,
                        StationList = ((from ls in dl.GetAllLineStation()
@@ -167,11 +230,42 @@ namespace BL.BLAPI
                    };
             return result;
         }
-
-        private Station GetOneSation(int stationID)
+        public IEnumerable<Line> GetPartOfBusesLine(Predicate<Line> LineCondition)
         {
-            return ConvertDtoB(dl.GetOneStation(stationID));
+            try
+            {
+                return from item in dl.GetAllBusesLine()
+                       let bobus = ConvertDtoB(item)
+                       where LineCondition(bobus)
+                       select bobus;
+            }
+
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException("Lune license is illegal", ex);
+            }
         }
+
+        public Line GetOneBusLine(int Id)
+        {
+            DO.Line LineDo = new DO.Line();
+            Line LineBo = new Line();
+            try
+            {
+                LineDo = dl.GetOneBusLine(Id);
+                LineBo = ConvertDtoB(LineDo);
+                return LineBo;
+
+            }
+            catch (DO.BusException ex)
+            {
+                throw new BO.BusException("Line license is illegal", ex);
+            }
+        }
+        #endregion Line
+
+        #region Station
+
 
         private Station ConvertDtoB(DO.Station st)
         {
@@ -184,8 +278,44 @@ namespace BL.BLAPI
             };
         }
 
-    private LineStation ConvertDtoB(DO.LineStation linestation)
-    {
+        private Station GetOneSation(int stationID)
+        {
+            return ConvertDtoB(dl.GetOneStation(stationID));
+        }
+
+        public bool addStation(Station StationNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool updatingStation(Station StationNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool deleteStation(Station StationNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Station> GetAllStation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Line> GetPartOfStation(Predicate<Station> StationCondition)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Line GetOneStation(int code)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion Station
+
+        private LineStation ConvertDtoB(DO.LineStation linestation)
+        {
             var result = new LineStation
             {
                 LineNumber = linestation.LineNumber,
@@ -193,23 +323,7 @@ namespace BL.BLAPI
                 LineStationIndex = linestation.LineStationIndex
 
             };
-        return result;
-    }
-
-
-    public IEnumerable<Line> GetPartOfBusesLine(Predicate<Line> LineCondition)
-        {
-            throw new NotImplementedException();
+            return result;
         }
-
-        public Line GetOneBusLine(string Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Bus
-
-
-
     }
 }

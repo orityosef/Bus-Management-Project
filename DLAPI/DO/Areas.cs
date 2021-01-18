@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    public enum Aeras
+    public enum Areas
     {
         GENERAL, NORTH, SOUTH, CENTER, JERUSALEM
     }

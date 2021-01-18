@@ -72,15 +72,7 @@ namespace DL
                    select Bus.Clone();
         }
 
-        public IEnumerable<Bus> GetPartOfBuses(Predicate<Bus> LineCondition)
-        {
-            IEnumerable<Bus> TempBus = from Bus item in DataSource.listBus where LineCondition(item) select item.Clone();
-            if (TempBus.Count() == 0)
-            {
-                throw new BusException("There are no conditional buses in the system");
-            }
-            return TempBus;
-        }
+      
         #endregion Bus
 
         #region Line
@@ -127,19 +119,10 @@ namespace DL
                    select Line.Clone();
         }
 
-        public IEnumerable<Line> GetPartOfBusesLine(Predicate<Line> BusCondition)
-        {
-            IEnumerable<Line> TempBus = from Line item in DataSource.listLine where BusCondition(item) select item.Clone();
-            if (TempBus.Count() == 0)
-            {
-                throw new LineException("There are no conditional Lines in the system");
-            }
-            return TempBus;
-        }
 
-        public Line GetOneBusLine(string Id)
+        public Line GetOneBusLine(int Id)
         {
-            DO.Line busold = DataSource.listLine.Find(b => b.Id.ToString() == Id);
+            DO.Line busold = DataSource.listLine.Find(b => b.Id == Id);
             if (busold != null)
             {
                 return busold;
@@ -193,15 +176,7 @@ namespace DL
                    select Station.Clone();
         }
 
-        public IEnumerable<Station> GetPartOfStation(Predicate<Station> StationCondition)
-        {
-            IEnumerable<Station> TempBus = from Station item in DataSource.listStation where StationCondition(item) select item.Clone();
-            if (TempBus.Count() == 0)
-            {
-                throw new StationException( "There are no conditional Station in the system");
-            }
-            return TempBus;
-        }
+      
 
         public Station GetOneStation(int code)
         {
@@ -258,15 +233,6 @@ namespace DL
                    select LineStation.Clone();
         }
 
-        public IEnumerable<LineStation> GetPartOfLineStation(Predicate<LineStation> LineStationCondition)
-        {
-            IEnumerable<LineStation> TempBus = from LineStation item in DataSource.listLineStation where LineStationCondition(item) select item.Clone();
-            if (TempBus.Count() == 0)
-            {
-                throw new LineException("There are no conditional LineStation in the system");
-            }
-            return TempBus;
-        }
 
         public LineStation GetOneLineStation(int LineNumber)
         {
@@ -323,15 +289,7 @@ namespace DL
                    select User.Clone();
         }
 
-        public IEnumerable<User> GetPartOfUser(Predicate<User> UserCondition)
-        {
-            IEnumerable<User> TempUser = from User item in DataSource.listUser where UserCondition(item) select item.Clone();
-            if (TempUser.Count() == 0)
-            {
-                throw new UserException("There are no conditional User in the system");
-            }
-            return TempUser;
-        }
+      
 
         public User GetOneUser(string UsserName)
         {
@@ -390,15 +348,7 @@ namespace DL
                    select AdjacentStation.Clone();
         }
 
-        public IEnumerable<AdjacentStation> GetPartOfAdjacentStation(Predicate<AdjacentStation> AdjacentStationCondition)
-        {
-            IEnumerable<AdjacentStation> TempAdjacentStation = from AdjacentStation item in DataSource.listAdjacentStation where AdjacentStationCondition(item) select item.Clone();
-            if (TempAdjacentStation.Count() == 0)
-            {
-                throw new AdjacentStationException("There are no conditional AdjacentStation in the system");
-            }
-            return TempAdjacentStation;
-        }
+
 
         public AdjacentStation GetOneAdjacentStation(int Station1, int Station2)
         {

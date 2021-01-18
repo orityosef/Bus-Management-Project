@@ -10,7 +10,7 @@ namespace DO
     {
         public int Id { get; set; }
         public int LineNumber { get; set; }
-        public Aeras Aera { get; set; }
+        public Areas Area { get; set; }
         public int FirstStation { get; set; }
         public int LastStation { get; set; }
     }

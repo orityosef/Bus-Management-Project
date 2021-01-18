@@ -17,7 +17,7 @@ namespace DLAPI
         bool updatingBus(Bus busNew);
         bool deleteBus(Bus busNew);
         IEnumerable<Bus> GetAllBuses();
-        IEnumerable<Bus> GetPartOfBuses(Predicate<Bus>BusCondition);
+  
         Bus GetOneBus(int License);
         #endregion
         //קו
@@ -26,8 +26,8 @@ namespace DLAPI
         bool updatingBusLine(Line busLineNew);
         bool deleteBusLine(Line busLineNew);
         IEnumerable<Line> GetAllBusesLine();
-        IEnumerable<Line> GetPartOfBusesLine(Predicate<Line> LineCondition);
-        Line GetOneBusLine(string Id);
+
+        Line GetOneBusLine(int Id);
         #endregion BusLine
         //תחנה
         #region Station
@@ -35,7 +35,7 @@ namespace DLAPI
         bool updatingStation(Station StationNew);
         bool deleteStation(Station StationNew);
         IEnumerable<Station> GetAllStation();
-        IEnumerable<Station> GetPartOfStation(Predicate<Station> StationCondition);
+
         Station GetOneStation(int code);
         #endregion Station
         //רשימת תחנות
@@ -44,7 +44,7 @@ namespace DLAPI
         bool updatingLineStation(LineStation LineStationNew);
         bool deleteLineStation(LineStation SLineStationNew);
         IEnumerable<LineStation> GetAllLineStation();
-        IEnumerable<LineStation> GetPartOfLineStation(Predicate<LineStation> LineStationCondition);
+
         LineStation GetOneLineStation(int LineNumber);
 
         #endregion LineStation
@@ -54,7 +54,7 @@ namespace DLAPI
         bool updatingUser(User UserNew);
         bool deleteUser(User UserNew);
         IEnumerable<User> GetAllUser();
-        IEnumerable<User> GetPartOfUser(Predicate<User> UserCondition);
+
         User GetOneUser(string UsserName);
         #endregion User
         //תחנות סמוכות
@@ -63,7 +63,6 @@ namespace DLAPI
         bool updatingAdjacentStation(AdjacentStation AdjacentStationNew);
         bool deleteAdjacentStation(AdjacentStation AdjacentStationNew);
         IEnumerable<AdjacentStation> GetAllAdjacentStation();
-        IEnumerable<AdjacentStation> GetPartOfAdjacentStation(Predicate<AdjacentStation> AdjacentStationCondition);
         AdjacentStation GetOneAdjacentStation( int Station1 , int Station2);
         #endregion AdjacentStation
 

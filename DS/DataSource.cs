@@ -91,7 +91,7 @@ namespace DS
             {
                 Id = 1,
                 LineNumber = 836,
-                Aera = Aeras.GENERAL,
+                Area = Areas.GENERAL,
                 FirstStation = 234567,
                 LastStation = 303999
             });
@@ -99,7 +99,7 @@ namespace DS
             {
                 Id = 2,
                 LineNumber = 450,
-                Aera = Aeras.NORTH,
+                Area = Areas.NORTH,
                 FirstStation = 234567,
                 LastStation = 987654
             });
@@ -107,7 +107,7 @@ namespace DS
             {
                 Id = 3,
                 LineNumber = 56,
-                Aera = Aeras.SOUTH,
+                Area = Areas.SOUTH,
                 FirstStation = 246801,
                 LastStation = 303988
             });
@@ -115,7 +115,7 @@ namespace DS
             {
                 Id = 4,
                 LineNumber = 480,
-                Aera = Aeras.CENTER,
+                Area = Areas.CENTER,
                 FirstStation = 143998,
                 LastStation = 303999
             });

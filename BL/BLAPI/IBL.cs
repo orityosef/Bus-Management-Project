@@ -15,7 +15,7 @@ namespace BL.BLAPI
         bool updatingBus(Bus busNew);
         bool deleteBus(Bus busNew);
         IEnumerable<Bus> GetAllBuses();
-        IEnumerable<Bus> GetPartOfBuses(Predicate<DO.Bus> BusCondition);
+        IEnumerable<Bus> GetPartOfBuses(Predicate<Bus> BusCondition);
         Bus GetOneBus(int License);
         #endregion
         //קו
@@ -25,7 +25,16 @@ namespace BL.BLAPI
         bool deleteLine(Line LineNew);
         IEnumerable<Line> GetAllBusesLine();
         IEnumerable<Line> GetPartOfBusesLine(Predicate<Line> LineCondition);
-        Line GetOneBusLine(string Id);
+        Line GetOneBusLine(int Id);
+        #endregion
+        //תחנה
+        #region Station
+        bool addStation(Station StationNew);
+        bool updatingStation(Station StationNew);
+        bool deleteStation(Station StationNew);
+        IEnumerable<Station> GetAllStation();
+        IEnumerable<Line> GetPartOfStation(Predicate<Station> StationCondition);
+        Line GetOneStation(int code);
         #endregion
     }
 }
