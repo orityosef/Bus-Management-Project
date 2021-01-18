@@ -209,38 +209,108 @@ namespace DS
         public static void InitLineStation()
         {
             listLineStation = new List<LineStation>();
-
+            //836 קו 
             listLineStation.Add(new LineStation
             {
                 LineNumber = 836,
-                Station = 852340,
-                LineStationIndex = 3,
-                PrevStation = 234567,
-                NextStation = 303999,
+                Station = 852340,//יקנעם
+                LineStationIndex = 2,
+                PrevStation = 234567,//טבריה
+                NextStation = 303999// תל אביב
+            });
+            listLineStation.Add(new LineStation
+            {
+                LineNumber = 836,
+                Station =234567,//טבריה
+                LineStationIndex =1,
+                PrevStation = 0,// תחנה ראשונה
+                NextStation = 852340//יקנעם
+            });
+            listLineStation.Add(new LineStation
+            {
+                LineNumber = 836,
+                Station = 303999,// תל אביב
+                LineStationIndex =3,
+                PrevStation = 852340,//יקנעם
+                NextStation = 0//תחנה אחרונה
+            });
+
+            //קו 450
+            listLineStation.Add(new LineStation
+            {
+                LineNumber = 450,
+                Station = 965320,//מגדל
+                LineStationIndex = 2,
+                PrevStation = 234567,//טבריה
+                NextStation = 987654//צפת
             });
             listLineStation.Add(new LineStation
             {
                 LineNumber = 450,
-                Station = 965320,
+                Station = 234567,//טבריה
+                LineStationIndex = 1,
+                PrevStation = 0,
+                NextStation = 965320//מגדל
+            });            
+            listLineStation.Add(new LineStation
+            {
+                LineNumber = 450,
+                Station = 987654,//צפת
                 LineStationIndex = 3,
-                PrevStation = 234567,
-                NextStation = 987654
+                PrevStation = 965320,//מגדל
+                NextStation = 0
+            });
+
+            //קו 56
+            listLineStation.Add(new LineStation
+            {
+                LineNumber = 56,
+                Station = 764581,//נבטים
+                LineStationIndex = 2,
+                PrevStation = 246801,//דימונה
+                NextStation = 303988//באר שבע
             });
             listLineStation.Add(new LineStation
             {
                 LineNumber = 56,
-                Station = 764581,
+                Station = 246801,//דימונה
+                LineStationIndex = 1,
+                PrevStation = 0,
+                NextStation = 764581//נבטים
+            });
+            listLineStation.Add(new LineStation
+            {
+                LineNumber = 56,
+                Station =  303988,//באר שבע
                 LineStationIndex = 3,
-                PrevStation = 246801,
-                NextStation = 303988
+                PrevStation = 764581,//נבטים
+                NextStation = 0
+            });
+
+            //קו 480
+            listLineStation.Add(new LineStation
+            {
+                LineNumber = 480,
+                Station = 673029,//לטרון
+                LineStationIndex = 2,
+                PrevStation = 143998,//ירושלים
+                NextStation = 303999//תל אביב
             });
             listLineStation.Add(new LineStation
             {
                 LineNumber = 480,
-                Station = 673029,
+                Station = 143998,//ירושלים
+                LineStationIndex = 1,
+                PrevStation = 0,
+                NextStation = 673029//לטרון
+            });            
+            listLineStation.Add(new LineStation
+            {
+                LineNumber = 480,
+                Station = 303999,//תל אביב
                 LineStationIndex = 3,
-                PrevStation = 143998,
-                NextStation = 303999
+                PrevStation = 673029,//לטרון
+                NextStation = 0
             });
         }
         public static void InitAdjacentStation()

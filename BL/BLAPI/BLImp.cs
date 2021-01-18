@@ -267,16 +267,22 @@ namespace BL.BLAPI
         #region Station
 
 
-        private Station ConvertDtoB(DO.Station st)
+         private Station ConvertDtoB(DO.Station st)
         {
-            return new Station
-            {
-                Code = st.Code,
-                Name = st.Name,
-                Latitude = st.Latitude,
-                Longitude = st.Longitude
-            };
+            Station StationBo = new Station();
+
+            StationBo.Code = st.Code;
+            StationBo.Name = st.Name;
+            StationBo.Latitude = st.Latitude;
+            StationBo.Longitude = st.Longitude;
+            StationBo.StationInLineList = ((from ls in dl.GetAllLineStation()
+                                            let bls = ConvertDtoB(ls)
+                                            where (bls.StationID == st.Code)
+                                            select bls.LineNumber).ToList());             
+            return (StationBo);
         }
+
+
 
         private Station GetOneSation(int stationID)
         {
@@ -313,7 +319,9 @@ namespace BL.BLAPI
             throw new NotImplementedException();
         }
         #endregion Station
+        
 
+        #region LineStation
         private LineStation ConvertDtoB(DO.LineStation linestation)
         {
             var result = new LineStation
@@ -325,5 +333,6 @@ namespace BL.BLAPI
             };
             return result;
         }
+        #endregion LineStation
     }
 }
