@@ -508,18 +508,79 @@ namespace BL.BLAPI
                 throw new BO.AdjacentStationException("Adjacent Station license is illegal", ex);
             }
         }
+        //מביא את התחנה הסמוכה הקודמת לתחנה הספציפית
+        public AdjacentStation GetOneAdjacentStation2(int Station)
+        {
+            
+            AdjacentStation AdjacentStationBo = new AdjacentStation();
+            AdjacentStationBo = (AdjacentStation)(from ls in GetAllAdjacentStation()
+                                                  where ((ls.Station1ID == Station)||(ls.Station2ID == Station))
+                                                  select ls);
+            return (AdjacentStationBo);
+        }
         #endregion AdjacentStation
+
+        #region LineStation
 
         private LineStation ConvertDtoB(DO.LineStation linestation)
         {
-            var result = new LineStation
-            {
-                LineNumber = linestation.LineNumber,
-                StationID = linestation.Station,
-                LineStationIndex = linestation.LineStationIndex
+            var LineStationBo = new LineStation();
 
-            };
-            return result;
+            LineStationBo.LineNumber = linestation.LineNumber;
+            LineStationBo.StationID = linestation.Station;
+            LineStationBo.LineStationIndex = linestation.LineStationIndex;
+            LineStationBo.PrevStation = linestation.PrevStation;
+            LineStationBo.NextStation = linestation.NextStation;
+            AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.PrevStation,LineStationBo.StationID);
+            LineStationBo.TimeFromPrevious = AdjacentStationBo.Time;
+            LineStationBo.DistanceFromPrevious = AdjacentStationBo.Distance;
+            AdjacentStationBo = GetOneAdjacentStation(LineStationBo.StationID, LineStationBo.NextStation);
+            LineStationBo.TimetoNext = AdjacentStationBo.Time;
+            LineStationBo.DistancetoNext = AdjacentStationBo.Distance;
+            return LineStationBo;
         }
+        //המרה מ-BלD
+        private DO.LineStation ConvertBtoD(LineStation LineStation)
+        {
+            DO.LineStation LineStationDo = new DO.LineStation();
+            LineStationDo.Station= LineStation.StationID;
+            LineStationDo.LineNumber = LineStation.LineNumber;
+            LineStationDo.LineStationIndex = LineStation.LineStationIndex;
+             LineStationDo.PrevStation = LineStation.PrevStation;
+            LineStationDo.NextStation = LineStation.NextStation;
+            return (LineStationDo);
+        }
+
+        public bool addLineStation(LineStation LineStationNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool updatingLineStation(LineStation LineStationNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool deleteLineStation(LineStation SLineStationNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<LineStation> GetAllLineStation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<LineStation> GetPartOfLineStation(Predicate<LineStation> LineStationCondition)
+        {
+            throw new NotImplementedException();
+        }
+
+        public LineStation GetOneLineStation(int LineNumber)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion LineStation
+
     }
 }

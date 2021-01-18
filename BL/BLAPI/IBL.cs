@@ -43,6 +43,7 @@ namespace BL.BLAPI
         bool deleteAdjacentStation(AdjacentStation AdjacentStationNew);
         IEnumerable<AdjacentStation> GetAllAdjacentStation();
         AdjacentStation GetOneAdjacentStation(int Station1, int Station2);
+        AdjacentStation GetOneAdjacentStation2(int Station);
         IEnumerable<AdjacentStation> GetPartOfAdjacentStation(Predicate<AdjacentStation> AdjacentStationCondition);
         #endregion AdjacentStation
         //רשימת תחנות
