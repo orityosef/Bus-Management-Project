@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Targil02_Tal_DotNetLab
+namespace _dotNet5781_03A_8240_0246
 {
-    public class Buslines4 : BusLine
+    public class BusCompany : BusLine
     {
         private List<BusLine> BusLines = new List<BusLine>();
         public List<BusLine> BusLiness
@@ -28,7 +28,7 @@ namespace Targil02_Tal_DotNetLab
         {
             if (BusLines == null)
             {
-                BusLines.Add((Buslines4)x);
+                BusLines.Add((BusCompany)x);
                 counterLine++;
                 return;
 
@@ -49,7 +49,7 @@ namespace Targil02_Tal_DotNetLab
                 {
                     temp.BusStations.Add((BusStation)p);
                 }
-                BusLines.Add((Buslines4)temp);
+                BusLines.Add((BusCompany)temp);
                 counterLine++;
                 return;
             }
@@ -57,7 +57,7 @@ namespace Targil02_Tal_DotNetLab
             {
                 throw new ArgumentException("The bus already exists");
             }
-            BusLines.Add((Buslines4)x);
+            BusLines.Add((BusCompany)x);
             counterLine++;
         }
         public void remove(BusLine x)
@@ -68,7 +68,7 @@ namespace Targil02_Tal_DotNetLab
                 {
                     if (x.BusStations == y.BusStations)
                     {
-                        BusLiness.Remove((Buslines4)x);
+                        BusLiness.Remove((BusCompany)x);
                         counterLine--;
                         return;
                     }
@@ -105,7 +105,7 @@ namespace Targil02_Tal_DotNetLab
             }
             throw new ArgumentException("There are no bus lines passing through this station");
         }
-        public Buslines4 SortTime(Buslines4 x)
+        public BusCompany SortTime(BusCompany x)
         {
             x.BusLiness.Sort();
             return x;
@@ -122,9 +122,9 @@ namespace Targil02_Tal_DotNetLab
 
             }
         }
-        public Buslines4 check(BusStation x, BusStation y)
+        public BusCompany check(BusStation x, BusStation y)
         {
-            Buslines4 sub_list = new Buslines4();
+            BusCompany sub_list = new BusCompany();
             foreach (BusLine i in BusLiness)
             {
                 x = i.SearchStationKey(x.BusStationKey);//find index
@@ -136,7 +136,7 @@ namespace Targil02_Tal_DotNetLab
             }
             return sub_list;
         }
-        public void print(Buslines4 x)
+        public void print(BusCompany x)
         {
             foreach (BusLine i in BusLiness)
             {
@@ -144,7 +144,7 @@ namespace Targil02_Tal_DotNetLab
 
             }
         }
-        public void printS(Buslines4 x)
+        public void printS(BusCompany x)
         {
             foreach (BusLine i in BusLiness)
             {

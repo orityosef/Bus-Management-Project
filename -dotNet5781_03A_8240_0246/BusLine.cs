@@ -4,28 +4,22 @@ using System.Collections;
 
 namespace _dotNet5781_03A_8240_0246
 {
-    public class BusLine : IComparable <BusLine>
+    public class BusLine : IComparable <BusLine> 
+
     {
         private List<BusStation> busstations = new List<BusStation>();
         public List<BusStation> BusStations
         {
-            get
-            {
-                List<BusStation> temp = new List<BusStation>(busstations);
-                return temp;
-            }
+            get => busstations;
+          
         }
 
-        //public readonly List<BusStation> busStations;
-
-        public BusLine()
-        {
-            //busStations = new List<BusStation>();
-        }
         /// <summary>
         /// Line number
         /// </summary>
-        public int Number { get; set; }
+        private int number;
+        public int Number {get=>number;set=>number= value;}
+
         public double Time
         {
             get { return Time; }
@@ -48,13 +42,13 @@ namespace _dotNet5781_03A_8240_0246
         }
         public void Add(int index, BusStation busStation)
         {
-            if (index == 0)
+            if (index == 0)//first one
             {
                 AddFirst(busStation);
             }
             else
             {
-                if (index > busstations.Count)
+                if (index > busstations.Count)//overflow
                 {
                     throw new ArgumentOutOfRangeException("index", "index should be less than or equal to" + busstations.Count);
                 }
@@ -65,13 +59,11 @@ namespace _dotNet5781_03A_8240_0246
                 }
             }
         }
-
-
-        public bool search(Station x)
+        public bool searchStation(BusStation x)//search Station on the bus line
         {
-            foreach (Station y in busstations)
+            foreach (BusStation y in busstations)
             {
-                if (y == x)
+                if (y.BusStationKey ==x.BusStationKey)
                 {
                     return true;
                 }
@@ -84,7 +76,7 @@ namespace _dotNet5781_03A_8240_0246
             return one.TravelTime.Subtract(two.TravelTime).TotalMinutes;
         }
 
-        public double DistanceBetween(Station x, Station y)
+        public double DistanceBetween(BusStation x, BusStation y)
         {
             double distance, z, p;
             z = x.Latitude - y.Latitude;
@@ -96,28 +88,62 @@ namespace _dotNet5781_03A_8240_0246
             return distance;
         }
 
-        public int SubRoute(Station x, Station y)
-        {
-            if (search(x))
-            {
-                if (search(y))
-                {
-                    return Number;
-                }
-            }
-            throw new FormatException("The bus does not pass through these stations");
+     
+        //public BusLine sub_Route(BusStation one, BusStation two)
+        //{
+        //    if (!searchStation(one))
+        //    {
+        //        throw new ArgumentException(
+        //                 String.Format("{0} bus not exist", one));
+        //    }
+        //    if (!searchStation(two))
+        //    {
+        //        throw new ArgumentException(
+        //                 String.Format("{0} bus not exist", two));
+        //    }
+        //    else
+        //    {
+        //        BusLine temp = new BusLine();
+        //        int first = find_index(one);
+        //        int last = find_index(two);
+        //        if (first != -1 && last != -1)
+        //        {
+        //            if (first > last)
+        //            {
+        //                int help = first;
+        //                first = last;
+        //                last = help;
+        //            }
+        //            for (int i = 0; first <= last; i++, first++)
+        //            {
+        //                temp.BusStations.Insert(i, BusStations[first]);
+        //            }
+        //            temp.LastStation = temp.BusStations[temp.BusStations.Count - 1];
+        //            temp.FirstStation = temp.BusStations[0];
+        //        }
 
-        }
+        //        else
+        //        {
+        //            throw new ArgumentException(
+        //            String.Format(" bus station not exist"));
+        //        }
+        //        return temp;
+        //    }
+        //}
 
-        public int CompareTo(BusLine other)
+        public int CompareTo(BusLine other)//Compare Between travel time
         {
             double mytotal = totalTime();
             double othertotal = other.totalTime();
 
             return mytotal.CompareTo(othertotal);
         }
+        public int CompareTo(object obj)
+        {
+            return Time.CompareTo(((BusLine)obj).Time);
+        }
 
-        private double totalTime()
+        private double totalTime()// total Time travel computer between stations
         {
             double total = 0;
             for (int i = 0; i < busstations.Count - 1; i++)
@@ -128,7 +154,7 @@ namespace _dotNet5781_03A_8240_0246
             return total;
         }
 
-        public BusStation SearchStationKey(int x)
+        public BusStation SearchStationKey(int x)//cheak if the bus pass this these stations
         {
             foreach (BusStation y in busstations)
             {
@@ -139,7 +165,7 @@ namespace _dotNet5781_03A_8240_0246
             }
             return null;
         }
-        public bool SearchStationKey1(int x)
+        public bool SearchStationKey1(int x)//bool-cheak if the bus pass this these stations
         {
             foreach (Station y in BusStations)
             {
@@ -150,11 +176,8 @@ namespace _dotNet5781_03A_8240_0246
             }
             return false;
         }
-        public int CompareTo(object obj)
-        {
-            return Time.CompareTo(((BusLine)obj).Time);
-        }
-        public void remove (BusStation x)
+        
+        public void remove (BusStation x)//remove station from the busline
         {
             BusStations.Remove(x);
         }

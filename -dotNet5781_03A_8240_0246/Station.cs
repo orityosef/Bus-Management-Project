@@ -6,7 +6,7 @@ namespace _dotNet5781_03A_8240_0246
     /// <summary>
     /// Staion for bus
     /// </summary>
-    public class Station
+    public class Station 
     {
         private const int MAXDIGITS = 1000000;
         private const int MIN_LAT = -90;
@@ -29,12 +29,12 @@ namespace _dotNet5781_03A_8240_0246
 
             set
             {
-                if (serials.Contains(value))
-                {
-                    throw new ArgumentException(
-                        String.Format("{0} key number exists allready", value));
-                }
-                if (value <= 0 && value >= MAXDIGITS)
+                //if (serials.Contains(value))//key number exists
+                //{
+                //    throw new ArgumentException(
+                //        String.Format("{0} key number exists allready", value));
+                //}
+                if (value <= 0 && value >= MAXDIGITS)//not a valid key number
                 {
                     throw new ArgumentException(
                        String.Format("{0} is not a valid key number", value));
