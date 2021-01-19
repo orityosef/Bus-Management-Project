@@ -25,10 +25,14 @@
             <RowDefinition Height="74*"/>
             <RowDefinition Height="75*"/>
         </Grid.RowDefinitions>
-        <Label FontSize="40" Content="Welcome" HorizontalAlignment="Center" FontFamily="Cooper" Margin="90,0,101.333,59" FontWeight="Bold" Width="202" Height="76" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <Label  Content="Please select" HorizontalAlignment="Center" FontFamily="Lucida Calligraphy" FontSize="20" Margin="117,0,125.333,41" Width="151" Height="39" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Row="1"/>
-        <Button x:Name="b1" Content="manager" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontFamily="Britannic Bold" Width="309" Height="62" Margin="39,0,0,37.333" FontSize="35" Grid.Row="1" Click="manager_Click" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <Label FontSize="40" Content="Welcome" HorizontalAlignment="Center" FontFamily="Elephant" Margin="90,0,101.333,59" FontWeight="Bold" 
+               Width="202" Height="76" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Label  Content="Please select user:" HorizontalAlignment="Center" FontFamily="Times New Roman" FontSize="22" Margin="106,0,101.6,32.6" 
+                Width="186" Height="39" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Row="1" FontWeight="Bold"/>
+        <Button x:Name="b1" Content="manager" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontFamily="Times New Roman" 
+                Width="309" Height="62" Margin="39,0,0,37.333" FontSize="35" Grid.Row="1" Click="manager_Click" Grid.ColumnSpan="2" Grid.RowSpan="2" FontWeight="Bold">
         </Button>
-        <Button x:Name="b2" Content="passenger" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Britannic Bold" Width="309" Height="62" Margin="39,0,0,9.667" FontSize="35" Grid.Row="2" Click="passenger_Click" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Button x:Name="b2" Content="passenger" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
+                Width="309" Height="62" Margin="39,0,0,9.667" FontSize="35" Grid.Row="2" Click="passenger_Click" Grid.ColumnSpan="2" Grid.RowSpan="2" FontWeight="Bold"/>
     </Grid>
 </Window>

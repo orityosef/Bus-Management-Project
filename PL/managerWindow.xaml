@@ -11,23 +11,28 @@
     </Window.Background>
     <Grid Margin="0,2,0,-2">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="122*"/>
-            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush ImageSource="Im/managerWindow.jpg"/>
-        </Grid.Background>
+        </Grid.Background>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
-            <RowDefinition Height="84*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="75*"/>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="71*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="72*"/>
         </Grid.RowDefinitions>
-        <Label  Content="Select an option" HorizontalAlignment="Center" FontFamily="Lucida Calligraphy" FontSize="20" Margin="117,0,125.333,41" Width="151" Height="39" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Row="1"/>
-        <Button x:Name="b1" Content="manager" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontFamily="Britannic Bold" Width="309" Height="62" Margin="39,0,0,37.333" FontSize="35" Grid.Row="1" Click="manager_Click" Grid.ColumnSpan="2" Grid.RowSpan="2">
-        </Button>
-        <Button x:Name="b2" Content="passenger" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Britannic Bold" Width="309" Height="62" Margin="39,0,0,9.667" FontSize="35" Grid.Row="2" Click="passenger_Click" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Label  Content="Select an option:" HorizontalAlignment="Center" FontFamily="Times New Roman" FontSize="24" Margin="111,0,110.6,9.4" Width="172" Height="43" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+        <Button x:Name="b1" Content="Buses" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontFamily="Times New Roman" 
+                Width="342" Height="47" Margin="26,0,0,20.6" FontSize="35" Click="Buses_Click" Grid.ColumnSpan="2" FontWeight="Bold" Grid.RowSpan="2"/>
+        <Button x:Name="b2" Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
+                Width="342" Height="47" Margin="26,0,0,23.8" FontSize="35" Grid.Row="2" Click="Lines_Click" Grid.ColumnSpan="2" FontWeight="Bold"/>
+        <Button x:Name="b3" Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
+                Width="342" Height="47" Margin="26,0,0,24" FontSize="35" Grid.Row="3" Click="Stations_Click" Grid.ColumnSpan="2" FontWeight="Bold"/>
+        <Button x:Name="b4" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
+                Width="342" Height="47" Margin="26,0,0,24.4" FontSize="35" Grid.Row="3" Click="Edit_Click" Grid.ColumnSpan="2" FontWeight="Bold" Grid.RowSpan="2"/>
     </Grid>
 </Window>

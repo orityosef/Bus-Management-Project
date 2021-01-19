@@ -26,14 +26,14 @@ namespace PL
         }
         private void manager_Click(object sender, RoutedEventArgs e)
         {
-            Window EmployeeWindow = new managerWindow();
-            EmployeeWindow.Show();
+            Window managerWindow = new managerWindow();
+            managerWindow.Show();
         }
 
         private void passenger_Click(object sender, RoutedEventArgs e)
         {
-            Window EmployerWindow = new passengerWindow();
-            EmployerWindow.Show();
+            Window passengerWindow = new passengerWindow();
+            passengerWindow.Show();
         }
     }
 }

@@ -23,5 +23,25 @@ namespace PL
         {
             InitializeComponent();
         }
+        private void Buses_Click(object sender, RoutedEventArgs e)
+        {
+            Window AllBusesWindow = new AllBusesWindow();
+            AllBusesWindow.Show();
+        }
+         private void Lines_Click(object sender, RoutedEventArgs e)
+        {
+            Window AllLinesWindow = new AllLinesWindow();
+            AllLinesWindow.Show();
+        }
+         private void Stations_Click(object sender, RoutedEventArgs e)
+        {
+            Window AllStationsWindow = new AllStationsWindow();
+            AllStationsWindow.Show();
+        }
+         private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            Window EditWindow = new EditWindow();
+            EditWindow.Show();
+        }
     }
 }
