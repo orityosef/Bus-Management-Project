@@ -508,7 +508,7 @@ namespace BL.BLAPI
                 throw new BO.AdjacentStationException("Adjacent Station license is illegal", ex);
             }
         }
-        //מביא את התחנה הסמוכה הקודמת לתחנה הספציפית
+        //מביא את התחנה הסמוכה  לתחנה הספציפית
         public AdjacentStation GetOneAdjacentStation2(int Station)
         {
             
@@ -553,32 +553,89 @@ namespace BL.BLAPI
 
         public bool addLineStation(LineStation LineStationNew)
         {
-            throw new NotImplementedException();
+            DO.LineStation LineStationDo = new DO.LineStation();
+            LineStationDo = ConvertBtoD(LineStationNew);
+            try
+            {
+                dl.addLineStation(LineStationDo);
+            }
+            catch (DO.LineStationDException ex)
+            {
+                throw new BO.LineStationBException("Line Station license is illegal", ex);
+                //return false
+            }
+            return true;
         }
 
         public bool updatingLineStation(LineStation LineStationNew)
         {
-            throw new NotImplementedException();
+            DO.LineStation LineStationDo = new DO.LineStation();
+            LineStationDo = ConvertBtoD(LineStationNew);
+            try
+            {
+                dl.updatingLineStation(LineStationDo);
+            }
+            catch (DO.LineStationDException ex)
+            {
+                throw new BO.LineStationBException("Line Station license is illegal", ex);
+                //return false
+            }
+            return true;
         }
 
-        public bool deleteLineStation(LineStation SLineStationNew)
+        public bool deleteLineStation(LineStation LineStationNew)
         {
-            throw new NotImplementedException();
+            DO.LineStation LineStationDo = new DO.LineStation();
+            LineStationDo = ConvertBtoD(LineStationNew);
+            try
+            {
+                dl.deleteLineStation(LineStationDo);
+            }
+            catch (DO.LineStationDException ex)
+            {
+                throw new BO.LineStationBException("Line Station license is illegal", ex);
+                //return false
+            }
+            return true;
         }
 
         public IEnumerable<LineStation> GetAllLineStation()
         {
-            throw new NotImplementedException();
+            return from LineStation in dl.GetAllLineStation()
+                   select ConvertDtoB(LineStation);
         }
 
         public IEnumerable<LineStation> GetPartOfLineStation(Predicate<LineStation> LineStationCondition)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return from item in dl.GetAllLineStation()
+                       let boGetAllLineStation = ConvertDtoB(item)
+                       where LineStationCondition(boGetAllLineStation)
+                       select boGetAllLineStation;
+            }
+
+            catch (DO.LineStationDException ex)
+            {
+                throw new BO.LineStationBException("Line Station license is illegal", ex);
+            }
         }
 
         public LineStation GetOneLineStation(int LineNumber)
         {
-            throw new NotImplementedException();
+            DO.LineStation LineStationDo = new DO.LineStation();
+            LineStation LineStationBo = new LineStation();
+            try
+            {
+                LineStationDo = dl.GetOneLineStation(LineNumber);
+                LineStationBo = ConvertDtoB(LineStationDo);
+                return LineStationBo;
+
+            }
+            catch (DO.LineStationDException ex)
+            {
+                throw new BO.LineStationBException("Line Station license is illegal", ex);
+            }
         }
         #endregion LineStation
 

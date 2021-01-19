@@ -40,11 +40,11 @@ namespace BL.BO
     }
 
     [Serializable]
-    public class LineStationDException : Exception
+    public class LineStationBException : Exception
         {
             public int LineNumberB;
             public int stationB;
-            public LineStationDException(string message, Exception innerException) :
+            public LineStationBException(string message, Exception innerException) :
                 base(message, innerException)
             {
             LineNumberB = ((DO.LineException)innerException).ID;
