@@ -24,5 +24,16 @@ namespace PL
         {
             InitializeComponent();
         }
+        private void manager_Click(object sender, RoutedEventArgs e)
+        {
+            Window EmployeeWindow = new managerWindow();
+            EmployeeWindow.Show();
+        }
+
+        private void passenger_Click(object sender, RoutedEventArgs e)
+        {
+            Window EmployerWindow = new passengerWindow();
+            EmployerWindow.Show();
+        }
     }
 }

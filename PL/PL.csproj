@@ -67,8 +67,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="managerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="passengerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="managerWindow.xaml.cs">
+      <DependentUpon>managerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="passengerWindow.xaml.cs">
+      <DependentUpon>passengerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -99,6 +113,15 @@
       <Project>{1e841107-c75e-495f-8e9a-2ffef9dfcaca}</Project>
       <Name>BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Im\mainW.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Im\icon.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Im\managerWindow.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
