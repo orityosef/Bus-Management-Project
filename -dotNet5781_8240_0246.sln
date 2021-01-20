@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLObject", "DL\DLObject.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SOLUTION.item", "SOLUTION.item", "{829DAA77-0040-40B3-A3B3-16121B5FD660}"
 	ProjectSection(SolutionItems) = preProject
-		config.xml = config.xml
+		bin\config.xml = bin\config.xml
 	EndProjectSection
 EndProject
 Global
