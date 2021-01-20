@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,104 @@ namespace PL
     /// </summary>
     public partial class AllBusesWindow : Window
     {
+
+        static public Random r = new Random();
+      //  public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
+        BL.BLAPI.IBL bl;
+        private IEnumerable source;
+        public IEnumerable Source
+        {
+            get { return source; }
+            set
+            {
+                source = value;
+                AllBuses.ItemsSource = source;
+            }
+        }
         public AllBusesWindow()
         {
             InitializeComponent();
+            bl = BL.BLAPI.BLFactory.GetBL("1");
+            Source = bl.GetAllBuses();
+            this.Content = Source;
+
+            //AllBuses.ItemsSource = Buss; //Displays buses on screen
         }
+        //        private void Refuelling_Click(object sender, RoutedEventArgs e) //Fuel button
+        //        {
+        //            Button btn = sender as Button;
+        //            Bus currentuser = btn.DataContext as Bus;
+
+        //            btn.IsEnabled = false;
+
+        //            tidluk(currentuser, 12000, btn);
+        //        }
+
+
+        //        private void Tidluk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) //Fuel button- Refueling is over 
+        //        {
+        //            List<Object> lst = (List<object>)e.Result;
+        //            Bus currentUser = lst[0] as Bus;
+        //            Button btn = lst[2] as Button;
+
+        //            currentUser.Status = STATE.ReadyToGo;
+
+        //            btn.IsEnabled = true;
+        //            //btn.Background = Brushes.MintCream;
+        //            //         throw new NotImplementedException();
+        //        }
+
+        //        private void Tidluk_DoWork(object sender, DoWorkEventArgs e)//Fuel button- Refueling process
+        //        {
+        //            List<Object> lst = (List<object>)e.Argument;
+        //            Bus currentUser = lst[0] as Bus;
+
+        //            currentUser.Refuelling(1200);
+        //            currentUser.Status = STATE.Refueling;
+
+        //            int value = (int)lst[1];    //3000 time
+        //            Thread.Sleep(value);
+
+        //            e.Result = lst;          //btn
+        //        }
+
+        //        private void tidluk(Bus lineData, int time, Button btn)//Fuel button- Refueling
+        //        {
+        //            btn.IsEnabled = false;
+        //            //           btn.Background = Brushes.Honeydew;
+
+        //            List<Object> lst = new List<object> { lineData, time, btn };
+
+        //            BackgroundWorker tidluk = new BackgroundWorker();
+        //            tidluk.DoWork += Tidluk_DoWork;
+        //            tidluk.RunWorkerCompleted += Tidluk_RunWorkerCompleted;
+
+        //            tidluk.RunWorkerAsync(lst);
+        //        }
+        //        private void MainWindow_Closing(object sender, CancelEventArgs e)
+        //        {
+        //            Environment.Exit(Environment.ExitCode);
+        //        }
+
+        //        private void btnDrive_Click(object sender, RoutedEventArgs e) //Travel button opens a new window
+        //        {
+        //            Button btn = sender as Button;
+        //            Bus currentuser = btn.DataContext as Bus;
+        //            SecondWindow secondWindow = new SecondWindow(currentuser);
+        //            //secondWindow.InputChanged += OnDialogInputChanged;
+        //            secondWindow.Show();
+
+        //        }
+
+
+
+        //        private void AddBus_Click(object sender, RoutedEventArgs e) //Adds a new bus at random
+        //        {
+        //            Bus bus = new Bus();
+        //            bus.State();
+        //            bus.Fuel = r.Next(0, 1200);
+        //            bus.Km = r.Next(0, 10000);
+        //            Buss.Add(bus);
+        //        }
     }
 }

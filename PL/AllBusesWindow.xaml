@@ -7,6 +7,36 @@
         mc:Ignorable="d"
         Title="AllBusesWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid Margin="10" RenderTransformOrigin="0.497,0.581">
+            <ListView x:Name="AllBuses" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Bus License" Width="100" DisplayMemberBinding="{Binding License}" />
+                        <GridViewColumn Header="KM" Width="60" DisplayMemberBinding="{Binding Km}" />
+                        <GridViewColumn Header="Start Date" Width="150" DisplayMemberBinding="{Binding StartingDate}" />
+                        <GridViewColumn Header="Fuel" Width="60" DisplayMemberBinding="{Binding Fuel}" />
+                        <GridViewColumn Header="status" Width="80" DisplayMemberBinding="{Binding Status}" />
+                        <GridViewColumn Width="90">
+                            <!--<GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Refuelling"  Margin="0"
+                                VerticalAlignment="Center"
+                                Click="Refuelling_Click" Width="70"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="SartDrive"  Margin="0"
+                                VerticalAlignment="Center"
+                                Click ="btnDrive_Click" Width="80"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>-->
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>
