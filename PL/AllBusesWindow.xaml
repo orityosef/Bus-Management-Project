@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="AllBusesWindow" Height="450" Width="800">
+        Title="AllBusesWindow" Height="472.8" Width="735.2">
     <Grid>
         <Grid Margin="10" RenderTransformOrigin="0.497,0.581">
             <ListView x:Name="AllBuses" >
@@ -23,17 +23,17 @@
                                 VerticalAlignment="Center"
                                 Click="Refuelling_Click" Width="70"/>
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate>
+                            </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
-                        <GridViewColumn Width="100">
+                        <!--<GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="SartDrive"  Margin="0"
                                 VerticalAlignment="Center"
                                 Click ="btnDrive_Click" Width="80"/>
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate>-->
-                        </GridViewColumn>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>-->
                     </GridView>
                 </ListView.View>
             </ListView>

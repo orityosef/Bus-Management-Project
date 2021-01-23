@@ -1,6 +1,9 @@
-﻿using System;
+﻿using BL.BLAPI;
+using BO;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,18 +23,15 @@ namespace PL
     /// </summary>
     public partial class AllBusesWindow : Window
     {
+        public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
+        IBL bl;
 
-        static public Random r = new Random();
-      //  public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
-        BL.BLAPI.IBL bl;
-
-        public AllBusesWindow()
+        public AllBusesWindow(IBL _bl)
         {
             InitializeComponent();
-            bl = BL.BLAPI.BLFactory.GetBL("1");
-            this.DataContext = bl.GetAllBuses();
-
-            //AllBuses.ItemsSource = Buss; //Displays buses on screen
+            bl = _bl;
+            this.DataContext = bl.GetAllBuses().ToString();
+           // AllBuses.DataContext = Buss; //Displays buses on screen
         }
         //        private void Refuelling_Click(object sender, RoutedEventArgs e) //Fuel button
         //        {

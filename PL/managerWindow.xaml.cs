@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.BLAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace PL
     /// </summary>
     public partial class managerWindow : Window
     {
-        public managerWindow()
+        IBL bl;
+        public managerWindow(IBL _bl)
         {
             InitializeComponent();
+            bl = _bl;
         }
         private void Buses_Click(object sender, RoutedEventArgs e)
         {

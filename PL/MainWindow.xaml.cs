@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.BLAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,15 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        IBL bl = BLFactory.GetBL("1");
         public MainWindow()
         {
             InitializeComponent();
         }
         private void manager_Click(object sender, RoutedEventArgs e)
         {
-            Window managerWindow = new managerWindow();
-            managerWindow.Show();
+            Window ManagerWindow = new ManagerWindow();
+            ManagerWindow.Show();
         }
 
         private void passenger_Click(object sender, RoutedEventArgs e)
