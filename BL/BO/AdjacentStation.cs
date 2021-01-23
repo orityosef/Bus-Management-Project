@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.BO;
 using BO;
 namespace BO
 {
@@ -12,5 +13,9 @@ namespace BO
         public int Station2ID { get; set; }
         public double Distance { get; set; }
         public TimeSpan Time { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }

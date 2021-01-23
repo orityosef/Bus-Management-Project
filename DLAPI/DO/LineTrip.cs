@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DLAPI.DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,9 @@ namespace DO
         public TimeSpan StartAt { get; set; }
         public TimeSpan Frequency { get; set; }
         public TimeSpan FinishAt { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.BO;
 using BO;
 namespace BO
 {
@@ -14,6 +15,10 @@ namespace BO
         public double FuelRemain { get; set; }
         public int Refuel { get; set; }
         public Status Status { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
 
     }
 }

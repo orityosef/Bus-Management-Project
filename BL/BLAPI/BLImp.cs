@@ -94,8 +94,9 @@ namespace BL.BLAPI
         //הבאת כל הרשימה של האוטובוסים
         public IEnumerable<Bus> GetAllBuses()
         {
-            return from Bus in dl.GetAllBuses()
+            var result= from Bus in dl.GetAllBuses()
                    select ConvertDtoB(Bus);
+            return result;
         }
         //הבאת אוטובוס בודד
         public Bus GetOneBus(int License)

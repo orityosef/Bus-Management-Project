@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DLAPI.DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,10 @@ namespace DO
         public int OutStation { get; set; }
         public TimeSpan OutAt { get; set; }
         public TimeSpan InAt { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
 
     }
 }

@@ -24,22 +24,12 @@ namespace PL
         static public Random r = new Random();
       //  public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
         BL.BLAPI.IBL bl;
-        private IEnumerable source;
-        public IEnumerable Source
-        {
-            get { return source; }
-            set
-            {
-                source = value;
-                AllBuses.ItemsSource = source;
-            }
-        }
+
         public AllBusesWindow()
         {
             InitializeComponent();
             bl = BL.BLAPI.BLFactory.GetBL("1");
-            Source = bl.GetAllBuses();
-            this.Content = Source;
+            this.DataContext = bl.GetAllBuses();
 
             //AllBuses.ItemsSource = Buss; //Displays buses on screen
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DLAPI.DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,10 @@ namespace DO
         public double FuelRemain { get; set; }
         public int Refuel { get; set; }
         public Status Status { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
 
     }
 }

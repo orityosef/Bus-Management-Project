@@ -54,6 +54,7 @@
     <Compile Include="BO\LineStation.cs" />
     <Compile Include="BO\Station.cs" />
     <Compile Include="BO\Status.cs" />
+    <Compile Include="BO\Tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

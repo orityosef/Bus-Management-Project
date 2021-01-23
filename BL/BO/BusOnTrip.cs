@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.BO;
 using BO;
 namespace BO
 {
@@ -16,6 +17,10 @@ namespace BO
         public int PrevStation { get; set; }
         public TimeSpan PrevStationAt { get; set; }
         public TimeSpan NextStationAt { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
 
     }
 }
