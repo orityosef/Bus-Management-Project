@@ -56,5 +56,17 @@ namespace BL.BLAPI
         LineStation GetOneLineStation(int LineNumber);
 
         #endregion LineStation
+
+        #region User
+        IEnumerable<User> GetAllUsersBO();//הדפסת כל המשתמשים
+        User GetUserBO(string userName);//קבלת פרטי משתמש בודד
+        //הוספה, עדכון ומחיקת משתמש
+        bool addUser(User user);
+        bool updateUser(User user);
+        bool deleteUser(User user);
+        string forgetPassWord(string userName, string checkAsk);//שחזור סיסמה לפי שם משתמש ושאלת אימות
+        bool ifUserAndPassCorrect(string userName, string passWord);
+        
+        #endregion
     }
 }

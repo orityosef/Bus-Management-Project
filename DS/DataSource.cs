@@ -394,25 +394,25 @@ namespace DS
            listUser = new List<User>();
             listUser.Add(new User
             {
-              UsserName="Orit", 
+              UserName="Orit", 
               Password="1234",
               Admit=true 
             });
             listUser.Add(new User
             {
-                UsserName = "Yosef",
+                UserName = "Yosef",
                 Password = "6798",
                 Admit = true
             });
             listUser.Add(new User
             {
-                UsserName = "Hila",
+                UserName = "Hila",
                 Password = "4321",
                 Admit = false
             });
             listUser.Add(new User
             {
-                UsserName = "Ariel",
+                UserName = "Ariel",
                 Password = "1008",
                 Admit = false
             });

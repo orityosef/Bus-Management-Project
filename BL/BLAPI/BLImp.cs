@@ -399,7 +399,6 @@ namespace BL.BLAPI
 
         #endregion Station
 
-
         #region AdjacentStation
         //המרה מ-BלD
         private DO.AdjacentStation ConvertBtoD(AdjacentStation AdjacentStationBo)
@@ -639,6 +638,105 @@ namespace BL.BLAPI
             }
         }
         #endregion LineStation
+
+        #region users
+        private DO.User ConvertBtoD(User user)
+        {
+            DO.User userDO = new DO.User
+            {
+                UserName = user.UserName,
+                Password = user.Password,
+            };
+            return userDO;
+        }
+
+        private User convertoBO(DO.User user)
+        {
+            return new User
+            {
+                UserName = user.UserName,
+                Password = user.Password,
+            };
+        }
+        public IEnumerable<User> GetAllUsersBO()//הדפסת כל המשתמשים
+        {
+            return from user in dl.GetAllUser()
+                   select convertoBO(user);
+        }
+        public User GetUserBO(string userName)//קבלת פרטי משתמש בודד
+        {
+            User result = new User();
+            DO.User userDO;
+            try
+            {
+                userDO = dl.GetOneObjectUserDAO(userName);
+            }
+            catch (DO.UserExceptionDO ex)
+            {
+                throw new BO.UserExceptionBO("userName not found", ex);
+            }
+            result = convertoBO(userDAO);
+            return result;
+        }
+        //הוספה, עדכון ומחיקת משתמש
+        public bool addUser(UserBO user)
+        {
+            bool result;
+            try
+            {
+                result = dal.addUser(convertDAO(user));
+            }
+            catch (DO.UserExceptionDO ex)
+            {
+                throw new BO.UserExceptionBO("שם המשתמש בשימוש כבר", ex);
+            }
+            return result;
+        }
+        public bool updateUser(UserBO user)
+        {
+            bool result;
+            try
+            {
+                result = dal.updateUser(convertDAO(user));
+            }
+            catch (DO.UserExceptionDO ex)
+            {
+                throw new BO.UserExceptionBO("The userName " + user.UserName + " not found", ex);
+            }
+            return result;
+        }
+        public bool deleteUser(UserBO user)
+        {
+            bool result;
+            try
+            {
+                result = dal.deleteUser(convertDAO(user));
+            }
+            catch (DO.UserExceptionDO ex)
+            {
+                throw new BO.UserExceptionBO("Does not exist in the system", ex);
+            }
+            return result;
+        }
+        public string forgetPassWord(string userName, string checkAsk)//שחזור סיסמה לפי שם משתמש ושאלת אימות
+        {
+            UserDAO user1 = dal.getAllUsers().ToList().Find(p => p.UserName == userName && p.CheckAsk == checkAsk);
+
+            if (user1 != null)
+                return user1.PassWord;
+            else
+                throw new BO.UserExceptionBO("שם המשתמש אינו קיים במערכת ו/או שאלת האימות שהזנת אינם תואמים");
+        }
+        public bool ifUserAndPassCorrect(string userName, string passWord)
+        {
+            UserDAO user1 = dal.getAllUsers().ToList().Find(p => p.UserName == userName && p.PassWord == passWord);
+
+            if (user1 != null)
+                return true;
+            else
+                throw new BO.UserExceptionBO("אחד או יותר מהשדות שהזנת שגויים");
+        }
+        #endregion
 
     }
 }

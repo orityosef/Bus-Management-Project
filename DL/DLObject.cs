@@ -249,9 +249,9 @@ namespace DL
         #region User
         public bool addUser(User UserNew)
         {
-            if (DataSource.listUser.Exists(Userold => Userold.UsserName == UserNew.UsserName))
+            if (DataSource.listUser.Exists(Userold => Userold.UserName == UserNew.UserName))
             {
-                throw new UserException(UserNew.UsserName,"the User is exists in the system");
+                throw new UserException(UserNew.UserName,"the User is exists in the system");
                 //return false;
             }
 
@@ -261,22 +261,22 @@ namespace DL
 
         public bool updatingUser(User UserNew)
         {
-            DO.User Userold = DataSource.listUser.Find(b => b.UsserName == UserNew.UsserName);
+            DO.User Userold = DataSource.listUser.Find(b => b.UserName == UserNew.UserName);
             if (Userold != null)
             {
                 DataSource.listUser.Remove(Userold);
                 DataSource.listUser.Add(UserNew.Clone());
                 return true;
             }
-            throw new UserException(UserNew.UsserName, "the User is not exists in the system");
+            throw new UserException(UserNew.UserName, "the User is not exists in the system");
             //return false;
         }
 
         public bool deleteUser(User UserNew)
         {
-            if (DataSource.listUser.Exists(Userold => Userold.UsserName != UserNew.UsserName))
+            if (DataSource.listUser.Exists(Userold => Userold.UserName != UserNew.UserName))
             {
-                throw new UserException(UserNew.UsserName, "the User is not exists in the system");
+                throw new UserException(UserNew.UserName, "the User is not exists in the system");
                 //return false;
             }
             DataSource.listUser.Remove(UserNew);
@@ -293,7 +293,7 @@ namespace DL
 
         public User GetOneUser(string UsserName)
         {
-            DO.User Userold = DataSource.listUser.Find(b => b.UsserName.ToString() == UsserName);
+            DO.User Userold = DataSource.listUser.Find(b => b.UserName.ToString() == UsserName);
             if (Userold != null)
             {
                 return Userold;
