@@ -32,6 +32,7 @@ namespace BL.BLAPI
         bool addStation(Station StationNew);
         bool updatingStation(Station StationNew);
         bool deleteStation(Station StationNew);
+        bool ifUserAndPassCorrect(string userName, object password);
         IEnumerable<Station> GetAllStation();
         IEnumerable<Station> GetPartOfStation(Predicate<Station> StationCondition);
         Station GetOneStation(int code);
@@ -64,7 +65,7 @@ namespace BL.BLAPI
         bool addUser(User user);
         bool updateUser(User user);
         bool deleteUser(User user);
-        string forgetPassWord(string userName, string checkAsk);//שחזור סיסמה לפי שם משתמש ושאלת אימות
+    
         bool ifUserAndPassCorrect(string userName, string passWord);
         
         #endregion

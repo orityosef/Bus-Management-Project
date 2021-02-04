@@ -669,72 +669,64 @@ namespace BL.BLAPI
             DO.User userDO;
             try
             {
-                userDO = dl.GetOneObjectUserDAO(userName);
+                userDO = dl.GetOneUser(userName);
             }
-            catch (DO.UserExceptionDO ex)
+            catch (DO.UserException ex)
             {
-                throw new BO.UserExceptionBO("userName not found", ex);
+                throw new BO.UserException("userName not found", ex);
             }
-            result = convertoBO(userDAO);
+            result = convertoBO(userDO);
             return result;
         }
         //הוספה, עדכון ומחיקת משתמש
-        public bool addUser(UserBO user)
+        public bool addUser(User user)
         {
             bool result;
             try
             {
-                result = dal.addUser(convertDAO(user));
+                result = dl.addUser(ConvertBtoD(user));
             }
-            catch (DO.UserExceptionDO ex)
+            catch (DO.UserException ex)
             {
-                throw new BO.UserExceptionBO("שם המשתמש בשימוש כבר", ex);
+                throw new BO.UserException("שם המשתמש בשימוש כבר", ex);
             }
             return result;
         }
-        public bool updateUser(UserBO user)
+        public bool updateUser(User user)
         {
             bool result;
             try
             {
-                result = dal.updateUser(convertDAO(user));
+                result = dl.updatingUser(ConvertBtoD(user));
             }
-            catch (DO.UserExceptionDO ex)
+            catch (DO.UserException ex)
             {
-                throw new BO.UserExceptionBO("The userName " + user.UserName + " not found", ex);
+                throw new BO.UserException("The userName " + user.UserName + " not found", ex);
             }
             return result;
         }
-        public bool deleteUser(UserBO user)
+        public bool deleteUser(User user)
         {
             bool result;
             try
             {
-                result = dal.deleteUser(convertDAO(user));
+                result = dl.deleteUser(ConvertBtoD(user));
             }
-            catch (DO.UserExceptionDO ex)
+            catch (DO.UserException ex)
             {
-                throw new BO.UserExceptionBO("Does not exist in the system", ex);
+                throw new BO.UserException("Does not exist in the system", ex);
             }
             return result;
         }
-        public string forgetPassWord(string userName, string checkAsk)//שחזור סיסמה לפי שם משתמש ושאלת אימות
-        {
-            UserDAO user1 = dal.getAllUsers().ToList().Find(p => p.UserName == userName && p.CheckAsk == checkAsk);
-
-            if (user1 != null)
-                return user1.PassWord;
-            else
-                throw new BO.UserExceptionBO("שם המשתמש אינו קיים במערכת ו/או שאלת האימות שהזנת אינם תואמים");
-        }
+        
         public bool ifUserAndPassCorrect(string userName, string passWord)
         {
-            UserDAO user1 = dal.getAllUsers().ToList().Find(p => p.UserName == userName && p.PassWord == passWord);
+            DO.User user1 = dl.GetAllUser().ToList().Find(p => p.UserName == userName && p.Password == passWord);
 
             if (user1 != null)
                 return true;
             else
-                throw new BO.UserExceptionBO("אחד או יותר מהשדות שהזנת שגויים");
+                throw new BO.UserException("One or more Does not exist in the system");
         }
         #endregion
 

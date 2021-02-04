@@ -28,8 +28,8 @@ namespace PL
         }
         private void manager_Click(object sender, RoutedEventArgs e)
         {
-            Window ManagerWindow = new ManagerWindow();
-            ManagerWindow.Show();
+            Window ManagerAccessOption = new ManagerAccessOption();
+            ManagerAccessOption.Show();
         }
 
         private void passenger_Click(object sender, RoutedEventArgs e)

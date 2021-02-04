@@ -34,6 +34,11 @@ namespace BL.BO
     public class UserException : Exception
     {
         public String Name;
+
+        public UserException(string message) : base(message)
+        {
+        }
+
         public UserException(string message, Exception innerException) :
             base(message, innerException) => Name = ((DO.UserException)innerException).UserName;
         public override string ToString() => base.ToString() + $", Invalid User Name: {Name}";
