@@ -8,7 +8,7 @@ using BO;
 
 namespace BO
 {
-    class User
+    class User// חלון משתמש
     {
         public string UserName { get; set; }
         public string Password { get; set; }
