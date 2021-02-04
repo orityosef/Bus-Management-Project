@@ -28,9 +28,9 @@ namespace PL
 
         public AllBusesWindow(IBL _bl)
         {
-            InitializeComponent();
-            bl = _bl;
-            this.DataContext = bl.GetAllBuses().ToString();
+            //InitializeComponent();
+            //bl = _bl;
+            //this.DataContext = bl.GetAllBuses().ToString();
            // AllBuses.DataContext = Buss; //Displays buses on screen
         }
         //        private void Refuelling_Click(object sender, RoutedEventArgs e) //Fuel button

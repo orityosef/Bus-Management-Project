@@ -32,7 +32,6 @@ namespace BL.BLAPI
         bool addStation(Station StationNew);
         bool updatingStation(Station StationNew);
         bool deleteStation(Station StationNew);
-        bool ifUserAndPassCorrect(string userName, object password);
         IEnumerable<Station> GetAllStation();
         IEnumerable<Station> GetPartOfStation(Predicate<Station> StationCondition);
         Station GetOneStation(int code);

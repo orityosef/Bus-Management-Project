@@ -28,8 +28,8 @@ namespace PL
         }
         private void Buses_Click(object sender, RoutedEventArgs e)
         {
-            Window AllBusesWindow = new AllBusesWindow();
-            AllBusesWindow.Show();
+            //Window AllBusesWindow = new AllBusesWindow();
+            //AllBusesWindow.Show();
         }
          private void Lines_Click(object sender, RoutedEventArgs e)
         {

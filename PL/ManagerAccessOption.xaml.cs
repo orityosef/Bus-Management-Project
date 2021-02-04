@@ -13,8 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BLAPI;
-
 namespace PL
 {
     /// <summary>
@@ -22,13 +20,14 @@ namespace PL
     /// </summary>
     public partial class ManagerAccessOption : Window
     {
-        IBL bl = BLFactory.GetBL("1");
+        IBL bl; //= BLFactory.GetBL("1");
         private User newItem = new User();
         public User newItem1 { get => newItem; set => newItem = value; }
         public ManagerAccessOption()
         {
             InitializeComponent();
             DataContext = newItem;
+
         }
 
 
@@ -36,7 +35,7 @@ namespace PL
         {
             try
             {
-                if (bl.ifUserAndPassCorrect(newItem.UserName, password.Password))//אם קיים במערכת משתמש כזה
+                if (bl.ifUserAndPassCorrect(newItem.UserName, Password.Password))//אם קיים במערכת משתמש כזה
                 {
                     managerWindow managerWindow = new managerWindow(bl);
                     managerWindow.ShowDialog();
@@ -44,6 +43,7 @@ namespace PL
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
-       
+
     }
 }
+
