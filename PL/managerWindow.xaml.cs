@@ -20,7 +20,7 @@ namespace PL
     /// </summary>
     public partial class managerWindow : Window
     {
-        IBL bl;
+        readonly IBL bl = BLFactory.GetBL("1");
         public managerWindow(IBL _bl)
         {
             InitializeComponent();
@@ -28,8 +28,8 @@ namespace PL
         }
         private void Buses_Click(object sender, RoutedEventArgs e)
         {
-            //Window AllBusesWindow = new AllBusesWindow();
-            //AllBusesWindow.Show();
+            Window AllBusesWindow = new AllBusesWindow();
+            AllBusesWindow.Show();
         }
          private void Lines_Click(object sender, RoutedEventArgs e)
         {

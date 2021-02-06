@@ -65,7 +65,7 @@ namespace BL.BLAPI
         bool updateUser(User user);
         bool deleteUser(User user);
     
-        bool ifUserAndPassCorrect(string userName, string passWord);
+        bool existingUser(string userName, string passWord);
         
         #endregion
     }

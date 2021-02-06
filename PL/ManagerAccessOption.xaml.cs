@@ -20,7 +20,7 @@ namespace PL
     /// </summary>
     public partial class ManagerAccessOption : Window
     {
-        IBL bl; //= BLFactory.GetBL("1");
+        readonly IBL bl = BLFactory.GetBL("1");
         private User newItem = new User();
         public User newItem1 { get => newItem; set => newItem = value; }
         public ManagerAccessOption()
@@ -35,13 +35,13 @@ namespace PL
         {
             try
             {
-                if (bl.ifUserAndPassCorrect(newItem.UserName, Password.Password))//אם קיים במערכת משתמש כזה
+                if (bl.existingUser(newItem.UserName, Password.Password))//אם קיים במערכת משתמש כזה
                 {
                     managerWindow managerWindow = new managerWindow(bl);
                     managerWindow.ShowDialog();
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERORR", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
     }

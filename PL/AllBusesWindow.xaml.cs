@@ -24,14 +24,13 @@ namespace PL
     public partial class AllBusesWindow : Window
     {
         public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
-        IBL bl;
+        readonly IBL bl = BLFactory.GetBL("1");
 
-        public AllBusesWindow(IBL _bl)
+        public AllBusesWindow()
         {
-            //InitializeComponent();
-            //bl = _bl;
-            //this.DataContext = bl.GetAllBuses().ToString();
-           // AllBuses.DataContext = Buss; //Displays buses on screen
+            InitializeComponent();
+            AllBuses.DataContext = bl.GetAllBuses().ToString();
+            AllBuses.ItemsSource = Buss; //Displays buses on screen
         }
         //        private void Refuelling_Click(object sender, RoutedEventArgs e) //Fuel button
         //        {

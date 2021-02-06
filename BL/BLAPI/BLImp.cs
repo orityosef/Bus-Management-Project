@@ -719,7 +719,7 @@ namespace BL.BLAPI
             return result;
         }
         
-        public bool ifUserAndPassCorrect(string userName, string passWord)
+        public bool existingUser(string userName, string passWord)
         {
             DO.User user1 = dl.GetAllUser().ToList().Find(p => p.UserName == userName && p.Password == passWord);
 

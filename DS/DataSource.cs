@@ -408,7 +408,7 @@ namespace DS
             {
                 UserName = "Hila",
                 Password = "4321",
-                Admit = false
+                Admit = true
             });
             listUser.Add(new User
             {
