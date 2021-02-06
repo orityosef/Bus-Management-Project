@@ -11,10 +11,10 @@
             <ListView x:Name="AllBuses" >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Bus License" Width="100" DisplayMemberBinding="{Binding License}" />
-                        <GridViewColumn Header="KM" Width="60" DisplayMemberBinding="{Binding Km}" />
-                        <GridViewColumn Header="Start Date" Width="150" DisplayMemberBinding="{Binding StartingDate}" />
-                        <GridViewColumn Header="Fuel" Width="60" DisplayMemberBinding="{Binding Fuel}" />
+                        <GridViewColumn Header="Bus License" Width="100" DisplayMemberBinding="{Binding LicenseNum}" />
+                        <GridViewColumn Header="KM" Width="60" DisplayMemberBinding="{Binding TotalTrip}" />
+                        <GridViewColumn Header="Start Date" Width="150" DisplayMemberBinding="{Binding Fromdate}" />
+                        <GridViewColumn Header="Fuel" Width="60" DisplayMemberBinding="{Binding FuelRemain}" />
                         <GridViewColumn Header="status" Width="80" DisplayMemberBinding="{Binding Status}" />
                         <GridViewColumn Width="90">
                             <!--<GridViewColumn.CellTemplate>
