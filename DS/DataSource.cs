@@ -318,7 +318,7 @@ namespace DS
             listAdjacentStation = new List<AdjacentStation>();
 
             var distance = Distancebetween(32.787514, 35.536816, 32.655859, 35.115152);
-
+            //טבריה יקנעם
             listAdjacentStation.Add(new AdjacentStation
             {
                 Station1 = 234567,
@@ -326,9 +326,17 @@ namespace DS
                 Distance = distance,
                 Time = new TimeSpan(0, 58, 0)
             });
+            //יקנעם טבריה
+            listAdjacentStation.Add(new AdjacentStation
+            {
+                Station1 = 852340,
+                Station2 = 234567,
+                Distance = distance,
+                Time = new TimeSpan(0, 58, 0)
+            });
 
-            distance = Distancebetween(32.655859, 35.115152, 31.243017, 34.796741);
-
+            distance = Distancebetween(32.655859, 35.115152, 32.056151, 34.7795355);
+            //תל אביב יקנעם
             listAdjacentStation.Add(new AdjacentStation
             {
                 Station1 = 852340,
@@ -336,10 +344,18 @@ namespace DS
                 Distance = distance,
                 Time = new TimeSpan(1, 15, 0)
             });
+            //יקנעם תל אביב 
+            listAdjacentStation.Add(new AdjacentStation
+            {
+                Station1 = 303999,
+                Station2 = 852340,
+                Distance = distance,
+                Time = new TimeSpan(1, 15, 0)
+            });
 
             distance = Distancebetween(32.787514, 35.536816, 32.839494, 35.499849);
 
-
+            //טבריה מגדל
             listAdjacentStation.Add(new AdjacentStation
             {
                 Station1 = 234567,
@@ -347,8 +363,16 @@ namespace DS
                 Distance = distance,
                 Time = new TimeSpan(0, 15, 0)
             });
+            //מגדל טבריה
+            listAdjacentStation.Add(new AdjacentStation
+            {
+                Station1 = 965320,
+                Station2 = 234567,
+                Distance = distance,
+                Time = new TimeSpan(0, 15, 0)
+            });
             distance = Distancebetween(32.839494, 35.499849, 32.969704, 35.497204);
-
+            //מגדל צפת
             listAdjacentStation.Add(new AdjacentStation
             {
                 Station1 = 965320,
@@ -356,7 +380,24 @@ namespace DS
                 Distance = distance,
                 Time = new TimeSpan(0, 42, 0)
             });
+            // צפת מגדל
+            listAdjacentStation.Add(new AdjacentStation
+            {
+                Station1 = 987654,
+                Station2 = 965320,
+                Distance = distance,
+                Time = new TimeSpan(0, 42, 0)
+            });
             distance = Distancebetween(31.067888, 35.032528, 31.219761, 34.882488);
+            //דימונה נבטים
+            listAdjacentStation.Add(new AdjacentStation
+            {
+                Station1 = 246801,
+                Station2 = 764581,
+                Distance = distance,
+                Time = new TimeSpan(0, 34, 0)
+            });
+            //נבטים דימונה
             listAdjacentStation.Add(new AdjacentStation
             {
                 Station1 = 246801,
@@ -365,6 +406,7 @@ namespace DS
                 Time = new TimeSpan(0, 34, 0)
             });
             distance = Distancebetween(31.243017, 34.796741, 31.219761, 34.882488);
+            //נבטים באר שבע
             listAdjacentStation.Add(new AdjacentStation
             {
                 Station1 = 764581,
@@ -372,19 +414,45 @@ namespace DS
                 Distance = distance,
                 Time = new TimeSpan(0, 23, 0)
             });
-            distance = Distancebetween(31.835052, 34.978367, 31.7888727, 35.2031491);
+            //באר שבע נבטים
             listAdjacentStation.Add(new AdjacentStation
             {
-                Station1 = 143988,
+                Station1 = 303988,
+                Station2 = 764581,
+                Distance = distance,
+                Time = new TimeSpan(0, 23, 0)
+            });
+            distance = Distancebetween(31.835052, 34.978367, 31.7888727, 35.2031491);
+            //ירושלים לטרון
+            listAdjacentStation.Add(new AdjacentStation
+            {
+                Station1 = 143998,
                 Station2 = 673029,
                 Distance = distance,
                 Time = new TimeSpan(0, 38, 0)
             });
+            //לטרון ירושלים
+            listAdjacentStation.Add(new AdjacentStation
+            {
+                Station1 = 673029,
+                Station2 = 143998,
+                Distance = distance,
+                Time = new TimeSpan(0, 38, 0)
+            });
             distance = Distancebetween(31.835052, 34.978367, 31.7888727, 35.2031491);
+            //לטרון תל אביב
             listAdjacentStation.Add(new AdjacentStation
             {
                 Station1 = 673029,
                 Station2 = 303999,
+                Distance = distance,
+                Time = new TimeSpan(1, 7, 0)
+            });
+            //תל אביב לטרון
+            listAdjacentStation.Add(new AdjacentStation
+            {
+                Station1 = 303999,
+                Station2 = 673029,
                 Distance = distance,
                 Time = new TimeSpan(1, 7, 0)
             });
