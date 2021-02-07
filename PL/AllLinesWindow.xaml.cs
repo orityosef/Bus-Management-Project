@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.BLAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,18 @@ namespace PL
     /// </summary>
     public partial class AllLinesWindow : Window
     {
+        //  public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
+        readonly IBL bl = BLFactory.GetBL("1");
+
         public AllLinesWindow()
         {
             InitializeComponent();
+            AllLine.ItemsSource = bl.GetAllBusesLine();
+            //  AllBuses.ItemsSource = Buss; //Displays buses on screen
+        }
+        private void AllLine_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -47,7 +47,7 @@ namespace BO
         public Status Status { get; set; }
         public override string ToString()
         {
-            return " ";
+            return "";
         }
 
 
