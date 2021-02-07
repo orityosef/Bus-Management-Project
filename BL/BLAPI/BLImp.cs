@@ -531,13 +531,33 @@ namespace BL.BLAPI
             LineStationBo.LineStationIndex = linestation.LineStationIndex;
             LineStationBo.PrevStation = linestation.PrevStation;
             LineStationBo.NextStation = linestation.NextStation;
-            AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.PrevStation,LineStationBo.StationID);
-            LineStationBo.TimeFromPrevious = AdjacentStationBo.Time;
-            LineStationBo.DistanceFromPrevious = AdjacentStationBo.Distance;
-            AdjacentStationBo = GetOneAdjacentStation(LineStationBo.StationID, LineStationBo.NextStation);
-            LineStationBo.TimetoNext = AdjacentStationBo.Time;
-            LineStationBo.DistancetoNext = AdjacentStationBo.Distance;
-            return LineStationBo;
+            if ((LineStationBo.PrevStation != 0) && (LineStationBo.NextStation != 0))
+            {
+                AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.PrevStation, LineStationBo.StationID);
+                LineStationBo.TimeFromPrevious = AdjacentStationBo.Time;
+                LineStationBo.DistanceFromPrevious = AdjacentStationBo.Distance;
+                AdjacentStationBo = GetOneAdjacentStation(LineStationBo.StationID, LineStationBo.NextStation);
+                LineStationBo.TimetoNext = AdjacentStationBo.Time;
+                LineStationBo.DistancetoNext = AdjacentStationBo.Distance;
+            }
+            if((LineStationBo.PrevStation == 0))
+            {
+                LineStationBo.TimeFromPrevious = new TimeSpan(0, 0, 0);
+                LineStationBo.DistanceFromPrevious = 0;
+                AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.StationID, LineStationBo.NextStation);
+                LineStationBo.TimetoNext = AdjacentStationBo.Time;
+                LineStationBo.DistancetoNext = AdjacentStationBo.Distance;
+            }
+            if (LineStationBo.NextStation == 0)
+            {
+                AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.PrevStation, LineStationBo.StationID);
+                LineStationBo.TimeFromPrevious = AdjacentStationBo.Time;
+                LineStationBo.DistanceFromPrevious = AdjacentStationBo.Distance;
+                LineStationBo.TimetoNext = new TimeSpan(0, 0, 0);
+                LineStationBo.DistancetoNext = 0;
+
+            }
+                return LineStationBo;
         }
         //המרה מ-BלD
         private DO.LineStation ConvertBtoD(LineStation LineStation)

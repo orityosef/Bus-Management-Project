@@ -18,23 +18,9 @@
                         <!--<GridViewColumn Header="StationList" Width="150" DisplayMemberBinding="{Binding StationList}" />-->
                   
                         <GridViewColumn Width="90">
-                            <!--<GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="Refuelling"  Margin="0"
-                                VerticalAlignment="Center"
-                                Click="Refuelling_Click" Width="70"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>-->
+                            
                         </GridViewColumn>
-                        <!--<GridViewColumn Width="100">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="SartDrive"  Margin="0"
-                                VerticalAlignment="Center"
-                                Click ="btnDrive_Click" Width="80"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>-->
+                       
                     </GridView>
                 </ListView.View>
             </ListView>
