@@ -10,10 +10,16 @@ using BLAPI;
 
 namespace BL.BLAPI
 {
-    class BLImp : IBL //internal
+    sealed class BLImp : IBL //internal
     {
-        readonly IDL dl = DLFactory.GetDL();
+        static IDL dl = DLFactory.GetDL();
 
+        #region singelton
+        static readonly BLImp instance = new BLImp();
+        static BLImp() { }// static ctor to ensure instance init is done just before first usage
+        BLImp() { } // default => private
+        public static BLImp Instance { get => instance; }// The public Instance property to use
+        #endregion
 
         #region Bus
         //המרה מ-BלD
