@@ -76,7 +76,7 @@ namespace DS
             });
             listBus.Add(new Bus
             {
-                LicenseNum = 15823409,
+                LicenseNum = 89823409,
                 Fromdate = DateTime.Today.AddYears(-1),
                 TotalTrip = 5000,
                 FuelRemain = 1200,
