@@ -20,7 +20,8 @@ namespace BO
         public List<Station> StationList { get; set; }
         public override string ToString()
         {
-            return this.ToStringProperty();
+            return " ";
+           // return this.ToStringProperty();
         }
     }
 }
