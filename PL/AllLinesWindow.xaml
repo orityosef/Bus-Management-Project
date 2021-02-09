@@ -13,8 +13,8 @@
                     <GridView>
                         <GridViewColumn Header="Line Number" Width="100" DisplayMemberBinding="{Binding LineNumber}" />
                         <GridViewColumn Header="Aera" Width="80" DisplayMemberBinding="{Binding Aera}" />
-                        <GridViewColumn Header="FirstStation" Width="150" DisplayMemberBinding="{Binding FirstStation}" />
-                        <GridViewColumn Header="LastStation" Width="150" DisplayMemberBinding="{Binding LastStation}" />
+                        <GridViewColumn Header="FirstStation" Width="150" DisplayMemberBinding="{Binding FirstStationN}" />
+                        <GridViewColumn Header="LastStation" Width="150" DisplayMemberBinding="{Binding LastStationN}" />
                         <!--<GridViewColumn Header="StationList" Width="150" DisplayMemberBinding="{Binding StationList}" />-->
                   
                         <GridViewColumn Width="90">

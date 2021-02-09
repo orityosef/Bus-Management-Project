@@ -149,11 +149,15 @@ namespace BL.BLAPI
         //המרה מ-DלB
         private Line ConvertDtoB(DO.Line LineDo)
         {
+            DO.Station x1 = dl.GetOneStation(LineDo.FirstStation);
+            DO.Station x2 = dl.GetOneStation(LineDo.LastStation);
             Line LineBo = new Line
             {
                 Id = LineDo.Id,
                 LineNumber = LineDo.LineNumber,
                 FirstStation = LineDo.FirstStation,
+                FirstStationN = x1.Name,
+                LastStationN = x2.Name,
                 LastStation = LineDo.LastStation,
                 Aera = (Areas)LineDo.Area,
                 //הוספה לרשימת הלשדה חדש-רשימת תחנות בהם עובר הקו
