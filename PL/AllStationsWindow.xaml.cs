@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.BLAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,15 @@ namespace PL
     /// </summary>
     public partial class AllStationsWindow : Window
     {
+
+        readonly IBL bl = BLFactory.GetBL("1");
+
         public AllStationsWindow()
         {
             InitializeComponent();
+            AllStations.ItemsSource = bl.GetAllBusesLine();
+
         }
     }
 }
+

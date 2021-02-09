@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="AllStationsWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid Margin="10" RenderTransformOrigin="0.497,0.581">
+            <ListView x:Name="AllStations">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Code" Width="100" DisplayMemberBinding="{Binding Code}" />
+                        <GridViewColumn Header="Name" Width="80" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Longitude" Width="150" DisplayMemberBinding="{Binding Longitude}" />
+                        <GridViewColumn Header="Latitude" Width="150" DisplayMemberBinding="{Binding Latitude}" />
+                        <!--<GridViewColumn Header="LineList" Width="150" DisplayMemberBinding="{Binding StationInLineList}" />-->
+
+                        <GridViewColumn Width="90">
+
+                        </GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>
