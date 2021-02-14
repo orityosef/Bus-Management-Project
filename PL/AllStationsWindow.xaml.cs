@@ -26,7 +26,7 @@ namespace PL
         public AllStationsWindow()
         {
             InitializeComponent();
-            AllStations.ItemsSource = bl.GetAllBusesLine();
+            AllStations.ItemsSource = bl.GetAllStation();
 
         }
     }
