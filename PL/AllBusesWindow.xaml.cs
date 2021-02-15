@@ -41,10 +41,55 @@ namespace PL
                 Button btn = sender as Button;
                 var fxElt = sender as FrameworkElement;
                 Bus CurrentBus = fxElt.DataContext as Bus;
+                btn.IsEnabled = false;
                 bl.Treatment(CurrentBus.LicenseNum.ToString());
-                MessageBox.Show("The treatment was performed successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                TreatmentT(CurrentBus, 12000, btn);
+               
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                Button btn = sender as Button;
+                btn.IsEnabled = true;
+            }
+        }
+        private void TreatmentT(Bus lineData, int time, Button btn)//Fuel button- Refueling
+        {
+            btn.IsEnabled = false;
+            //           btn.Background = Brushes.Honeydew;
+
+            List<Object> lst = new List<object> { lineData, time, btn };
+
+            BackgroundWorker TreatmentT = new BackgroundWorker();
+            TreatmentT.DoWork += TreatmentT_DoWork;
+            TreatmentT.RunWorkerCompleted += TreatmentT_RunWorkerCompleted;
+
+            TreatmentT.RunWorkerAsync(lst);
+        }
+
+        private void TreatmentT_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) //Fuel button- Refueling is over 
+        {
+            List<Object> lst = (List<object>)e.Result;
+            Bus currentUser = lst[0] as Bus;
+            Button btn = lst[2] as Button;
+
+            currentUser.Status = Status.ReadyToGo;
+
+            btn.IsEnabled = true;
+            //btn.Background = Brushes.MintCream;
+            //         throw new NotImplementedException();
+        }
+
+        private void TreatmentT_DoWork(object sender, DoWorkEventArgs e)//Fuel button- Refueling process
+        {
+            List<Object> lst = (List<object>)e.Argument;
+            Bus currentUser = lst[0] as Bus;
+            currentUser.Status = Status.Treatment;
+
+            int value = (int)lst[1];    //3000 time
+            Thread.Sleep(value);
+            MessageBox.Show("The treatment was performed successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            e.Result = lst;          //btn
         }
         private void Refuelling_Click(object sender, RoutedEventArgs e)
         {
