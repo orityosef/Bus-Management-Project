@@ -20,7 +20,7 @@ namespace PL
     /// </summary>
     public partial class ManagerAccessOption : Window
     {
-        readonly IBL bl = BLFactory.GetBL("1");
+         IBL bl = BLFactory.GetBL("1");
         private User newItem = new User();
         public User newItem1 { get => newItem; set => newItem = value; }
         public ManagerAccessOption()
