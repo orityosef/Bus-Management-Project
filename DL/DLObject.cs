@@ -202,6 +202,15 @@ namespace DL
             DataSource.listLineStation.Add(LineStationNew.Clone());
             return true;
         }
+        public IEnumerable<LineStation> getPartOfLineStations(Predicate<LineStation> LineStationDAOCondition)
+        {
+            IEnumerable<LineStation> TempLineStationDAO = from LineStation item in DataSource.listLineStation
+                                                          where LineStationDAOCondition(item)
+                                                             select item.Clone();
+            if (TempLineStationDAO.Count() == 0)
+                throw new LineStationDException("There are no line stations that meet the condition");
+            return TempLineStationDAO;
+        }
 
         public bool updatingLineStation(LineStation LineStationNew)
         {
@@ -244,6 +253,7 @@ namespace DL
             }
             throw new LineException( LineNumber,"the LineStation is not exists in the system");
         }
+
         #endregion LineStation
 
         #region User

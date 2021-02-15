@@ -100,8 +100,8 @@ namespace BL.BLAPI
         //הבאת כל הרשימה של האוטובוסים
         public IEnumerable<Bus> GetAllBuses()
         {
-            var result= from Bus in dl.GetAllBuses()
-                   select ConvertDtoB(Bus);
+            var result = from Bus in dl.GetAllBuses()
+                         select ConvertDtoB(Bus);
             return result;
         }
         //הבאת אוטובוס בודד
@@ -299,7 +299,29 @@ namespace BL.BLAPI
                                             let bls = ConvertDtoB(ls)
                                             where (bls.StationID == st.Code)
                                             select bls.LineNumber).ToList());
-            return (StationBo);
+            try
+            {
+                IEnumerable<DO.LineStation> listLineStations = dl.getPartOfLineStations(item => item.Station == st.Code);//רשימה של תחנות קו המתאימות לתחנה הזאת
+                IEnumerable<LineInStation> listOfLineInStation =
+                from lineStation in listLineStations
+                from BusLine1 in dl.GetAllBusesLine()
+                where lineStation.Station== BusLine1.Id
+                let result = new LineInStation
+                {
+                    IdentifyNumber = BusLine1.Id,
+                    LineNumber = BusLine1.LineNumber,
+                    LastStationName = dl.GetOneStation(BusLine1.LastStation).Name,
+                    LastStationNum = BusLine1.LastStation
+                }
+                select result;
+                StationBo.ListOfLines = listOfLineInStation;
+                return StationBo;
+            }
+            catch//אין קווים שעוברים בתחנה
+            {
+                StationBo.ListOfLines = null;
+                return StationBo;
+            }
         }
 
         private Station GetOneSation(int stationID)
@@ -521,10 +543,10 @@ namespace BL.BLAPI
         //מביא את התחנה הסמוכה  לתחנה הספציפית
         public AdjacentStation GetOneAdjacentStation2(int Station)
         {
-            
+
             AdjacentStation AdjacentStationBo = new AdjacentStation();
             AdjacentStationBo = (AdjacentStation)(from ls in GetAllAdjacentStation()
-                                                  where ((ls.Station1ID == Station)||(ls.Station2ID == Station))
+                                                  where ((ls.Station1ID == Station) || (ls.Station2ID == Station))
                                                   select ls);
             return (AdjacentStationBo);
         }
@@ -550,7 +572,7 @@ namespace BL.BLAPI
                 LineStationBo.TimetoNext = AdjacentStationBo.Time;
                 LineStationBo.DistancetoNext = AdjacentStationBo.Distance;
             }
-            if((LineStationBo.PrevStation == 0))
+            if ((LineStationBo.PrevStation == 0))
             {
                 LineStationBo.TimeFromPrevious = new TimeSpan(0, 0, 0);
                 LineStationBo.DistanceFromPrevious = 0;
@@ -567,16 +589,16 @@ namespace BL.BLAPI
                 LineStationBo.DistancetoNext = 0;
 
             }
-                return LineStationBo;
+            return LineStationBo;
         }
         //המרה מ-BלD
         private DO.LineStation ConvertBtoD(LineStation LineStation)
         {
             DO.LineStation LineStationDo = new DO.LineStation();
-            LineStationDo.Station= LineStation.StationID;
+            LineStationDo.Station = LineStation.StationID;
             LineStationDo.LineNumber = LineStation.LineNumber;
             LineStationDo.LineStationIndex = LineStation.LineStationIndex;
-             LineStationDo.PrevStation = LineStation.PrevStation;
+            LineStationDo.PrevStation = LineStation.PrevStation;
             LineStationDo.NextStation = LineStation.NextStation;
             return (LineStationDo);
         }
@@ -748,7 +770,7 @@ namespace BL.BLAPI
             }
             return result;
         }
-        
+
         public bool existingUser(string userName, string passWord)
         {
             DO.User user1 = dl.GetAllUser().ToList().Find(p => p.UserName == userName && p.Password == passWord);
@@ -760,5 +782,66 @@ namespace BL.BLAPI
         }
         #endregion
 
+        #region MiniStation
+        public IEnumerable<MiniStation> GetAllMiniStations()//תצוגה מינימלית של תחנה עבור הקומבובוקס
+        {
+            IEnumerable<MiniStation> result =
+                from station in GetAllStation()
+                select new MiniStation { CodeStation = station.Code, NameStation = station.Name };
+            return result;
+        }
+        public IEnumerable<MiniStation> GetListMiniStationsByLine(Line line)//מחזירה את רשימת המיני תחנות של קו ספציפי
+        {
+            IEnumerable<MiniStation> result =
+                from station in line.StationList
+                select new MiniStation { CodeStation = station.Code, NameStation = station.Name };
+            return result;
+        }
+
+        #endregion
+        public List<WayForPass> GetRelevantWays(int codeStation1, int codeStation2)
+        {
+            List<WayForPass> result = new List<WayForPass>();
+
+            foreach (Line line in GetAllBusesLine())
+            {
+                bool ifFirstIn = false;
+                int LocationFirst = 0;
+                bool ifLastIn = false;
+                int LocationLast = 0;
+                foreach (var station in line.ListOfStations)
+                {
+                    if (station.StationID == codeStation1)
+                    {
+                        ifFirstIn = true;
+                        LocationFirst = station.LineStationIndex;
+                        break;
+                    }
+                }
+                foreach (var station in line.ListOfStations)
+                {
+                    if (station.StationID == codeStation2)
+                    {
+                        ifLastIn = true;
+                        LocationLast = station.LineStationIndex;
+                        break;
+                    }
+                }
+                if (ifFirstIn == true && ifLastIn == true && LocationFirst < LocationLast)//אם שתי התחנות קיימות בקו ותחנת המוצא לפני תחנת היעד
+                {
+                    TimeSpan count = new TimeSpan(0, 0, 0);
+                    for (int i = LocationLast - 1; i >= LocationFirst; i--)//עובר מהתחנת יעד עד תחנת המוצא אחורה
+                    {
+                        count += line.ListOfStations.ToArray()[i].TimeFromPrevious;//סופר את זמן הנסיעה של המסלול הזה
+                    }
+                    result.Add(new WayForPass { LineNumber = line.LineNumber, TimeOfTrip = count });
+                }
+            }
+            IEnumerable<WayForPass> orderList =
+                from way in result
+                orderby way.TimeOfTrip
+                select way;
+            return orderList.ToList();
+        }
     }
 }

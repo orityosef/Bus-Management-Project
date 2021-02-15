@@ -18,6 +18,7 @@ namespace BO
         public int LastStation { get; set; }
         public string LastStationN { get; set; }
         public List<Station> StationList { get; set; }
+        public IEnumerable<LineStation> ListOfStations { get; set; }
         public override string ToString()
         {
             return " ";

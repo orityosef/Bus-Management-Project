@@ -44,6 +44,7 @@ namespace DLAPI
         bool updatingLineStation(LineStation LineStationNew);
         bool deleteLineStation(LineStation SLineStationNew);
         IEnumerable<LineStation> GetAllLineStation();
+        IEnumerable<LineStation> getPartOfLineStations(Predicate<LineStation> LineStationDAOCondition);
 
         LineStation GetOneLineStation(int LineNumber);
 

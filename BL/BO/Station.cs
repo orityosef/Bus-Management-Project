@@ -14,6 +14,7 @@ namespace BO
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public List<int> StationInLineList { get; set; }
+        public IEnumerable<LineInStation> ListOfLines { get; set; }
         public override string ToString()
         {
             return this.ToStringProperty();
