@@ -150,5 +150,40 @@ namespace PL
 
             tidluk.RunWorkerAsync(lst);
         }
+        private void Button_ClickAddBus(object sender, RoutedEventArgs e)
+        {
+            addBus addBusWindow = new addBus();
+            addBusWindow.ShowDialog();
+            bool a = false;
+            try
+            {
+                if (addBusWindow.ifDone)
+                { a = bl.addBus(addBusWindow.newItem1); }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
+            AllBuses.ItemsSource = bl.GetAllBuses();
+            if (a)
+            {
+                MessageBox.Show("Done", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        private void Delete_Click(object sender, RoutedEventArgs e)//כפתור מחיקה מתוך הרשימה
+        {
+            var fxElt = sender as FrameworkElement;
+            Bus CurrentBus = fxElt.DataContext as Bus;
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure?", " DELETE", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    bl.deleteBus(CurrentBus);
+                    AllBuses.ItemsSource = bl.GetAllBuses();
+                    MessageBox.Show("Done", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+            
+        }
+       
     }
 }

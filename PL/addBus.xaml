@@ -1,0 +1,33 @@
+﻿<Window x:Class="PL.addBus"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="addBus" Height="400" Width="400">
+    <Grid>
+        <TextBlock x:Name="addLine111" Text="Adding a bus"  HorizontalAlignment="Left" Margin="148,0,0,350.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="36" Width="92"/>
+        <TextBlock HorizontalAlignment="Left" Margin="48,87,0,0" TextWrapping="Wrap" Text="license number" VerticalAlignment="Top" Height="23" Width="118"/>
+        <TextBlock HorizontalAlignment="Left" Margin="48,137,0,0" TextWrapping="Wrap" Text="TotalTrip" VerticalAlignment="Top" Height="29" Width="102"/>
+        <TextBlock HorizontalAlignment="Left" Margin="48,187,0,0" TextWrapping="Wrap" Text="Licensing date" VerticalAlignment="Top" Height="29" Width="129"/>
+        <TextBox x:Name="LicenseNum" HorizontalAlignment="Left" Height="23" Margin="171,87,0,0" PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" MaxLength="8" TextWrapping="Wrap" Text="{Binding Path=LicenseNum, Mode=OneWayToSource}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TotalTrip" HorizontalAlignment="Left" Height="23" Margin="171,143,0,0"  PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown"  TextWrapping="Wrap" Text="{Binding Path=TotalTrip, Mode=OneWayToSource}" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="addButton"  Content="ADD" HorizontalAlignment="Left" Margin="134,264,0,0" VerticalAlignment="Top" Width="132" Height="40" Click="addButton_Click">
+            <Button.Style>
+                <Style >
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=license, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=totalKms, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <DatePicker x:Name="dateStart"  SelectedDate="{x:Static sys:DateTime.Now}" HorizontalAlignment="Left" Margin="171,191,0,0" VerticalAlignment="Top" />
+    </Grid>
+</Window>

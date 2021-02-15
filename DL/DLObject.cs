@@ -34,15 +34,17 @@ namespace DL
 
         public bool deleteBus(Bus busNew)
         {
-            if (DataSource.listBus.Exists(busold => busold.LicenseNum != busNew.LicenseNum))
+        
+            if (!DataSource.listBus.Exists(busold => busold.LicenseNum == busNew.LicenseNum))
             {
                 throw new BusException(busNew.LicenseNum,"the bus is not exists in the system");
                 //return false;
             }
-            DataSource.listBus.Remove(busNew);
+
+            DataSource.listBus.RemoveAll(busold => busold.LicenseNum == busNew.LicenseNum);
             return true;
         }
-
+   
         public bool updatingBus(Bus busNew)
         {
             DO.Bus busold = DataSource.listBus.Find(b => b.LicenseNum == busNew.LicenseNum);
