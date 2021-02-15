@@ -53,9 +53,8 @@ namespace PL
                 var fxElt = sender as FrameworkElement;
                 Bus CurrentBus = fxElt.DataContext as Bus;
                 btn.IsEnabled = false;
+                tidluk(CurrentBus, 12000, btn);
                 bl.Refuelling(CurrentBus.LicenseNum.ToString());
-               if(CurrentBus.FuelRemain!=1200)
-                    tidluk(CurrentBus, 12000, btn);
                
                
             }

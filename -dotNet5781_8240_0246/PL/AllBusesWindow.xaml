@@ -1,0 +1,42 @@
+﻿<Window x:Class="PL.AllBusesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="AllBusesWindow" Height="472.8" Width="735.2">
+    <Grid>
+        <Grid Margin="10" RenderTransformOrigin="0.497,0.581">
+            <ListView x:Name="AllBuses" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Bus License" Width="100" DisplayMemberBinding="{Binding LicenseN}" />
+                        <GridViewColumn Header="TotalTrip" Width="60" DisplayMemberBinding="{Binding TotalTrip}" />
+                        <GridViewColumn Header="Start Date" Width="150" DisplayMemberBinding="{Binding Fromdate}" />
+                        <GridViewColumn Header="FuelRemain" Width="60" DisplayMemberBinding="{Binding FuelRemain}" />
+                        <GridViewColumn Header="Status" Width="80" DisplayMemberBinding="{Binding Status}" />
+                        <GridViewColumn Width="90">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Refuelling"  Margin="0"
+                                VerticalAlignment="Center"
+                                Click="Refuelling_Click" Width="70"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Treatment"  Margin="0"
+                                VerticalAlignment="Center"
+                                Click ="Treatment_Click" Width="80"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Grid>
+</Window>

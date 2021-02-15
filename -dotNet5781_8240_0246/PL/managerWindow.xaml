@@ -1,0 +1,45 @@
+﻿<Window x:Class="PL.managerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="managerWindow" Height="480" Width="400" Icon="Im/icon.jpeg" Foreground="{x:Null}">
+    <Window.Background>
+        <ImageBrush/>
+    </Window.Background>
+    <Grid Margin="0,2,0,-2">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FFF7F7F7" Offset="1"/>
+                <GradientStop Color="#FF006E25" Offset="1"/>
+                <GradientStop Color="#FF0A742D" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--<Grid.Background>
+            <ImageBrush ImageSource="Im/managerWindow.jpg"/>
+        </Grid.Background>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="71*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="72*"/>
+        </Grid.RowDefinitions>
+        <Label  Content="Select an option:" HorizontalAlignment="Center" FontFamily="Times New Roman" FontSize="24" Margin="111,0,110.6,9.4" Width="172" Height="43" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+        <Button x:Name="b1" Content="Buses" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontFamily="Times New Roman" 
+                Width="342" Height="47" Margin="26,0,0,20.6" FontSize="35" Click="Buses_Click" Grid.ColumnSpan="2" FontWeight="Bold" Grid.RowSpan="2"/>
+        <Button x:Name="b2" Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
+                Width="342" Height="47" Margin="26,0,0,23.8" FontSize="35" Grid.Row="2" Click="Lines_Click" Grid.ColumnSpan="2" FontWeight="Bold"/>
+        <Button x:Name="b3" Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
+                Width="342" Height="47" Margin="26,0,0,24" FontSize="35" Grid.Row="3" Click="Stations_Click" Grid.ColumnSpan="2" FontWeight="Bold"/>
+        <Button x:Name="b4" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
+                Width="342" Height="47" Margin="26,0,0,24.4" FontSize="35" Grid.Row="3" Click="Edit_Click" Grid.ColumnSpan="2" FontWeight="Bold" Grid.RowSpan="2"/>
+    </Grid>
+</Window>

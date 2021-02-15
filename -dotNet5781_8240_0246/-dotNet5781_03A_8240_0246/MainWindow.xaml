@@ -1,0 +1,39 @@
+﻿<Window x:Class="_dotNet5781_03A_8240_0246.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_dotNet5781_03A_8240_0246"
+        mc:Ignorable="d"
+              Title="Bus Company🚌" Height="640" Width="800" Icon="WhatsApp Image 2020-11-26 at 15.44.11.jpeg">
+    <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="700*"/>
+            <ColumnDefinition Width="93*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto" Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="149*"/>
+                <ColumnDefinition Width="198*"/>
+                <ColumnDefinition Width="198*"/>
+                <ColumnDefinition Width="198*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox Name="cbBusLines" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="148.305,0,0.4,0"
+					  VerticalAlignment="Center" Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged" SelectedItem="{Binding Path=Number}"/>
+            <TextBox Name ="tbArea" Grid.Column="4" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"  
+					 FontSize="20" Margin="9.362,10,10.038,10" Text="{Binding Path=Zone}" TextChanged="tbArea_TextChanged"/>
+
+            <Label Content="Bus Line Number:"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" 
+				   FontFamily="Times New Roman" Grid.ColumnSpan="2" Margin="12,16,12.4,16" />
+            <Label Content="Area:"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Grid.Column="3" 
+				   FontFamily="Bell MT" Margin="70.2,16" />
+        </Grid>
+        <ListBox Name="lbBusLineStations" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="542" Grid.Row="1"
+				 VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>
