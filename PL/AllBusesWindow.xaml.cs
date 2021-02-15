@@ -54,12 +54,15 @@ namespace PL
                 Bus CurrentBus = fxElt.DataContext as Bus;
                 btn.IsEnabled = false;
                 bl.Refuelling(CurrentBus.LicenseNum.ToString());
-               if(CurrentBus.FuelRemain!=1200)
-                    tidluk(CurrentBus, 12000, btn);
-               
-               
+                tidluk(CurrentBus, 12000, btn);
+                CurrentBus.FuelRemain = 1200;
+
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                
+            }
         }
        
         private void Tidluk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) //Fuel button- Refueling is over 
