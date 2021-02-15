@@ -7,7 +7,7 @@ using BL.BO;
 
 namespace BO
 {
-    class WayForPass
+    public class WayForPass
     {
         public int LineNumber { get; set; }//מספר קו
         public TimeSpan TimeOfTrip { get; set; }//כמה זמן לוקחת הדרך הזאת

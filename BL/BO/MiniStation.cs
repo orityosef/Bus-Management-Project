@@ -7,7 +7,7 @@ using BL.BO;
 
 namespace BO
 {
-    class MiniStation
+    public class MiniStation
     {
         public int CodeStation { get; set; }//קוד תחנה
         public string NameStation { get; set; }//שם תחנה

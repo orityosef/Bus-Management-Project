@@ -1,4 +1,5 @@
 ﻿using BL.BLAPI;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,9 @@ namespace PL
         IBL bl = BLFactory.GetBL("1");
         private int codeStation1;
         private int codeStation2;
-        public passengerWindow(IBL _bl)
+        public passengerWindow()
         {
             InitializeComponent();
-            bl = _bl;
             lastStationCB.ItemsSource = bl.GetAllMiniStations();
             firstStationCB.ItemsSource = bl.GetAllMiniStations();
         }

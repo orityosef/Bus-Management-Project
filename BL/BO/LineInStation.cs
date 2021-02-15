@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class LineInStation
+    public class LineInStation
     {
         public int IdentifyNumber { get; set; }//מזהה קו
         public int LineNumber { get; set; }//מספר קו
