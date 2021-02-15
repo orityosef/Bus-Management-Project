@@ -38,6 +38,7 @@ namespace PL
         {
             try
             {
+                Button btn = sender as Button;
                 var fxElt = sender as FrameworkElement;
                 Bus CurrentBus = fxElt.DataContext as Bus;
                 bl.Treatment(CurrentBus.LicenseNum.ToString());
@@ -61,7 +62,8 @@ namespace PL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                
+                Button btn = sender as Button;
+                btn.IsEnabled = true;
             }
         }
        
