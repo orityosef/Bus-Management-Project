@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DLAPI;
 using BLAPI;
-
+using BL.BO;
 
 namespace BL.BLAPI
 {
@@ -136,6 +136,47 @@ namespace BL.BLAPI
             {
                 throw new BO.BusException("bus license is illegal", ex);
             }
+        }
+        //שליחת אוטובוס לטיפול ותדלוק
+        public void Refuelling(string license)
+        {
+            IEnumerable<DO.Bus> buses = dl.GetAllBuses();
+            if (!buses.Any(item => item.LicenseNum.ToString() == license))
+            {
+                throw new ArgumentNullException("bus not found");
+            }
+            DO.Bus busD = new DO.Bus();
+            foreach (DO.Bus bus in buses)
+            {
+                if (bus.LicenseNum.ToString() == license)
+                    busD = bus;
+            }
+            if (busD.Refuel == 1200)
+            {
+                throw new BO.BusException("this bus Refuel is  full");
+            }
+           
+            busD.Status = DO.Status.ReadyToGo;//אחרי זה צריך לשנות את הסטטוס בחזרה למוכן
+            busD.Refuel = 1200;//התדלוק עצמו
+            dl.updatingBus(busD);
+        }
+        public void Treatment(string license)
+        {
+            IEnumerable<DO.Bus> buses = dl.GetAllBuses();
+            if (!buses.Any(item => item.LicenseNum.ToString() == license))
+            {
+                throw new ArgumentNullException("bus not found");
+            }
+            DO.Bus busD = new DO.Bus();
+            foreach (DO.Bus bus in buses)
+            {
+                if (bus.LicenseNum.ToString() == license)
+                    busD = bus;
+            }
+            busD.Status = DO.Status.Treatment;
+            busD.Status = DO.Status.ReadyToGo;//אחרי זה צריך לשנות את הסטטוס בחזרה למוכן
+            busD.TotalTrip = 0;
+            dl.updatingBus(busD);
         }
 
         #endregion Bus

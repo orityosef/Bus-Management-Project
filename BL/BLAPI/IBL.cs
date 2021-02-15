@@ -17,6 +17,8 @@ namespace BL.BLAPI
         IEnumerable<Bus> GetAllBuses();
         IEnumerable<Bus> GetPartOfBuses(Predicate<Bus> BusCondition);
         Bus GetOneBus(int License);
+        void Treatment(string license);
+        void Refuelling(string license);
         #endregion
         //קו
         #region Line

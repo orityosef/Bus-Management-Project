@@ -10,7 +10,12 @@ namespace BL.BO
     public class BusException : Exception
         {
             public int LicenseNumB;
-            public BusException(string message, Exception innerException) :
+
+        public BusException(string message) : base(message)
+        {
+        }
+
+        public BusException(string message, Exception innerException) :
                 base(message, innerException) => LicenseNumB = ((DO.BusException)innerException).LicenseNum;
             public override string ToString() => base.ToString() + $" Invalid license number: {LicenseNumB}";
         }

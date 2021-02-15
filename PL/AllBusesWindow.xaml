@@ -17,23 +17,23 @@
                         <GridViewColumn Header="FuelRemain" Width="60" DisplayMemberBinding="{Binding FuelRemain}" />
                         <GridViewColumn Header="Status" Width="80" DisplayMemberBinding="{Binding Status}" />
                         <GridViewColumn Width="90">
-                            <!--<GridViewColumn.CellTemplate>
+                            <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="Refuelling"  Margin="0"
                                 VerticalAlignment="Center"
                                 Click="Refuelling_Click" Width="70"/>
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate>-->
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <!--<GridViewColumn Width="100">
+                        <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="SartDrive"  Margin="0"
+                                    <Button Content="Treatment"  Margin="0"
                                 VerticalAlignment="Center"
-                                Click ="btnDrive_Click" Width="80"/>
+                                Click ="Treatment_Click" Width="80"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
-                        </GridViewColumn>-->
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

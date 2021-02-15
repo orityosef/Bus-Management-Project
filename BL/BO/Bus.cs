@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using BL.BO;
 using BO;
 namespace BO
 {
-    public class Bus
+    public class Bus: INotifyPropertyChanged
     {
         public int LicenseNum { get; set; }
         public string LicenseN
@@ -47,9 +48,18 @@ namespace BO
         public Status Status { get; set; }
         public override string ToString()
         {
-            return "";
+            return this.ToStringProperty();
         }
-
+        public event PropertyChangedEventHandler PropertyChanged;
+       protected void OnPropertyChanged(String propertyName)
+        {
+            //if (PropertyChanged != null)
+            //{
+            //    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            //}
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(String.Empty));
+        }
 
     }
 }

@@ -55,7 +55,7 @@ namespace DS
                 LicenseNum = 1234567,
                 Fromdate = DateTime.Today.AddYears(-3),
                 TotalTrip = 5000,
-                FuelRemain = 1200,
+                FuelRemain = 90,
                 Status = Status.ReadyToGo
             });
             listBus.Add(new Bus

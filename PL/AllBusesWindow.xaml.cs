@@ -4,8 +4,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,90 +25,79 @@ namespace PL
     /// </summary>
     public partial class AllBusesWindow : Window
     {
-      //  public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
-        readonly IBL bl = BLFactory.GetBL("1");
+        //  public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
+        IBL bl = BLFactory.GetBL("1");
 
         public AllBusesWindow()
         {
             InitializeComponent();
             AllBuses.ItemsSource = bl.GetAllBuses();
-          //  AllBuses.ItemsSource = Buss; //Displays buses on screen
+            //  AllBuses.ItemsSource = Buss; //Displays buses on screen
         }
-        //        private void Refuelling_Click(object sender, RoutedEventArgs e) //Fuel button
-        //        {
-        //            Button btn = sender as Button;
-        //            Bus currentuser = btn.DataContext as Bus;
+        private void Treatment_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var fxElt = sender as FrameworkElement;
+                Bus CurrentBus = fxElt.DataContext as Bus;
+                bl.Treatment(CurrentBus.LicenseNum.ToString());
+                MessageBox.Show("The treatment was performed successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
+        private void Refuelling_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button btn = sender as Button;
+                var fxElt = sender as FrameworkElement;
+                Bus CurrentBus = fxElt.DataContext as Bus;
+                btn.IsEnabled = false;
+                tidluk(CurrentBus, 12000, btn);
+                bl.Refuelling(CurrentBus.LicenseNum.ToString());
+               
+               
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
+       
+        private void Tidluk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) //Fuel button- Refueling is over 
+        {
+            List<Object> lst = (List<object>)e.Result;
+            Bus currentUser = lst[0] as Bus;
+            Button btn = lst[2] as Button;
 
-        //            btn.IsEnabled = false;
+            currentUser.Status = Status.ReadyToGo;
 
-        //            tidluk(currentuser, 12000, btn);
-        //        }
+            btn.IsEnabled = true;
+            //btn.Background = Brushes.MintCream;
+            //         throw new NotImplementedException();
+        }
 
+        private void Tidluk_DoWork(object sender, DoWorkEventArgs e)//Fuel button- Refueling process
+        {
+            List<Object> lst = (List<object>)e.Argument;
+            Bus currentUser = lst[0] as Bus;
+            currentUser.Status = Status.Refueling;
 
-        //        private void Tidluk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) //Fuel button- Refueling is over 
-        //        {
-        //            List<Object> lst = (List<object>)e.Result;
-        //            Bus currentUser = lst[0] as Bus;
-        //            Button btn = lst[2] as Button;
+            int value = (int)lst[1];    //3000 time
+            Thread.Sleep(value);
+            MessageBox.Show("Refueling performed successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            e.Result = lst;          //btn
+        }
 
-        //            currentUser.Status = STATE.ReadyToGo;
+        private void tidluk(Bus lineData, int time, Button btn)//Fuel button- Refueling
+        {
+            btn.IsEnabled = false;
+            //           btn.Background = Brushes.Honeydew;
 
-        //            btn.IsEnabled = true;
-        //            //btn.Background = Brushes.MintCream;
-        //            //         throw new NotImplementedException();
-        //        }
+            List<Object> lst = new List<object> { lineData, time, btn };
 
-        //        private void Tidluk_DoWork(object sender, DoWorkEventArgs e)//Fuel button- Refueling process
-        //        {
-        //            List<Object> lst = (List<object>)e.Argument;
-        //            Bus currentUser = lst[0] as Bus;
+            BackgroundWorker tidluk = new BackgroundWorker();
+            tidluk.DoWork += Tidluk_DoWork;
+            tidluk.RunWorkerCompleted += Tidluk_RunWorkerCompleted;
 
-        //            currentUser.Refuelling(1200);
-        //            currentUser.Status = STATE.Refueling;
-
-        //            int value = (int)lst[1];    //3000 time
-        //            Thread.Sleep(value);
-
-        //            e.Result = lst;          //btn
-        //        }
-
-        //        private void tidluk(Bus lineData, int time, Button btn)//Fuel button- Refueling
-        //        {
-        //            btn.IsEnabled = false;
-        //            //           btn.Background = Brushes.Honeydew;
-
-        //            List<Object> lst = new List<object> { lineData, time, btn };
-
-        //            BackgroundWorker tidluk = new BackgroundWorker();
-        //            tidluk.DoWork += Tidluk_DoWork;
-        //            tidluk.RunWorkerCompleted += Tidluk_RunWorkerCompleted;
-
-        //            tidluk.RunWorkerAsync(lst);
-        //        }
-        //        private void MainWindow_Closing(object sender, CancelEventArgs e)
-        //        {
-        //            Environment.Exit(Environment.ExitCode);
-        //        }
-
-        //        private void btnDrive_Click(object sender, RoutedEventArgs e) //Travel button opens a new window
-        //        {
-        //            Button btn = sender as Button;
-        //            Bus currentuser = btn.DataContext as Bus;
-        //            SecondWindow secondWindow = new SecondWindow(currentuser);
-        //            //secondWindow.InputChanged += OnDialogInputChanged;
-        //            secondWindow.Show();
-
-        //        }
-
-
-
-        //        private void AddBus_Click(object sender, RoutedEventArgs e) //Adds a new bus at random
-        //        {
-        //            Bus bus = new Bus();
-        //            bus.State();
-        //            bus.Fuel = r.Next(0, 1200);
-        //            bus.Km = r.Next(0, 10000);
-        //            Buss.Add(bus);
-        //        }
+            tidluk.RunWorkerAsync(lst);
+        }
     }
 }
