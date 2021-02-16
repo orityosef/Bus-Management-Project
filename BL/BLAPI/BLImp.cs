@@ -323,23 +323,30 @@ namespace BL.BLAPI
             return true;
         }
 
+        //public IEnumerable<Line> GetAllBusesLine()
+        //{
+        //    var result = from l in dl.GetAllBusesLine()
+        //                 select new Line
+        //                 {
+        //                     Id = l.Id,
+        //                     LineNumber = l.LineNumber,
+        //                     Aera = (Areas)l.Area,
+        //                     FirstStation = l.FirstStation,
+        //                     LastStation = l.LastStation,
+        //                     StationList = ((from ls in dl.GetAllLineStation()
+        //                                     let bls = ConvertDtoB(ls)
+        //                                     where bls.LineNumber == l.LineNumber
+        //                                     select bls).OrderBy(linestation => linestation.LineStationIndex))
+        //                                    .Select(item => GetOneSation(item.StationID)).ToList()
+        //                 };
+        //    return result;
+
+        //}
         public IEnumerable<Line> GetAllBusesLine()
         {
-            var result = from l in dl.GetAllBusesLine()
-                         select new Line
-                         {
-                             Id = l.Id,
-                             LineNumber = l.LineNumber,
-                             Aera = (Areas)l.Area,
-                             FirstStation = l.FirstStation,
-                             LastStation = l.LastStation,
-                             StationList = ((from ls in dl.GetAllLineStation()
-                                             let bls = ConvertDtoB(ls)
-                                             where bls.LineNumber == l.LineNumber
-                                             select bls).OrderBy(linestation => linestation.LineStationIndex))
-                                            .Select(item => GetOneSation(item.StationID)).ToList()
-                         };
-            return result;
+            return from busLine in dl.GetAllBusesLine()
+                   orderby busLine.LineNumber
+                   select ConvertDtoB(busLine);
         }
         public IEnumerable<Line> GetPartOfBusesLine(Predicate<Line> LineCondition)
         {
