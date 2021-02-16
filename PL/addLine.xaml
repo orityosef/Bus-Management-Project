@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="addLine" Height="450" Width="800">
+        Title="addLine" Height="450" Width="500">
     <Grid>
-        <TextBlock x:Name="addLine111" Text="הוספת קו"  HorizontalAlignment="Left" Margin="377,0,0,374.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="36" Width="92"/>
-        <TextBlock x:Name="explane" Text="עליך להוסיף מספר קו, איזור וחובה להוסיף שתי תחנות שקיימות במערכת. אם ברצונך להוסיף תחנות נוספות בצע זאת בכפתור הייעודי" HorizontalAlignment="Left" Margin="73,46,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="23" Width="701"/>
-        <TextBlock HorizontalAlignment="Left" Margin="459,100,0,0" TextWrapping="Wrap" Text=":מספר הקו להוספה" VerticalAlignment="Top" Height="29" Width="102"/>
-        <TextBlock HorizontalAlignment="Left" Margin="466,150,0,0" TextWrapping="Wrap" Text=":איזור הקו להוספה" VerticalAlignment="Top" Height="29" Width="102"/>
-        <TextBlock HorizontalAlignment="Left" Margin="460,200,0,0" TextWrapping="Wrap" Text=":בחר תחנה ראשונה" VerticalAlignment="Top" Height="29" Width="129"/>
-        <TextBlock HorizontalAlignment="Left" Margin="472,250,0,0" TextWrapping="Wrap" Text=":בחר תחנה שנייה" VerticalAlignment="Top" Height="29" Width="129"/>
+        <TextBlock x:Name="addLine111" Text="Adding a bus"  HorizontalAlignment="Left" Margin="194,0,0,374.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="36" Width="92"/>
+        <TextBlock x:Name="explane" Text="Add a line number, in the area and two existing stations in the system." HorizontalAlignment="Left" Margin="73,46,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="23" Width="701"/>
+        <TextBlock HorizontalAlignment="Left" Margin="140,100,0,0" TextWrapping="Wrap" Text="Line number:" VerticalAlignment="Top" Height="29" Width="102"/>
+        <TextBlock HorizontalAlignment="Left" Margin="140,150,0,0" TextWrapping="Wrap" Text="Arae:" VerticalAlignment="Top" Height="29" Width="102"/>
+        <TextBlock HorizontalAlignment="Left" Margin="140,200,0,0" TextWrapping="Wrap" Text="First Stiation:" VerticalAlignment="Top" Height="29" Width="129"/>
+        <TextBlock HorizontalAlignment="Left" Margin="140,259,0,0" TextWrapping="Wrap" Text="Last Station:" VerticalAlignment="Top" Height="29" Width="129"/>
         <TextBox x:Name="lineNumber" HorizontalAlignment="Left" Height="23" Margin="275,100,0,0" TextWrapping="Wrap" Text="{Binding Path=LineNumber, Mode=OneWayToSource}" PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" MaxLength="3" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="areaCB"  HorizontalAlignment="Left" Margin="274,150,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="areaCB_SelectionChanged"/>
         <ComboBox x:Name="station1CB" Text="{Binding CodeStation}" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="274,200,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="station1CB_SelectionChanged"/>
         <ComboBox x:Name="station2CB" Text="{Binding CodeStation}" HorizontalAlignment="Left" Margin="275,259,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="station2CB_SelectionChanged"/>
 
-        <Button x:Name="addButton" Content="הוסף" HorizontalAlignment="Left" Margin="335,300,0,0" VerticalAlignment="Top" Width="132" Height="40" Click="addButton_Click">
+        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="194,317,0,0" VerticalAlignment="Top" Width="132" Height="40" Click="addButton_Click">
             <Button.Style>
                 <Style>
                     <Style.Triggers>
