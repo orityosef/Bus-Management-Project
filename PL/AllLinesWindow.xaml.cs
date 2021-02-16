@@ -29,6 +29,18 @@ namespace PL
             AllLine.ItemsSource = bl.GetAllBusesLine();
             //  AllBuses.ItemsSource = Buss; //Displays buses on screen
         }
+        private void Button_ClickAddLine(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                addLine addLineWindow = new addLine();
+                addLineWindow.ShowDialog();
+                AllLine.ItemsSource = bl.GetAllBusesLine();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
+            InitializeComponent();
+            AllLine.ItemsSource = bl.GetAllBusesLine();
+        }
         private void AllLine_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

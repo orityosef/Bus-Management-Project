@@ -41,10 +41,5 @@ namespace PL
             Window AllStationsWindow = new AllStationsWindow();
             AllStationsWindow.Show();
         }
-         private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            Window EditWindow = new EditWindow();
-            EditWindow.Show();
-        }
     }
 }

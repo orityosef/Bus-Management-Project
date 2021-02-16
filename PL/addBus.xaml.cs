@@ -24,6 +24,7 @@ namespace PL
 
         IBL bl = BLFactory.GetBL("1");
         private Bus newItem = new Bus();
+       
         public Bus newItem1 { get => newItem; set => newItem = value; }
         public bool ifDone { get; set; } = false;
         public addBus()

@@ -17,7 +17,8 @@ namespace BO
         public IEnumerable<LineInStation> ListOfLines { get; set; }
         public override string ToString()
         {
-            return this.ToStringProperty();
+            return " ";
+            // return this.ToStringProperty();
         }
     }
 }

@@ -23,6 +23,11 @@ namespace BL.BO
     public class StationException : Exception
     {
         public int Code;
+
+        public StationException(string message) : base(message)
+        {
+        }
+
         public StationException(string message, Exception innerException) :
             base(message, innerException) => Code = ((DO.StationException)innerException).Code;
         public override string ToString() => base.ToString() + $", Invalid code number:: {Code}";

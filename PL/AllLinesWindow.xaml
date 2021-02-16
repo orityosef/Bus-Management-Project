@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="AllLinesWindow" Height="450" Width="800" Icon="Im/icon.jpeg">
+        Title="AllLinesWindow" Height="450" Width="500" Icon="Im/icon.jpeg">
     <Grid>
         <Grid Margin="10" RenderTransformOrigin="0.497,0.581">
             <ListView x:Name="AllLine" SelectionChanged="AllLine_SelectionChanged" >
@@ -15,15 +15,16 @@
                         <GridViewColumn Header="Aera" Width="80" DisplayMemberBinding="{Binding Aera}" />
                         <GridViewColumn Header="FirstStation" Width="150" DisplayMemberBinding="{Binding FirstStation}" />
                         <GridViewColumn Header="LastStation" Width="150" DisplayMemberBinding="{Binding LastStation}" />
-                        <!--<GridViewColumn Header="StationList" Width="150" DisplayMemberBinding="{Binding StationList}" />-->
-                  
-                        <GridViewColumn Width="90">
-                            
-                        </GridViewColumn>
                        
+
+                        <GridViewColumn Width="90">
+
+                        </GridViewColumn>
+
                     </GridView>
                 </ListView.View>
             </ListView>
         </Grid>
+        <Button Content="Add Line"  Margin="65,354,64.333,29.667"   VerticalAlignment="Center" Click ="Button_ClickAddLine" Height="37"/>
     </Grid>
 </Window>

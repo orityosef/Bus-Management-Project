@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="managerWindow" Height="480" Width="400" Icon="Im/icon.jpeg" Foreground="{x:Null}">
+        Title="managerWindow" Height="350" Width="400" Icon="Im/icon.jpeg" Foreground="{x:Null}">
     <Window.Background>
         <ImageBrush/>
     </Window.Background>
@@ -34,12 +34,10 @@
         </Grid.RowDefinitions>
         <Label  Content="Select an option:" HorizontalAlignment="Center" FontFamily="Times New Roman" FontSize="24" Margin="111,0,110.6,9.4" Width="172" Height="43" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
         <Button x:Name="b1" Content="Buses" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontFamily="Times New Roman" 
-                Width="342" Height="47" Margin="26,0,0,20.6" FontSize="35" Click="Buses_Click" Grid.ColumnSpan="2" FontWeight="Bold" Grid.RowSpan="2"/>
+                Width="342" Height="47" Margin="26,0,0,0.333" FontSize="35" Click="Buses_Click" Grid.ColumnSpan="2" FontWeight="Bold" Grid.RowSpan="2"/>
         <Button x:Name="b2" Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
-                Width="342" Height="47" Margin="26,0,0,23.8" FontSize="35" Grid.Row="2" Click="Lines_Click" Grid.ColumnSpan="2" FontWeight="Bold"/>
+                Width="342" Height="47" Margin="26,0,0,39.333" FontSize="35" Grid.Row="2" Click="Lines_Click" Grid.ColumnSpan="2" FontWeight="Bold" Grid.RowSpan="2"/>
         <Button x:Name="b3" Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
-                Width="342" Height="47" Margin="26,0,0,24" FontSize="35" Grid.Row="3" Click="Stations_Click" Grid.ColumnSpan="2" FontWeight="Bold"/>
-        <Button x:Name="b4" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" 
-                Width="342" Height="47" Margin="26,0,0,24.4" FontSize="35" Grid.Row="3" Click="Edit_Click" Grid.ColumnSpan="2" FontWeight="Bold" Grid.RowSpan="2"/>
+                Width="342" Height="47" Margin="26,0,0,44.667" FontSize="35" Grid.Row="4" Click="Stations_Click" Grid.ColumnSpan="2" FontWeight="Bold" Grid.RowSpan="2"/>
     </Grid>
 </Window>

@@ -323,30 +323,24 @@ namespace BL.BLAPI
             return true;
         }
 
-        //public IEnumerable<Line> GetAllBusesLine()
-        //{
-        //    var result = from l in dl.GetAllBusesLine()
-        //                 select new Line
-        //                 {
-        //                     Id = l.Id,
-        //                     LineNumber = l.LineNumber,
-        //                     Aera = (Areas)l.Area,
-        //                     FirstStation = l.FirstStation,
-        //                     LastStation = l.LastStation,
-        //                     StationList = ((from ls in dl.GetAllLineStation()
-        //                                     let bls = ConvertDtoB(ls)
-        //                                     where bls.LineNumber == l.LineNumber
-        //                                     select bls).OrderBy(linestation => linestation.LineStationIndex))
-        //                                    .Select(item => GetOneSation(item.StationID)).ToList()
-        //                 };
-        //    return result;
-
-        //}
         public IEnumerable<Line> GetAllBusesLine()
         {
-            return from busLine in dl.GetAllBusesLine()
-                   orderby busLine.LineNumber
-                   select ConvertDtoB(busLine);
+            var result = from l in dl.GetAllBusesLine()
+                         select new Line
+                         {
+                             Id = l.Id,
+                             LineNumber = l.LineNumber,
+                             Aera = (Areas)l.Area,
+                             FirstStation = l.FirstStation,
+                             LastStation = l.LastStation,
+                             StationList = ((from ls in dl.GetAllLineStation()
+                                             let bls = ConvertDtoB(ls)
+                                             where bls.LineNumber == l.LineNumber
+                                             select bls).OrderBy(linestation => linestation.LineStationIndex))
+                                            .Select(item => GetOneSation(item.StationID)).ToList()
+                         };
+            return result;
+
         }
         public IEnumerable<Line> GetPartOfBusesLine(Predicate<Line> LineCondition)
         {
@@ -938,7 +932,7 @@ namespace BL.BLAPI
                     TimeSpan count = new TimeSpan(0, 0, 0);
                     for (int i = LocationLast - 1; i >= LocationFirst; i--)//עובר מהתחנת יעד עד תחנת המוצא אחורה
                     {
-                        count += line.ListOfStations.ToArray()[i].Time;//סופר את זמן הנסיעה של המסלול הזה
+                        count += line.ListOfStations.ToArray()[i].TimeFromFirstStation;//סופר את זמן הנסיעה של המסלול הזה
                     }
                     result.Add(new WayForPass { LineNumber = line.LineNumber, TimeOfTrip = count });
                 }

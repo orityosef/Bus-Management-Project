@@ -13,6 +13,7 @@ namespace BO
         public int Id { get; set; }
         public int LineNumber { get; set; }
         public Areas Aera { get; set; }
+      
         public int FirstStation { get; set; }
         public string FirstStationN { get; set; }
         public int LastStation { get; set; }
