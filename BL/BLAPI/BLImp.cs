@@ -214,7 +214,66 @@ namespace BL.BLAPI
                                 select bls).OrderBy(linestation => linestation.LineStationIndex))
                                       .Select(item => GetOneSation(item.StationID)).ToList()
             };
-            return (LineBo);
+            IEnumerable<DO.LineStation> listLineStations = dl.getPartOfLineStations(item => item.LineNumber == LineDo.LineNumber);//רשימה של תחנות קו המתאימות לקו הזה
+            IEnumerable<DO.LineStation> listStationInLineOrder =//נשמרות כל התחנות קו של הקו הזה בצורה ממוינת
+               from lineStation in listLineStations
+               orderby lineStation.LineStationIndex
+               select lineStation;
+            IEnumerable<DO.AdjacentStation> pairs = dl.GetAllAdjacentStation();
+            List<LineStation> listStationTypeCorrect = new List<LineStation>();
+            DO.LineStation prev = null;
+            DO.LineStation current = null;
+            bool first = true;
+            //הלולאה הזאת עוברת על כל תחנות קו שמקושרות לקו הזה, ויוצרת רשימה של "תחנות בקו" שתוכנס לשדה המבוקש
+            foreach (DO.LineStation lineStationNext in listStationInLineOrder)
+            {
+                prev = current;//מקוות שזה המקום הנכון
+                current = lineStationNext;
+                if (!first)
+                {
+                    LineStation forNow = new LineStation();
+                    forNow.StationID = lineStationNext.Station;
+                    forNow.LineStationIndex = lineStationNext.LineStationIndex;
+                    forNow.NameStation = dl.GetOneStation(lineStationNext.Station).Name;
+                    TimeSpan count = new TimeSpan(0, 0, 0);
+                    for (int i = forNow.LineStationIndex; i > 1; i--)//חישוב זמן הנסיעה של התחנה הנוכחית מתחנת המוצא
+                    {
+                        count += dl.GetOneAdjacentStation(listStationInLineOrder.ToArray()[i - 1].Station, listStationInLineOrder.ToArray()[i - 2].Station).Time;
+                    }
+                    forNow.TimeFromFirstStation = count;
+                    if (dl.GetOneAdjacentStation(current.Station, prev.Station) != null)
+                    {
+                        forNow.Distance = dl.GetOneAdjacentStation(current.Station, prev.Station).Distance;//הצבת המרחק מתוך זוג התחנות העוקבות בשדה מרחק של התחנה שלנו מקודמתה
+                        forNow.Time = dl.GetOneAdjacentStation(current.Station, prev.Station).Time;//הצבת הזמן נסיעה מתוך זוג התחנות העוקבות בשדה זמן נסיעה של התחנה שלנו מקודמתה
+                    }
+                    else
+                    {
+                        forNow.Distance = 0;
+                        forNow.Time = new TimeSpan(0, 0, 0);
+                    }
+                    listStationTypeCorrect.Add(forNow);
+                }
+                else//במקרה שזו התחנה הראשונה, נאתחל את המרחק והזמן לאפסים
+                {
+                    listStationTypeCorrect.Add(new LineStation
+                    {
+                        StationID = lineStationNext.Station,
+                        LineNumber = lineStationNext.LineStationIndex,
+                        NameStation = dl.GetOneStation(lineStationNext.Station).Name,
+                        Distance = 0,
+                        Time = new TimeSpan(0, 0, 0),
+                        TimeFromFirstStation = new TimeSpan(0, 0, 0)
+                    });
+                }
+                first = false;
+            }
+            LineBo.ListOfStations = listStationTypeCorrect;
+            //IEnumerable<BusOnTrip> trips =
+            //    from trip in dl.getPartOfLineTrip(item => item.IdentifyNumber == busLine.IdentifyNumber)
+            //    orderby trip.TripStart
+            //    select convertoBO(trip);
+            //LineBo.ListOfStations = trips;
+            return LineBo;
         }
         public bool addLine(Line LineNew)
         {
@@ -360,7 +419,7 @@ namespace BL.BLAPI
             }
             catch//אין קווים שעוברים בתחנה
             {
-                StationBo.ListOfLines = null;
+                StationBo. ListOfLines = null;
                 return StationBo;
             }
         }
@@ -607,27 +666,26 @@ namespace BL.BLAPI
             if ((LineStationBo.PrevStation != 0) && (LineStationBo.NextStation != 0))
             {
                 AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.PrevStation, LineStationBo.StationID);
-                LineStationBo.TimeFromPrevious = AdjacentStationBo.Time;
-                LineStationBo.DistanceFromPrevious = AdjacentStationBo.Distance;
+                LineStationBo.TimeFromFirstStation = AdjacentStationBo.Time;
+                LineStationBo.Distance = AdjacentStationBo.Distance;
                 AdjacentStationBo = GetOneAdjacentStation(LineStationBo.StationID, LineStationBo.NextStation);
-                LineStationBo.TimetoNext = AdjacentStationBo.Time;
-                LineStationBo.DistancetoNext = AdjacentStationBo.Distance;
+                LineStationBo.Time = AdjacentStationBo.Time;
             }
             if ((LineStationBo.PrevStation == 0))
             {
-                LineStationBo.TimeFromPrevious = new TimeSpan(0, 0, 0);
-                LineStationBo.DistanceFromPrevious = 0;
+                LineStationBo.TimeFromFirstStation = new TimeSpan(0, 0, 0);
+                LineStationBo.Distance = 0;
                 AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.StationID, LineStationBo.NextStation);
-                LineStationBo.TimetoNext = AdjacentStationBo.Time;
-                LineStationBo.DistancetoNext = AdjacentStationBo.Distance;
+                LineStationBo.Time = AdjacentStationBo.Time;
+              
             }
             if (LineStationBo.NextStation == 0)
             {
                 AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.PrevStation, LineStationBo.StationID);
-                LineStationBo.TimeFromPrevious = AdjacentStationBo.Time;
-                LineStationBo.DistanceFromPrevious = AdjacentStationBo.Distance;
-                LineStationBo.TimetoNext = new TimeSpan(0, 0, 0);
-                LineStationBo.DistancetoNext = 0;
+                LineStationBo.TimeFromFirstStation = AdjacentStationBo.Time;
+                LineStationBo.Distance = AdjacentStationBo.Distance;
+                LineStationBo.Time= new TimeSpan(0, 0, 0);
+        
 
             }
             return LineStationBo;
@@ -873,7 +931,7 @@ namespace BL.BLAPI
                     TimeSpan count = new TimeSpan(0, 0, 0);
                     for (int i = LocationLast - 1; i >= LocationFirst; i--)//עובר מהתחנת יעד עד תחנת המוצא אחורה
                     {
-                        count += line.ListOfStations.ToArray()[i].TimeFromPrevious;//סופר את זמן הנסיעה של המסלול הזה
+                        count += line.ListOfStations.ToArray()[i].TimeFromFirstStation;//סופר את זמן הנסיעה של המסלול הזה
                     }
                     result.Add(new WayForPass { LineNumber = line.LineNumber, TimeOfTrip = count });
                 }
