@@ -938,7 +938,7 @@ namespace BL.BLAPI
                     TimeSpan count = new TimeSpan(0, 0, 0);
                     for (int i = LocationLast - 1; i >= LocationFirst; i--)//עובר מהתחנת יעד עד תחנת המוצא אחורה
                     {
-                        count += line.ListOfStations.ToArray()[i].TimeFromFirstStation;//סופר את זמן הנסיעה של המסלול הזה
+                        count += line.ListOfStations.ToArray()[i].Time;//סופר את זמן הנסיעה של המסלול הזה
                     }
                     result.Add(new WayForPass { LineNumber = line.LineNumber, TimeOfTrip = count });
                 }

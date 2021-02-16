@@ -356,21 +356,30 @@ namespace DL
 
         public IEnumerable<AdjacentStation> GetAllAdjacentStation()
         {
-            return from AdjacentStation in DataSource.listAdjacentStation
-                   select AdjacentStation.Clone();
+            return from stations in DataSource.listAdjacentStation
+                   select stations.Clone();
         }
 
 
 
+        //public AdjacentStation GetOneAdjacentStation(int Station1, int Station2)
+        //{
+        //    DO.AdjacentStation AdjacentStationold = DataSource.listAdjacentStation.Find(b => (b.Station1== Station1)&& (b.Station2 == Station2));
+        //    if (AdjacentStationold != null)
+        //    {
+        //        return AdjacentStationold;
+
+        //    }
+        //    throw new AdjacentStationException(Station1, Station2, "the AdjacentStation is not exists in the system");
+        //}
         public AdjacentStation GetOneAdjacentStation(int Station1, int Station2)
         {
-            DO.AdjacentStation AdjacentStationold = DataSource.listAdjacentStation.Find(b => (b.Station1== Station1)&& (b.Station2 == Station2));
-            if (AdjacentStationold != null)
-            {
-                return AdjacentStationold;
+            DO.AdjacentStation stations1 = DataSource.listAdjacentStation.Find(p => p.Station1 == Station1 && p.Station2 == Station2 || p.Station2 == Station1 && p.Station1 == Station2);
 
-            }
-            throw new AdjacentStationException(Station1, Station2, "the AdjacentStation is not exists in the system");
+            if (stations1 != null)
+                return stations1.Clone();
+            else
+                return null;//throw new DO.PairConsecutiveStationsExceptionDO("No object found for this pair of stations");
         }
 
         #endregion AdjacentStation
