@@ -31,11 +31,13 @@ namespace PL
         }
         private void Button_ClickAddStation(object sender, RoutedEventArgs e)
         {
+            addStation addStationWindow = new addStation();
+            addStationWindow.ShowDialog();
+            bool a = false;
             try
             {
-                addStation addStationWindow = new addStation();
-                addStationWindow.ShowDialog();
-                AllStations.ItemsSource = bl.GetAllStation();
+                if (addStationWindow.ifDone)
+                { a = bl.addStation(addStationWindow.newItem1); }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
             InitializeComponent();

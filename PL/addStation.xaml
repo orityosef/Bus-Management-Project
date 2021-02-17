@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="addStation" Height="450" Width="800">
+        Title="addStation" Height="450" Width="550">
     <Grid>
-        <TextBlock x:Name="addLine111" Text="הוספת תחנה"  HorizontalAlignment="Left" Margin="377,0,0,360.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="36" Width="92"/>
-        <TextBlock HorizontalAlignment="Left" Margin="448,100,0,0" TextWrapping="Wrap" Text=":מספר תחנה להוספה" VerticalAlignment="Top" Height="29" Width="113"/>
-        <TextBlock HorizontalAlignment="Left" Margin="463,150,0,0" TextWrapping="Wrap" Text=":קו רוחב" VerticalAlignment="Top" Height="29" Width="102"/>
-        <TextBlock HorizontalAlignment="Left" Margin="465,200,0,0" TextWrapping="Wrap" Text=":קו אורך" VerticalAlignment="Top" Height="29" Width="129"/>
-        <TextBlock HorizontalAlignment="Left" Margin="442,250,0,0" TextWrapping="Wrap" Text=":שם התחנה להוספה" VerticalAlignment="Top" Height="29" Width="129"/>
-        <TextBox x:Name="codeStation" HorizontalAlignment="Left" Height="23" Margin="275,100,0,0" TextWrapping="Wrap" Text="{Binding Path=CodeStation, Mode=OneWayToSource}" MaxLength="6" PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="addLine111" Text="Add a station"  HorizontalAlignment="Left" Margin="159,0,0,340.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="36" Width="92"/>
+        <TextBlock HorizontalAlignment="Left" Margin="159,100,0,0" TextWrapping="Wrap" Text="Code:" VerticalAlignment="Top" Height="29" Width="64"/>
+        <TextBlock HorizontalAlignment="Left" Margin="159,150,0,0" TextWrapping="Wrap" Text="Latitude:" VerticalAlignment="Top" Height="29" Width="64"/>
+        <TextBlock HorizontalAlignment="Left" Margin="159,200,0,0" TextWrapping="Wrap" Text="Longitude:" VerticalAlignment="Top" Height="29" Width="92"/>
+        <TextBlock HorizontalAlignment="Left" Margin="159,250,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="29" Width="64"/>
+        <TextBox x:Name="code" HorizontalAlignment="Left" Height="23" Margin="275,100,0,0" TextWrapping="Wrap" Text="{Binding Path=Code, Mode=OneWayToSource}" MaxLength="6" PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="latitude" HorizontalAlignment="Left" Height="23" Margin="275,150,0,0" TextWrapping="Wrap" Text="{Binding Path=Latitude, Mode=OneWayToSource}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="longitude" HorizontalAlignment="Left" Height="23" Margin="275,200,0,0" TextWrapping="Wrap" Text="{Binding Path=Longitude, Mode=OneWayToSource}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="NameStation" HorizontalAlignment="Left" Height="23" Margin="272,250,0,0" TextWrapping="Wrap" Text="{Binding Path=NameStation, Mode=OneWayToSource}" VerticalAlignment="Top" Width="120"/>
-               <Button Content="הוסף"  HorizontalAlignment="Left" Margin="311,340,0,0" VerticalAlignment="Top" Width="126" Height="30" Click="Button_ClickAddStation">
+        <TextBox x:Name="Name" HorizontalAlignment="Left" Height="23" Margin="272,250,0,0" TextWrapping="Wrap" Text="{Binding Path=Name, Mode=OneWayToSource}" VerticalAlignment="Top" Width="120"/>
+               <Button Content="Add"  HorizontalAlignment="Left" Margin="203,314,0,0" VerticalAlignment="Top" Width="126" Height="30" Click="Button_ClickAddStation">
             <Button.Style>
                 <Style>
                     <Style.Triggers>
