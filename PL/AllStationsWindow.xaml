@@ -25,5 +25,6 @@
                 </ListView.View>
             </ListView>
         </Grid>
+        <Button Content="Add Station"  Margin="76,307,53.333,26.667"   VerticalAlignment="Center" Click ="Button_ClickAddStation" Height="37"/>
     </Grid>
 </Window>

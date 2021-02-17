@@ -29,6 +29,18 @@ namespace PL
             AllStations.ItemsSource = bl.GetAllStation();
 
         }
+        private void Button_ClickAddStation(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                addStation addStationWindow = new addStation();
+                addStationWindow.ShowDialog();
+                AllStations.ItemsSource = bl.GetAllStation();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+            InitializeComponent();
+            AllStations.ItemsSource = bl.GetAllStation();
+        }
     }
 }
 

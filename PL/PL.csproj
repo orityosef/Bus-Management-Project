@@ -63,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="addStation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AllBusesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,6 +88,9 @@
     </Compile>
     <Compile Include="addLine.xaml.cs">
       <DependentUpon>addLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="addStation.xaml.cs">
+      <DependentUpon>addStation.xaml</DependentUpon>
     </Compile>
     <Compile Include="AllBusesWindow.xaml.cs">
       <DependentUpon>AllBusesWindow.xaml</DependentUpon>
