@@ -15,12 +15,15 @@
                         <GridViewColumn Header="Name" Width="80" DisplayMemberBinding="{Binding Name}" />
                         <GridViewColumn Header="Longitude" Width="150" DisplayMemberBinding="{Binding Longitude}" />
                         <GridViewColumn Header="Latitude" Width="150" DisplayMemberBinding="{Binding Latitude}" />
-                        <!--<GridViewColumn Header="LineList" Width="150" DisplayMemberBinding="{Binding StationInLineList}" />-->
-
                         <GridViewColumn Width="90">
-
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="delete"  Margin="0"
+                                VerticalAlignment="Center"
+                                Click="Delete_Click" Width="70"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-
                     </GridView>
                 </ListView.View>
             </ListView>

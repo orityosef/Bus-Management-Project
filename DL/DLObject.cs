@@ -163,7 +163,7 @@ namespace DL
 
         public bool deleteStation(Station StationNew)
         {
-            if (DataSource.listStation.Exists(StationOld => StationOld.Code != StationNew.Code))
+            if (!DataSource.listStation.Exists(StationOld => StationOld.Code == StationNew.Code))
             {
                 throw new StationException(StationNew.Code, "the bus is not exists in the system");
                 //return false;

@@ -43,6 +43,22 @@ namespace PL
             InitializeComponent();
             AllStations.ItemsSource = bl.GetAllStation();
         }
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var fxElt = sender as FrameworkElement;
+            BO.Station Currentstation = fxElt.DataContext as BO.Station;
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure?", " DELETE", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    bl.deleteStation(Currentstation);
+                    AllStations.ItemsSource = bl.GetAllStation();
+                    MessageBox.Show("Done", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
     }
 }
 
