@@ -111,7 +111,7 @@ namespace DL
                 throw new LineException(busLineNew.Id, "the bus is not exists in the system");
                 //return false;
             }
-            DataSource.listLine.Remove(busLineNew);
+            DataSource.listLine.RemoveAll(busold => busold.Id == busLineNew.Id);
             return true;
         }
 
@@ -160,7 +160,7 @@ namespace DL
             throw new StationException(StationNew.Code,"the Station is not exists in the system");
             //return false;
         }
-
+       
         public bool deleteStation(Station StationNew)
         {
             if (!DataSource.listStation.Exists(StationOld => StationOld.Code == StationNew.Code))
@@ -168,7 +168,8 @@ namespace DL
                 throw new StationException(StationNew.Code, "the bus is not exists in the system");
                 //return false;
             }
-            DataSource.listStation.Remove(StationNew);
+            
+            DataSource.listStation.RemoveAll(StationOld => StationOld.Code == StationNew.Code);
             return true;
         }
 

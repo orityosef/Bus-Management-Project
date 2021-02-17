@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="AllStationsWindow" Height="400" Width="550" Icon="Im/icon.jpeg">
+        Title="AllStationsWindow" Height="400" Width="600" Icon="Im/icon.jpeg">
     <Grid>
         <Grid Margin="10" RenderTransformOrigin="0.497,0.581">
             <ListView x:Name="AllStations">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Code" Width="100" DisplayMemberBinding="{Binding Code}" />
-                        <GridViewColumn Header="Name" Width="80" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Longitude" Width="150" DisplayMemberBinding="{Binding Longitude}" />
-                        <GridViewColumn Header="Latitude" Width="150" DisplayMemberBinding="{Binding Latitude}" />
+                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Longitude" Width="100" DisplayMemberBinding="{Binding Longitude}" />
+                        <GridViewColumn Header="Latitude" Width="100" DisplayMemberBinding="{Binding Latitude}" />
                         <GridViewColumn Width="90">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
