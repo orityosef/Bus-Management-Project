@@ -37,11 +37,27 @@ namespace PL
                 addLineWindow.ShowDialog();
                 AllLine.ItemsSource = bl.GetAllBusesLine();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
             InitializeComponent();
             AllLine.ItemsSource = bl.GetAllBusesLine();
         }
-        private void AllLine_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var fxElt = sender as FrameworkElement;
+            BO.Line CurrentLine = fxElt.DataContext as BO.Line;
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure?", " DELETE", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    bl.deleteLine(CurrentLine);
+                    AllLine.ItemsSource = bl.GetAllBuses();
+                    MessageBox.Show("Done", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
+            private void AllLine_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

@@ -160,7 +160,7 @@ namespace PL
                 if (addBusWindow.ifDone)
                 { a = bl.addBus(addBusWindow.newItem1); }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
             AllBuses.ItemsSource = bl.GetAllBuses();
             if (a)
             {
