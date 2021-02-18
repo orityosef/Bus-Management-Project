@@ -34,15 +34,17 @@ namespace DL
 
         public bool deleteBus(Bus busNew)
         {
-            if (DataSource.listBus.Exists(busold => busold.LicenseNum != busNew.LicenseNum))
+        
+            if (!DataSource.listBus.Exists(busold => busold.LicenseNum == busNew.LicenseNum))
             {
                 throw new BusException(busNew.LicenseNum,"the bus is not exists in the system");
                 //return false;
             }
-            DataSource.listBus.Remove(busNew);
+
+            DataSource.listBus.RemoveAll(busold => busold.LicenseNum == busNew.LicenseNum);
             return true;
         }
-
+   
         public bool updatingBus(Bus busNew)
         {
             DO.Bus busold = DataSource.listBus.Find(b => b.LicenseNum == busNew.LicenseNum);
@@ -202,6 +204,15 @@ namespace DL
             DataSource.listLineStation.Add(LineStationNew.Clone());
             return true;
         }
+        public IEnumerable<LineStation> getPartOfLineStations(Predicate<LineStation> LineStationDAOCondition)
+        {
+            IEnumerable<LineStation> TempLineStationDAO = from LineStation item in DataSource.listLineStation
+                                                          where LineStationDAOCondition(item)
+                                                             select item.Clone();
+            if (TempLineStationDAO.Count() == 0)
+                throw new LineStationDException("There are no line stations that meet the condition");
+            return TempLineStationDAO;
+        }
 
         public bool updatingLineStation(LineStation LineStationNew)
         {
@@ -244,6 +255,7 @@ namespace DL
             }
             throw new LineException( LineNumber,"the LineStation is not exists in the system");
         }
+
         #endregion LineStation
 
         #region User
@@ -344,21 +356,30 @@ namespace DL
 
         public IEnumerable<AdjacentStation> GetAllAdjacentStation()
         {
-            return from AdjacentStation in DataSource.listAdjacentStation
-                   select AdjacentStation.Clone();
+            return from stations in DataSource.listAdjacentStation
+                   select stations.Clone();
         }
 
 
 
+        //public AdjacentStation GetOneAdjacentStation(int Station1, int Station2)
+        //{
+        //    DO.AdjacentStation AdjacentStationold = DataSource.listAdjacentStation.Find(b => (b.Station1== Station1)&& (b.Station2 == Station2));
+        //    if (AdjacentStationold != null)
+        //    {
+        //        return AdjacentStationold;
+
+        //    }
+        //    throw new AdjacentStationException(Station1, Station2, "the AdjacentStation is not exists in the system");
+        //}
         public AdjacentStation GetOneAdjacentStation(int Station1, int Station2)
         {
-            DO.AdjacentStation AdjacentStationold = DataSource.listAdjacentStation.Find(b => (b.Station1== Station1)&& (b.Station2 == Station2));
-            if (AdjacentStationold != null)
-            {
-                return AdjacentStationold;
+            DO.AdjacentStation stations1 = DataSource.listAdjacentStation.Find(p => p.Station1 == Station1 && p.Station2 == Station2 || p.Station2 == Station1 && p.Station1 == Station2);
 
-            }
-            throw new AdjacentStationException(Station1, Station2, "the AdjacentStation is not exists in the system");
+            if (stations1 != null)
+                return stations1.Clone();
+            else
+                return null;//throw new DO.PairConsecutiveStationsExceptionDO("No object found for this pair of stations");
         }
 
         #endregion AdjacentStation

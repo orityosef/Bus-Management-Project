@@ -10,6 +10,8 @@ namespace BO
 {
     public class Bus: INotifyPropertyChanged
     {
+        private Status status;
+        private double fuelRemain;
         public int LicenseNum { get; set; }
         public string LicenseN
         {
@@ -43,9 +45,25 @@ namespace BO
         } 
         public DateTime Fromdate { get; set; }
         public double TotalTrip { get; set; }
-        public double FuelRemain { get; set; }
+        public double FuelRemain
+        {
+            get => fuelRemain;
+            set
+            {
+                fuelRemain = value;
+                OnPropertyChanged("Fuel");
+            }
+        }
         public int Refuel { get; set; }
-        public Status Status { get; set; }
+        public Status Status
+        {
+            get => status;
+            set
+            {
+                status = value;
+                OnPropertyChanged("Status");
+            }
+        }
         public override string ToString()
         {
             return this.ToStringProperty();

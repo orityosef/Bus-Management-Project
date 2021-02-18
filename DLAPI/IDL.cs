@@ -17,7 +17,7 @@ namespace DLAPI
         bool updatingBus(Bus busNew);
         bool deleteBus(Bus busNew);
         IEnumerable<Bus> GetAllBuses();
-  
+
         Bus GetOneBus(int License);
         #endregion
         //קו
@@ -64,7 +64,7 @@ namespace DLAPI
         bool updatingAdjacentStation(AdjacentStation AdjacentStationNew);
         bool deleteAdjacentStation(AdjacentStation AdjacentStationNew);
         IEnumerable<AdjacentStation> GetAllAdjacentStation();
-        AdjacentStation GetOneAdjacentStation( int Station1 , int Station2);
+        AdjacentStation GetOneAdjacentStation(int Station1, int Station2);
         #endregion AdjacentStation
 
     }

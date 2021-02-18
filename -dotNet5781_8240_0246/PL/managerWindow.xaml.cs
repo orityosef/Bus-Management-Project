@@ -20,7 +20,7 @@ namespace PL
     /// </summary>
     public partial class managerWindow : Window
     {
-        readonly IBL bl = BLFactory.GetBL("1");
+         IBL bl = BLFactory.GetBL("1");
         public managerWindow(IBL _bl)
         {
             InitializeComponent();

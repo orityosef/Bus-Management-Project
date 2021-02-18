@@ -11,7 +11,7 @@ namespace BL.BLAPI
 
         //אוטובוס
         #region Bus
-      bool addBus(Bus busNew);
+        bool addBus(Bus busNew);
         bool updatingBus(Bus busNew);
         bool deleteBus(Bus busNew);
         IEnumerable<Bus> GetAllBuses();
@@ -66,7 +66,7 @@ namespace BL.BLAPI
         bool addUser(User user);
         bool updateUser(User user);
         bool deleteUser(User user);
-    
+
         bool existingUser(string userName, string passWord);
 
         #endregion

@@ -24,7 +24,7 @@ namespace DL
         {
             if (DataSource.listBus.Exists(busold => busold.LicenseNum == busNew.LicenseNum))
             {
-                throw new BusException(busNew.LicenseNum,"the bus is exists in the system");
+                throw new BusException(busNew.LicenseNum, "the bus is exists in the system");
                 //return false;
             }
 
@@ -34,17 +34,17 @@ namespace DL
 
         public bool deleteBus(Bus busNew)
         {
-        
+
             if (!DataSource.listBus.Exists(busold => busold.LicenseNum == busNew.LicenseNum))
             {
-                throw new BusException(busNew.LicenseNum,"the bus is not exists in the system");
+                throw new BusException(busNew.LicenseNum, "the bus is not exists in the system");
                 //return false;
             }
 
             DataSource.listBus.RemoveAll(busold => busold.LicenseNum == busNew.LicenseNum);
             return true;
         }
-   
+
         public bool updatingBus(Bus busNew)
         {
             DO.Bus busold = DataSource.listBus.Find(b => b.LicenseNum == busNew.LicenseNum);
@@ -74,7 +74,7 @@ namespace DL
                    select Bus.Clone();
         }
 
-      
+
         #endregion Bus
 
         #region Line
@@ -82,7 +82,7 @@ namespace DL
         {
             if (DataSource.listLine.Exists(busold => busold.Id == busLineNew.Id))
             {
-                throw new LineException(busLineNew.Id,"the Line is exists in the system");
+                throw new LineException(busLineNew.Id, "the Line is exists in the system");
                 //return false;
             }
 
@@ -99,19 +99,19 @@ namespace DL
                 DataSource.listLine.Add(busLineNew.Clone());
                 return true;
             }
-            throw new LineException(busLineNew.Id,"the line is not exists in the system");
+            throw new LineException(busLineNew.Id, "the line is not exists in the system");
             //return false;
         }
 
         public bool deleteBusLine(Line busLineNew)
         {
 
-            if (!DataSource.listLine.Exists(busold => busold.Id == busLineNew.Id))
+            if (DataSource.listLine.Exists(busold => busold.Id != busLineNew.Id))
             {
                 throw new LineException(busLineNew.Id, "the bus is not exists in the system");
                 //return false;
             }
-            DataSource.listLine.RemoveAll(busold => busold.Id == busLineNew.Id);
+            DataSource.listLine.Remove(busLineNew);
             return true;
         }
 
@@ -140,7 +140,7 @@ namespace DL
         {
             if (DataSource.listStation.Exists(Stationold => Stationold.Code == StationNew.Code))
             {
-                throw new StationException(StationNew.Code,"the station is exists in the system");
+                throw new StationException(StationNew.Code, "the station is exists in the system");
                 //return false;
             }
 
@@ -157,19 +157,18 @@ namespace DL
                 DataSource.listStation.Add(StationNew.Clone());
                 return true;
             }
-            throw new StationException(StationNew.Code,"the Station is not exists in the system");
+            throw new StationException(StationNew.Code, "the Station is not exists in the system");
             //return false;
         }
-       
+
         public bool deleteStation(Station StationNew)
         {
-            if (!DataSource.listStation.Exists(StationOld => StationOld.Code == StationNew.Code))
+            if (DataSource.listStation.Exists(StationOld => StationOld.Code != StationNew.Code))
             {
                 throw new StationException(StationNew.Code, "the bus is not exists in the system");
                 //return false;
             }
-            
-            DataSource.listStation.RemoveAll(StationOld => StationOld.Code == StationNew.Code);
+            DataSource.listStation.Remove(StationNew);
             return true;
         }
 
@@ -179,7 +178,7 @@ namespace DL
                    select Station.Clone();
         }
 
-      
+
 
         public Station GetOneStation(int code)
         {
@@ -198,7 +197,7 @@ namespace DL
         {
             if (DataSource.listLineStation.Exists(LineStationold => LineStationold.LineNumber == LineStationNew.LineNumber))
             {
-                throw new LineException(LineStationNew.LineNumber,"the Line Station is exists in the system");
+                throw new LineException(LineStationNew.LineNumber, "the Line Station is exists in the system");
                 //return false;
             }
 
@@ -209,7 +208,7 @@ namespace DL
         {
             IEnumerable<LineStation> TempLineStationDAO = from LineStation item in DataSource.listLineStation
                                                           where LineStationDAOCondition(item)
-                                                             select item.Clone();
+                                                          select item.Clone();
             if (TempLineStationDAO.Count() == 0)
                 throw new LineStationDException("There are no line stations that meet the condition");
             return TempLineStationDAO;
@@ -224,7 +223,7 @@ namespace DL
                 DataSource.listLineStation.Add(LineStationNew.Clone());
                 return true;
             }
-            throw new LineException(LineStationNew.LineNumber,"the Line Station is not exists in the system");
+            throw new LineException(LineStationNew.LineNumber, "the Line Station is not exists in the system");
             //return false;
         }
 
@@ -232,7 +231,7 @@ namespace DL
         {
             if (DataSource.listLineStation.Exists(LineStationold => LineStationold.LineNumber != LineStationNew.LineNumber))
             {
-                throw new LineException(LineStationNew.LineNumber,"the Line Station is not exists in the system");
+                throw new LineException(LineStationNew.LineNumber, "the Line Station is not exists in the system");
                 //return false;
             }
             DataSource.listLineStation.Remove(LineStationNew);
@@ -254,7 +253,7 @@ namespace DL
                 return LineStationold;
 
             }
-            throw new LineException( LineNumber,"the LineStation is not exists in the system");
+            throw new LineException(LineNumber, "the LineStation is not exists in the system");
         }
 
         #endregion LineStation
@@ -264,7 +263,7 @@ namespace DL
         {
             if (DataSource.listUser.Exists(Userold => Userold.UserName == UserNew.UserName))
             {
-                throw new UserException(UserNew.UserName,"the User is exists in the system");
+                throw new UserException(UserNew.UserName, "the User is exists in the system");
                 //return false;
             }
 
@@ -302,7 +301,7 @@ namespace DL
                    select User.Clone();
         }
 
-      
+
 
         public User GetOneUser(string UsserName)
         {
@@ -312,7 +311,7 @@ namespace DL
                 return Userold;
 
             }
-            throw new UserException(UsserName,"the User is not exists in the system");
+            throw new UserException(UsserName, "the User is not exists in the system");
         }
 
         #endregion User
@@ -320,9 +319,9 @@ namespace DL
         #region AdjacentStation
         public bool addAdjacentStation(AdjacentStation AdjacentStationNew)
         {
-            if (DataSource.listAdjacentStation.Exists(AdjacentStationold => (AdjacentStationold.Station1 == AdjacentStationNew.Station1)&& (AdjacentStationold.Station2 == AdjacentStationNew.Station2)))
+            if (DataSource.listAdjacentStation.Exists(AdjacentStationold => (AdjacentStationold.Station1 == AdjacentStationNew.Station1) && (AdjacentStationold.Station2 == AdjacentStationNew.Station2)))
             {
-                throw new AdjacentStationException(AdjacentStationNew.Station1, AdjacentStationNew.Station2 );
+                throw new AdjacentStationException(AdjacentStationNew.Station1, AdjacentStationNew.Station2);
                 //return false;
             }
             var cloned = AdjacentStationNew.Clone();
@@ -349,7 +348,7 @@ namespace DL
             {
                 throw new AdjacentStationException(AdjacentStationNew.Station1, AdjacentStationNew.Station2, "the AdjacentStation is not exists in the system");
                 //return false;
-               
+
             }
             DataSource.listAdjacentStation.Remove(AdjacentStationNew);
             return true;

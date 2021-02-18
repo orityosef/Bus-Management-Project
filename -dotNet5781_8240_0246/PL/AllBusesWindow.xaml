@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="AllBusesWindow" Height="472.8" Width="735.2">
+        Title="AllBusesWindow" Height="500" Width="900" Icon="Im/icon.jpeg">
     <Grid>
         <Grid Margin="10" RenderTransformOrigin="0.497,0.581">
             <ListView x:Name="AllBuses" >
@@ -14,7 +14,7 @@
                         <GridViewColumn Header="Bus License" Width="100" DisplayMemberBinding="{Binding LicenseN}" />
                         <GridViewColumn Header="TotalTrip" Width="60" DisplayMemberBinding="{Binding TotalTrip}" />
                         <GridViewColumn Header="Start Date" Width="150" DisplayMemberBinding="{Binding Fromdate}" />
-                        <GridViewColumn Header="FuelRemain" Width="60" DisplayMemberBinding="{Binding FuelRemain}" />
+                        <GridViewColumn Header="FuelRemain" Width="80" DisplayMemberBinding="{Binding FuelRemain}" />
                         <GridViewColumn Header="Status" Width="80" DisplayMemberBinding="{Binding Status}" />
                         <GridViewColumn Width="90">
                             <GridViewColumn.CellTemplate>
@@ -34,9 +34,20 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="delete"  Margin="0"
+                                VerticalAlignment="Center"
+                                Click ="Delete_Click" Width="80"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
         </Grid>
+        
+        <Button Content="Add Bus"  Margin="148,385,136.2,28.4"   VerticalAlignment="Center" Click ="Button_ClickAddBus" Height="37"/>
     </Grid>
 </Window>

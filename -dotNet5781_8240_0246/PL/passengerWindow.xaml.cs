@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BL.BLAPI;
+using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,33 @@ namespace PL
     /// </summary>
     public partial class passengerWindow : Window
     {
+        IBL bl = BLFactory.GetBL("1");
+        private int codeStation1;
+        private int codeStation2;
         public passengerWindow()
         {
             InitializeComponent();
+            lastStationCB.ItemsSource = bl.GetAllMiniStations();
+            firstStationCB.ItemsSource = bl.GetAllMiniStations();
+        }
+        private void firstStationCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                codeStation1 = (firstStationCB.SelectedItem as MiniStation).CodeStation;
+                dgWays.ItemsSource = bl.GetRelevantWays(codeStation1, codeStation2);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
+        private void lastStationCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                codeStation2 = (lastStationCB.SelectedItem as MiniStation).CodeStation;
+                dgWays.ItemsSource = bl.GetRelevantWays(codeStation1, codeStation2);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
+
         }
     }
 }

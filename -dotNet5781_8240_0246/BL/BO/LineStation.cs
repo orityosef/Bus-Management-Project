@@ -12,12 +12,12 @@ namespace BO
         public int LineNumber { get; set; }
         public int StationID { get; set; }
         public int LineStationIndex { get; set; }
+        public string NameStation { get; set; }
         public int PrevStation { get; set; }
         public int NextStation { get; set; }
-        public TimeSpan TimeFromPrevious { get; set; }
-        public double DistanceFromPrevious { get; set; }
-        public TimeSpan TimetoNext { get; set; }
-        public double DistancetoNext { get; set; }
+        public TimeSpan TimeFromFirstStation { get; set; }
+        public TimeSpan Time { get; set; }
+        public double Distance { get; set; }
 
         public int CompareTo(LineStation other)
         {

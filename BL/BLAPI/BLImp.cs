@@ -151,11 +151,11 @@ namespace BL.BLAPI
                 if (bus.LicenseNum.ToString() == license)
                     busD = bus;
             }
-            if (busD.FuelRemain== 1200)
+            if (busD.FuelRemain == 1200)
             {
                 throw new BO.BusException("this bus Refuel is  full");
             }
-           
+
             busD.Status = DO.Status.ReadyToGo;//אחרי זה צריך לשנות את הסטטוס בחזרה למוכן
             busD.Refuel = 1200;//התדלוק עצמו
             dl.updatingBus(busD);
@@ -323,24 +323,30 @@ namespace BL.BLAPI
             return true;
         }
 
+        //public IEnumerable<Line> GetAllBusesLine()
+        //{
+        //    var result = from l in dl.GetAllBusesLine()
+        //                 select new Line
+        //                 {
+        //                     Id = l.Id,
+        //                     LineNumber = l.LineNumber,
+        //                     Aera = (Areas)l.Area,
+        //                     FirstStation = l.FirstStation,
+        //                     LastStation = l.LastStation,
+        //                     StationList = ((from ls in dl.GetAllLineStation()
+        //                                     let bls = ConvertDtoB(ls)
+        //                                     where bls.LineNumber == l.LineNumber
+        //                                     select bls).OrderBy(linestation => linestation.LineStationIndex))
+        //                                    .Select(item => GetOneSation(item.StationID)).ToList()
+        //                 };
+        //    return result;
+
+        //}
         public IEnumerable<Line> GetAllBusesLine()
         {
-            var result = from l in dl.GetAllBusesLine()
-                         select new Line
-                         {
-                             Id = l.Id,
-                             LineNumber = l.LineNumber,
-                             Aera = (Areas)l.Area,
-                             FirstStation = l.FirstStation,
-                             LastStation = l.LastStation,
-                             StationList = ((from ls in dl.GetAllLineStation()
-                                             let bls = ConvertDtoB(ls)
-                                             where bls.LineNumber == l.LineNumber
-                                             select bls).OrderBy(linestation => linestation.LineStationIndex))
-                                            .Select(item => GetOneSation(item.StationID)).ToList()
-                         };
-            return result;
-
+            return from busLine in dl.GetAllBusesLine()
+                   orderby busLine.LineNumber
+                   select ConvertDtoB(busLine);
         }
         public IEnumerable<Line> GetPartOfBusesLine(Predicate<Line> LineCondition)
         {
@@ -406,7 +412,7 @@ namespace BL.BLAPI
                 IEnumerable<LineInStation> listOfLineInStation =
                 from lineStation in listLineStations
                 from BusLine1 in dl.GetAllBusesLine()
-                where lineStation.Station== BusLine1.Id
+                where lineStation.Station == BusLine1.Id
                 let result = new LineInStation
                 {
                     IdentifyNumber = BusLine1.Id,
@@ -420,7 +426,7 @@ namespace BL.BLAPI
             }
             catch//אין קווים שעוברים בתחנה
             {
-                StationBo. ListOfLines = null;
+                StationBo.ListOfLines = null;
                 return StationBo;
             }
         }
@@ -678,15 +684,15 @@ namespace BL.BLAPI
                 LineStationBo.Distance = 0;
                 AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.StationID, LineStationBo.NextStation);
                 LineStationBo.Time = AdjacentStationBo.Time;
-              
+
             }
             if (LineStationBo.NextStation == 0)
             {
                 AdjacentStation AdjacentStationBo = GetOneAdjacentStation(LineStationBo.PrevStation, LineStationBo.StationID);
                 LineStationBo.TimeFromFirstStation = AdjacentStationBo.Time;
                 LineStationBo.Distance = AdjacentStationBo.Distance;
-                LineStationBo.Time= new TimeSpan(0, 0, 0);
-        
+                LineStationBo.Time = new TimeSpan(0, 0, 0);
+
 
             }
             return LineStationBo;
@@ -932,7 +938,7 @@ namespace BL.BLAPI
                     TimeSpan count = new TimeSpan(0, 0, 0);
                     for (int i = LocationLast - 1; i >= LocationFirst; i--)//עובר מהתחנת יעד עד תחנת המוצא אחורה
                     {
-                        count += line.ListOfStations.ToArray()[i].TimeFromFirstStation;//סופר את זמן הנסיעה של המסלול הזה
+                        count += line.ListOfStations.ToArray()[i].Time;//סופר את זמן הנסיעה של המסלול הזה
                     }
                     result.Add(new WayForPass { LineNumber = line.LineNumber, TimeOfTrip = count });
                 }

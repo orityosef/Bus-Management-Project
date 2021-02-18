@@ -68,7 +68,14 @@ namespace BL.BLAPI
         bool deleteUser(User user);
     
         bool existingUser(string userName, string passWord);
-        
+
         #endregion
+
+        # region  MiniStation
+        IEnumerable<MiniStation> GetAllMiniStations();
+        IEnumerable<MiniStation> GetListMiniStationsByLine(Line line);//מחזירה את רשימת המיני תחנות של קו ספציפי
+
+        #endregion
+        List<WayForPass> GetRelevantWays(int codeStation1, int codeStation2);
     }
 }
