@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfLine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Line>
+    <Id>1</Id>
+    <LineNumber>836</LineNumber>
+    <Area>GENERAL</Area>
+    <FirstStationNum>234567</FirstStationNum>
+    <LastStationNum>303999</LastStationNum>
+  </Line>
+  <Line>
+    <Id>2</Id>
+    <LineNumber>450</LineNumber>
+    <Area>NORTH</Area>
+    <FirstStationNum>234567</FirstStationNum>
+    <LastStationNum>987654</LastStationNum>
+  </Line>
+  <Line>
+    <Id>3</Id>
+    <LineNumber>56</LineNumber>
+    <Area>SOUTH</Area>
+    <FirstStationNum>246801</FirstStationNum>
+    <LastStationNum>303988</LastStationNum>
+  </Line>
+  <Line>
+    <Id>4</Id>
+    <LineNumber>480</LineNumber>
+    <Area>CENTER</Area>
+    <FirstStationNum>143998</FirstStationNum>
+    <LastStationNum>303999</LastStationNum>
+  </Line>
+</ArrayOfLine>
+
