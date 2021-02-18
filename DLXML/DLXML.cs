@@ -28,32 +28,31 @@ namespace DL
         #endregion
 
         //#region Bus
-    //    public bool addBus(DO.Bus bus)
-    //    {
-    //        XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
+        public bool addBus(DO.Bus bus)
+        {
+            XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
 
-    //        XElement bus1 = (from p in busesRootElem.Elements()
-    //                         where p.Element("LicenseNum").Value == bus.LicenseNum
-    //                         select p).FirstOrDefault();
+            XElement bus1 = (from p in busesRootElem.Elements()
+                             where p.Element("LicenseNum").Value == bus.LicenseNum.ToString()
+                             select p).FirstOrDefault();
 
-    //        if (bus1 != null)
-    //            throw new BusException("license exists allready");
+            if (bus1 != null)
+                throw new BusException("license exists allready");
 
-    //        XElement busElem = new XElement("BusDAO",
-    //                               new XElement("License", bus.License),//העתקה עמוקה
-    //                               new XElement("StartOfWork", bus.StartOfWork),
-    //                               new XElement("TotalKms", bus.TotalKms),
-    //                               new XElement("Fuel", bus.Fuel),
-    //                               new XElement("DateTreatLast", bus.DateTreatLast),
-    //                               new XElement("KmFromTreament", bus.KmFromTreament),
-    //                               new XElement("Status", bus.Status));
+            XElement busElem = new XElement("BusDAO",
+                                   new XElement("LicenseNum", bus.LicenseNum),//העתקה עמוקה
+                                   new XElement("Fromdate", bus.Fromdate),
+                                   new XElement("TotalTrip", bus.TotalTrip),
+                                   new XElement("Refuel", bus.Refuel),
+                                   new XElement("FuelRemain", bus.FuelRemain),
+                                   new XElement("Status", bus.Status));
 
-    //        busesRootElem.Add(busElem);
+            busesRootElem.Add(busElem);
 
-    //        XMLTools.SaveListToXMLElement(busesRootElem, busesPath);
-    //        return true;
-    //    }
-    //}
+            XMLTools.SaveListToXMLElement(busesRootElem, busPath);
+            return true;
+        }
+    }
 
     //    public bool deleteBus(Bus busNew)
     //    {
@@ -408,5 +407,4 @@ namespace DL
     //    #endregion AdjacentStation
 
 
-    }
 }
