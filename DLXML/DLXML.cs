@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace DL
 {
-    public class DLXML: IDL
+    public class DLXML
     { 
       #region singelton
     static readonly DLXML instance = new DLXML();

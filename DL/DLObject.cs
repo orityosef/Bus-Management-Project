@@ -105,13 +105,13 @@ namespace DL
 
         public bool deleteBusLine(Line busLineNew)
         {
-
-            if (DataSource.listLine.Exists(busold => busold.Id != busLineNew.Id))
+     
+                if (!DataSource.listLine.Exists(busold => busold.LineNumber == busLineNew.LineNumber))
             {
                 throw new LineException(busLineNew.Id, "the bus is not exists in the system");
                 //return false;
             }
-            DataSource.listLine.RemoveAll(busold => busold.Id != busLineNew.Id);
+            DataSource.listLine.RemoveAll(busold => busold.LineNumber != busLineNew.LineNumber);
             return true;
         }
 
@@ -163,7 +163,7 @@ namespace DL
 
         public bool deleteStation(Station StationNew)
         {
-            if (DataSource.listStation.Exists(StationOld => StationOld.Code != StationNew.Code))
+            if (!DataSource.listStation.Exists(StationOld => StationOld.Code == StationNew.Code))
             {
                 throw new StationException(StationNew.Code, "the bus is not exists in the system");
                 //return false;
