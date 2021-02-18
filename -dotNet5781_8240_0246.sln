@@ -16,12 +16,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SOLUTION.item", "SOLUTION.item", "{829DAA77-0040-40B3-A3B3-16121B5FD660}"
 	ProjectSection(SolutionItems) = preProject
 		bin\config.xml = bin\config.xml
-		XMLAdjacentStation.xml = XMLAdjacentStation.xml
-		XMLBus.xml = XMLBus.xml
-		XMLLine.xml = XMLLine.xml
-		XMLLineStation.xml = XMLLineStation.xml
-		XMLStation.xml = XMLStation.xml
-		XMLUser.xml = XMLUser.xml
+		bin\XML\XMLAdjacentStation.xml = bin\XML\XMLAdjacentStation.xml
+		bin\XML\XMLBus.xml = bin\XML\XMLBus.xml
+		bin\XML\XMLLine.xml = bin\XML\XMLLine.xml
+		bin\XML\XMLLineStation.xml = bin\XML\XMLLineStation.xml
+		bin\XML\XMLStation.xml = bin\XML\XMLStation.xml
+		bin\XML\XMLUser.xml = bin\XML\XMLUser.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLXML", "DLXML\DLXML.csproj", "{50D9DD3B-066E-40D0-A12C-6CB3D9F8FBB0}"
