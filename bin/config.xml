@@ -3,7 +3,7 @@
   <dl>data</dl>
   <dl-packages>
     <data namespace="DL" class="DLObject">DLObject</data>
-    <xml namespace="DL" class="DLXml">DLXml</xml>
+    <xml namespace="DL" class="DLXML">DLXML</xml>
     <oracle namespace="DL_O" class="DLOracle">DLOracle</oracle>
   </dl-packages>
 </config>
