@@ -102,19 +102,20 @@ namespace DL
             throw new LineException(busLineNew.Id, "the line is not exists in the system");
             //return false;
         }
-
-        public bool deleteBusLine(Line busLineNew)
+        public bool deleteBusLine(Line LineNew)
         {
-     
-                if (!DataSource.listLine.Exists(busold => busold.LineNumber == busLineNew.LineNumber))
+
+            if (!DataSource.listLine.Exists(busold => busold.LineNumber == LineNew.LineNumber))
             {
-                throw new LineException(busLineNew.Id, "the bus is not exists in the system");
+                throw new LineException(LineNew.LineNumber, "the line is not exists in the system");
                 //return false;
             }
-            DataSource.listLine.RemoveAll(busold => busold.LineNumber != busLineNew.LineNumber);
+
+            DataSource.listLine.RemoveAll(busold => busold.LineNumber == LineNew.LineNumber);
             return true;
         }
 
+    
         public IEnumerable<Line> GetAllBusesLine()
         {
             return from Line in DataSource.listLine
