@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class addStation : Window
     {
-        IBL bl = BLFactory.GetBL("1");
+         IBL bl = BLFactory.GetBL("1");
         private Station newItem = new Station();
         public Station newItem1 { get => newItem; set => newItem = value; }
         public bool ifDone { get; set; } = false;
