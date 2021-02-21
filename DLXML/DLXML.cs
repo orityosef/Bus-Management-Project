@@ -515,7 +515,7 @@ namespace DL
             XElement pairsRootElem = XMLTools.LoadListFromXMLElement(AdjacentStationPath);
 
             AdjacentStation p = (from pair in pairsRootElem.Elements()
-                                 where pair.Element("Station1").Value == Station1.ToString() && pair.Element("Station2").Value == Station2.ToString() || pair.Element("Station1").Value == Station2.ToString() && pair.Element("Station2").Value == Station2.ToString()
+                                 where pair.Element("Station1").Value == Station1.ToString() && pair.Element("Station2").Value == Station2.ToString() || pair.Element("Station1").Value == Station2.ToString() && pair.Element("Station2").Value == Station1.ToString()
                                  select new AdjacentStation()
                                  {
                                      Station1 = Int32.Parse(pair.Element("Station1").Value),

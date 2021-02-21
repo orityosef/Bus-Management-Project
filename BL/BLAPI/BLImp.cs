@@ -237,12 +237,12 @@ namespace BL.BLAPI
                     forNow.StationID = lineStationNext.Station;
                     forNow.LineStationIndex = lineStationNext.LineStationIndex;
                     forNow.NameStation = dl.GetOneStation(lineStationNext.Station).Name;
-                    TimeSpan count = new TimeSpan(0, 0, 0);
-                    for (int i = forNow.LineStationIndex; i > 1; i--)//חישוב זמן הנסיעה של התחנה הנוכחית מתחנת המוצא
-                    {
-                        count += dl.GetOneAdjacentStation(listStationInLineOrder.ToArray()[i - 1].Station, listStationInLineOrder.ToArray()[i - 2].Station).Time;
-                    }
-                    forNow.TimeFromFirstStation = count;
+                    //TimeSpan count = new TimeSpan(0, 0, 0);
+                    //for (int i = forNow.LineStationIndex; i > 1; i--)//חישוב זמן הנסיעה של התחנה הנוכחית מתחנת המוצא
+                    //{
+                    //   count += dl.GetOneAdjacentStation(listStationInLineOrder.ToArray()[i - 1].Station, listStationInLineOrder.ToArray()[i - 2].Station).Time;
+                    //}
+                    //forNow.TimeFromFirstStation = count;
                     if (dl.GetOneAdjacentStation(current.Station, prev.Station) != null)
                     {
                         forNow.Distance = dl.GetOneAdjacentStation(current.Station, prev.Station).Distance;//הצבת המרחק מתוך זוג התחנות העוקבות בשדה מרחק של התחנה שלנו מקודמתה
@@ -436,19 +436,31 @@ namespace BL.BLAPI
         private Station GetOneSation(int stationID)
         {
 
-            DO.Station StationDo = new DO.Station();
-            Station StationBo = new Station();
+            //DO.Station StationDo = new DO.Station();
+            //Station StationBo = new Station();
+            //try
+            //{
+            //    StationDo = dl.GetOneStation(stationID);
+            //    StationBo = ConvertDtoB(StationDo);
+            //    return StationBo;
+
+            //}
+            //catch (DO.StationException ex)
+            //{
+            //    throw new BO.StationException("Station license is illegal", ex);
+            //}
+            Station result = new Station();
+            DO.Station busStation;
             try
             {
-                StationDo = dl.GetOneStation(stationID);
-                StationBo = ConvertDtoB(StationDo);
-                return StationBo;
-
+                busStation = dl.GetOneStation(stationID);
             }
             catch (DO.StationException ex)
             {
-                throw new BO.StationException("Station license is illegal", ex);
+                throw new BO.StationException("Code Station number not found", ex);
             }
+            result = ConvertDtoB(busStation);
+            return result;
         }
 
         public bool addStation(Station StationNew)

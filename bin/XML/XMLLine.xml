@@ -1,12 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ArrayOfLine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Line>
-    <Id>1</Id>
-    <LineNumber>836</LineNumber>
-    <Area>GENERAL</Area>
-    <FirstStation>234567</FirstStation>
-    <LastStation>303999</LastStation>
-  </Line>
   <Line>
     <Id>2</Id>
     <LineNumber>450</LineNumber>
@@ -29,4 +22,3 @@
     <LastStation>303999</LastStation>
   </Line>
 </ArrayOfLine>
-
