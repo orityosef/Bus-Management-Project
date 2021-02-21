@@ -59,7 +59,7 @@ namespace DS
                 Fromdate = DateTime.Today.AddYears(-3),
                 TotalTrip = 5000,
                 FuelRemain = 90,
-                Status = Status.ReadyToGo
+                Status = Status.Refueling
             });
             listBus.Add(new Bus
             {
@@ -75,7 +75,7 @@ namespace DS
                 Fromdate = DateTime.Today.AddYears(-2),
                 TotalTrip = 5000,
                 FuelRemain = 1200,
-                Status = Status.ReadyToGo
+                Status = Status.MidRide
             });
             listBus.Add(new Bus
             {
