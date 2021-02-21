@@ -23,7 +23,7 @@ namespace PL
     public partial class addLine : Window
     {
 
-        IBL bl = BLFactory.GetBL("1");
+         IBL bl = BLFactory.GetBL("1");
         private BO.Line newItem = new BO.Line();
    
         public BO.Line newItem1 { get => newItem; set => newItem = value; }

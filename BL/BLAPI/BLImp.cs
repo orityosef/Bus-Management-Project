@@ -10,7 +10,7 @@ using BL.BO;
 
 namespace BL.BLAPI
 {
-    sealed class BLImp : IBL //internal
+    class BLImp : IBL //internal
     {
         static IDL dl = DLFactory.GetDL();
 

@@ -105,8 +105,8 @@ namespace DL
 
     //    public bool deleteBusLine(Line busLineNew)
     //    {
-     
-    //            if (!DataSource.listLine.Exists(busold => busold.LineNumber == busLineNew.LineNumber))
+
+    //        if (!DataSource.listLine.Exists(busold => busold.LineNumber == busLineNew.LineNumber))
     //        {
     //            throw new LineException(busLineNew.Id, "the bus is not exists in the system");
     //            //return false;

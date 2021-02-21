@@ -26,7 +26,7 @@ namespace PL
     public partial class AllBusesWindow : Window
     {
         //  public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
-        IBL bl = BLFactory.GetBL("1");
+         IBL bl = BLFactory.GetBL("1");
 
         public AllBusesWindow()
         {
