@@ -77,26 +77,25 @@ namespace DL
         public bool updatingBus(Bus busNew)
         {
 
-            List<Bus> ListBus = XMLTools.LoadListFromXMLSerializer<Bus>(busPath);
-            Bus bus1 = ListBus.Find(p => p.LicenseNum == busNew.LicenseNum);
+            XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
+
+            XElement bus1 = (from p in busesRootElem.Elements()
+                             where p.Element("LicenseNum").Value == busNew.LicenseNum.ToString()
+                             select p).FirstOrDefault();
             if (bus1 != null)
             {
-                
-                    Bus current = GetOneBus(busNew.LicenseNum);//שמירה על הערכים הקודמים של הקו
-                    busNew.LicenseNum = current.LicenseNum;
-                    busNew.Fromdate = current.Fromdate;
-                    busNew.TotalTrip = current.TotalTrip;
-                    busNew.FuelRemain = current.FuelRemain;
-                    busNew.Status = current.Status;
-                    ListBus.Remove(bus1);
-                    ListBus.Add(busNew); //no nee to Clone()
-                }
+                bus1.Element("LicenseNum").Value = busNew.LicenseNum.ToString();//העתקה עמוקה
+                bus1.Element("Fromdate").Value = busNew.Fromdate.ToString();
+                bus1.Element("TotalTrip").Value = busNew.TotalTrip.ToString();
+                bus1.Element("FuelRemain").Value = busNew.FuelRemain.ToString();
+                bus1.Element("Status").Value = busNew.Status.ToString();
 
-                 else
-                    throw new DO.BusException("The Identify-Number ");
-                XMLTools.SaveListToXMLSerializer(ListBus, busPath);
+                XMLTools.SaveListToXMLElement(busesRootElem, busPath);
                 return true;
             }
+            else
+                throw new DO.BusException("The license number " + busNew.LicenseNum + " not found");
+        }
         public Bus GetOneBus(int License)
         {
             XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
@@ -523,26 +522,3 @@ namespace DL
 
     }
 }
-//public bool updatingBus(Bus busNew)
-//{
-
-//    List<Bus> ListBus = XMLTools.LoadListFromXMLSerializer<Bus>(busPath);
-//    Bus bus1 = ListBus.Find(p => p.LicenseNum == busNew.LicenseNum);
-//    if (bus1 != null)
-//    {
-
-//        Bus current = GetOneBus(busNew.LicenseNum);//שמירה על הערכים הקודמים של הקו
-//        busNew.LicenseNum = current.LicenseNum;
-//        busNew.Fromdate = current.Fromdate;
-//        busNew.TotalTrip = current.TotalTrip;
-//        busNew.FuelRemain = current.FuelRemain;
-//        busNew.Status = current.Status;
-//        ListBus.Remove(bus1);
-//        ListBus.Add(busNew); //no nee to Clone()
-//    }
-
-//    else
-//        throw new DO.BusException("The Identify-Number ");
-//    XMLTools.SaveListToXMLSerializer(ListBus, busPath);
-//    return true;
-//}
