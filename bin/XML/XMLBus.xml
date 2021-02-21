@@ -11,7 +11,7 @@
     <Status>ReadyToGo</Status>
     <LicenseNum>15823409</LicenseNum>
     <Fromdate>30/03/1999 13:52:01</Fromdate>
-    <TotalTrip>77</TotalTrip>
+    <TotalTrip>0</TotalTrip>
     <FuelRemain>3</FuelRemain>
   </Bus>
   <Bus>
@@ -32,14 +32,35 @@
     <Status>ReadyToGo</Status>
     <LicenseNum>65488451</LicenseNum>
     <Fromdate>21/04/2021 15:00:53</Fromdate>
-    <TotalTrip>0</TotalTrip>
+    <TotalTrip>4578</TotalTrip>
     <FuelRemain>456</FuelRemain>
   </Bus>
   <Bus>
     <Status>ReadyToGo</Status>
-    <LicenseNum>45287954</LicenseNum>
-    <Fromdate>07/10/1997 02:07:08</Fromdate>
-    <TotalTrip>98</TotalTrip>
+    <LicenseNum>9542315</LicenseNum>
+    <Fromdate>21/04/2021 15:30:00</Fromdate>
+    <TotalTrip>0</TotalTrip>
+    <FuelRemain>75</FuelRemain>
+  </Bus>
+  <Bus>
+    <Status>ReadyToGo</Status>
+    <LicenseNum>4251378</LicenseNum>
+    <Fromdate>08/12/2015 09:30:00</Fromdate>
+    <TotalTrip>789</TotalTrip>
     <FuelRemain>45</FuelRemain>
+  </Bus>
+  <Bus>
+    <Status>ReadyToGo</Status>
+    <LicenseNum>12453781</LicenseNum>
+    <Fromdate>08/06/2021 15:30:00</Fromdate>
+    <TotalTrip>0</TotalTrip>
+    <FuelRemain>12</FuelRemain>
+  </Bus>
+  <Bus>
+  <Status>ReadyToGo</Status>
+  <LicenseNum>12548635</LicenseNum>
+  <Fromdate>08/06/2019 18:30:00</Fromdate>
+  <TotalTrip>78</TotalTrip>
+  <FuelRemain>452</FuelRemain>
   </Bus>
 </ArrayOfBus>
