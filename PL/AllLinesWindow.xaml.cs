@@ -51,7 +51,7 @@ namespace PL
                 if (result == MessageBoxResult.Yes)
                 {
                     bl.deleteLine(CurrentLine);
-                    AllLine.ItemsSource = bl.GetAllBuses();
+                    AllLine.ItemsSource = bl.GetAllBusesLine();
                     MessageBox.Show("Done", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }

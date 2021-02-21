@@ -196,10 +196,20 @@ namespace DL
 
         public IEnumerable<Line> GetAllBusesLine()
         {
-            List<Line> ListBusLines = XMLTools.LoadListFromXMLSerializer<Line>(linePath);
 
-            return from line in ListBusLines
-                   select line; //no need to Clone()
+            XElement buseslineRootElem = XMLTools.LoadListFromXMLElement(linePath);
+
+            return (from line in buseslineRootElem.Elements()
+                    select new Line()
+                    { 
+                        Id = Int32.Parse(line.Element("Id").Value),
+                        LineNumber = Int32.Parse(line.Element("LineNumber").Value),
+                        Area = (Areas)Enum.Parse(typeof(Areas), line.Element("Area").Value),
+
+                        FirstStation = Int32.Parse(line.Element("FirstStation").Value),
+                        LastStation = Int32.Parse(line.Element("LastStation").Value),
+                    }
+                   );
         }
 
 
