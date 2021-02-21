@@ -32,7 +32,7 @@
     <Status>ReadyToGo</Status>
     <LicenseNum>65488451</LicenseNum>
     <Fromdate>21/04/2021 15:00:53</Fromdate>
-    <TotalTrip>4578</TotalTrip>
+    <TotalTrip>0</TotalTrip>
     <FuelRemain>456</FuelRemain>
   </Bus>
   <Bus>
@@ -57,10 +57,10 @@
     <FuelRemain>12</FuelRemain>
   </Bus>
   <Bus>
-  <Status>ReadyToGo</Status>
-  <LicenseNum>12548635</LicenseNum>
-  <Fromdate>08/06/2019 18:30:00</Fromdate>
-  <TotalTrip>78</TotalTrip>
-  <FuelRemain>452</FuelRemain>
+    <Status>ReadyToGo</Status>
+    <LicenseNum>12548635</LicenseNum>
+    <Fromdate>08/06/2019 18:30:00</Fromdate>
+    <TotalTrip>78</TotalTrip>
+    <FuelRemain>452</FuelRemain>
   </Bus>
 </ArrayOfBus>
