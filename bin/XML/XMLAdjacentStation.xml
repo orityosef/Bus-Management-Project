@@ -18,27 +18,27 @@
     <Station2>303999</Station2>
     <Distance>103.84</Distance>
     <Time>01:15:40</Time>
-</AdjacentStation>>
+  </AdjacentStation>>
   <AdjacentStation>
     <Station1>303999</Station1>
     <Station2>852340</Station2>
     <Distance>103.84</Distance>
     <Time>01:15:40</Time>
-</AdjacentStation>
+  </AdjacentStation>
 
   <AdjacentStation>
     <Station1>234567</Station1>
     <Station2>965320</Station2>
     <Distance>18.56</Distance>
     <Time>00:15:7</Time>
-</AdjacentStation>
+  </AdjacentStation>
   <AdjacentStation>
     <Station1>965320</Station1>
     <Station2>234567</Station2>
     <Distance>18.56</Distance>
     <Time>00:15:7</Time>
-    
-</AdjacentStation>
+
+  </AdjacentStation>
 
 
   <AdjacentStation>
@@ -46,37 +46,37 @@
     <Station2>987654</Station2>
     <Distance>50.6</Distance>
     <Time>0:47:11</Time>
-</AdjacentStation>
-    <AdjacentStation>
-      <Station1>987654</Station1>
-      <Station2>965320</Station2>
+  </AdjacentStation>
+  <AdjacentStation>
+    <Station1>987654</Station1>
+    <Station2>965320</Station2>
     <Distance>50.6</Distance>
-      <Time>0:47:11</Time>
-    
-</AdjacentStation>
+    <Time>0:47:11</Time>
+
+  </AdjacentStation>
 
   <AdjacentStation>
     <Station1>246801</Station1>
     <Station2>764581</Station2>
     <Distance>43.17</Distance>
     <Time>00:34:19</Time>
-</AdjacentStation>
+  </AdjacentStation>
   <AdjacentStation>
     <Station1>764581</Station1>
     <Station2>246801</Station2>
     <Distance>43.17</Distance>
     <Time>00:34:19</Time>
-</AdjacentStation>
+  </AdjacentStation>
 
   <AdjacentStation>
     <Station1>764581</Station1>
-    <Station2>303999</Station2>
+    <Station2>303988</Station2>
     <Distance>30.84</Distance>
     <Time>00:23:44</Time>
   </AdjacentStation>>
   <AdjacentStation>
-    <Station1>764581</Station1>
-    <Station2>303999</Station2>
+    <Station1>303988</Station1>
+    <Station2>764581</Station2>
     <Distance>30.84</Distance>
     <Time>00:23:44</Time>
   </AdjacentStation>>
@@ -93,7 +93,7 @@
     <Distance>39.45</Distance>
     <Time>00:38:02</Time>
   </AdjacentStation>>
-  
+
   <AdjacentStation>
     <Station1>673029</Station1>
     <Station2>303999</Station2>

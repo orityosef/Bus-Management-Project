@@ -4,7 +4,7 @@
     <Status>ReadyToGo</Status>
     <LicenseNum>6543217</LicenseNum>
     <Fromdate>15/10/2001 13:52:01</Fromdate>
-    <TotalTrip>98</TotalTrip>
+    <TotalTrip>0</TotalTrip>
     <FuelRemain>1200</FuelRemain>
   </Bus>
   <Bus>
@@ -18,7 +18,7 @@
     <Status>ReadyToGo</Status>
     <LicenseNum>89823409</LicenseNum>
     <Fromdate>20/04/2020 13:52:01</Fromdate>
-    <TotalTrip>789</TotalTrip>
+    <TotalTrip>0</TotalTrip>
     <FuelRemain>1200</FuelRemain>
   </Bus>
   <Bus>
