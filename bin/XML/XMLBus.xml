@@ -57,10 +57,17 @@
     <FuelRemain>12</FuelRemain>
   </Bus>
   <Bus>
-  <Status>ReadyToGo</Status>
-  <LicenseNum>12548635</LicenseNum>
-  <Fromdate>08/06/2019 18:30:00</Fromdate>
-  <TotalTrip>78</TotalTrip>
-  <FuelRemain>452</FuelRemain>
+    <Status>ReadyToGo</Status>
+    <LicenseNum>12548635</LicenseNum>
+    <Fromdate>08/06/2019 18:30:00</Fromdate>
+    <TotalTrip>78</TotalTrip>
+    <FuelRemain>452</FuelRemain>
   </Bus>
+  <BusDAO>
+    <LicenseNum>76545678</LicenseNum>
+    <Fromdate>2021-02-21T00:00:00</Fromdate>
+    <TotalTrip>98</TotalTrip>
+    <FuelRemain>1200</FuelRemain>
+    <Status>ReadyToGo</Status>
+  </BusDAO>
 </ArrayOfBus>

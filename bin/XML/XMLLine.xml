@@ -4,29 +4,29 @@
     <Id>1</Id>
     <LineNumber>836</LineNumber>
     <Area>GENERAL</Area>
-    <FirstStationNum>234567</FirstStationNum>
-    <LastStationNum>303999</LastStationNum>
+    <FirstStation>234567</FirstStation>
+    <LastStation>303999</LastStation>
   </Line>
   <Line>
     <Id>2</Id>
     <LineNumber>450</LineNumber>
     <Area>NORTH</Area>
-    <FirstStationNum>234567</FirstStationNum>
-    <LastStationNum>987654</LastStationNum>
+    <FirstStation>234567</FirstStation>
+    <LastStation>987654</LastStation>
   </Line>
   <Line>
     <Id>3</Id>
     <LineNumber>56</LineNumber>
     <Area>SOUTH</Area>
-    <FirstStationNum>246801</FirstStationNum>
-    <LastStationNum>303988</LastStationNum>
+    <FirstStation>246801</FirstStation>
+    <LastStation>303988</LastStation>
   </Line>
   <Line>
     <Id>4</Id>
     <LineNumber>480</LineNumber>
     <Area>CENTER</Area>
-    <FirstStationNum>143998</FirstStationNum>
-    <LastStationNum>303999</LastStationNum>
+    <FirstStation>143998</FirstStation>
+    <LastStation>303999</LastStation>
   </Line>
 </ArrayOfLine>
 
