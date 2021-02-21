@@ -1,11 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Station>
-    <Code>143998</Code>
-    <Name>Jerusalem</Name>
-    <Latitude>31.7888727</Latitude>
-    <Longitude>35.2031491</Longitude>
-  </Station>
   <Station>
     <Code>303999</Code>
     <Name>Tel-Aviv</Name>
@@ -35,37 +29,35 @@
     <Name>Zefat</Name>
     <Latitude>32.969704</Latitude>
     <Longitude>35.497204</Longitude>
-</Station>
-<Station>
-  <Code>234567</Code>
-  <Name>tveria</Name>
-  <Latitude>32.787514</Latitude>
-  <Longitude>35.536816</Longitude>
-</Station>
-<Station>
-  <Code>965320</Code>
-  <Name>Migdal</Name>
-  <Latitude>32.839494</Latitude>
-  <Longitude>35.499849</Longitude>
-</Station>
-<Station>
-  <Code>852340</Code>
-  <Name>Yokneam</Name>
-  <Latitude> 32.655859</Latitude>
-  <Longitude>35.115152</Longitude>
-</Station>
-<Station>
-  <Code>764581</Code>
-  <Name>Nevatim</Name>
-  <Latitude>31.219761</Latitude>
-  <Longitude>34.882488</Longitude>
-</Station>
-<Station>
-  <Code>673029</Code>
-  <Name>Latrun Junction</Name>
-  <Latitude>31.835052</Latitude>
-  <Longitude>34.978367</Longitude>
-</Station>
+  </Station>
+  <Station>
+    <Code>234567</Code>
+    <Name>tveria</Name>
+    <Latitude>32.787514</Latitude>
+    <Longitude>35.536816</Longitude>
+  </Station>
+  <Station>
+    <Code>965320</Code>
+    <Name>Migdal</Name>
+    <Latitude>32.839494</Latitude>
+    <Longitude>35.499849</Longitude>
+  </Station>
+  <Station>
+    <Code>852340</Code>
+    <Name>Yokneam</Name>
+    <Latitude>32.655859</Latitude>
+    <Longitude>35.115152</Longitude>
+  </Station>
+  <Station>
+    <Code>764581</Code>
+    <Name>Nevatim</Name>
+    <Latitude>31.219761</Latitude>
+    <Longitude>34.882488</Longitude>
+  </Station>
+  <Station>
+    <Code>673029</Code>
+    <Name>Latrun Junction</Name>
+    <Latitude>31.835052</Latitude>
+    <Longitude>34.978367</Longitude>
+  </Station>
 </ArrayOfStation>
-
-

@@ -28,5 +28,11 @@
     <FirstStation>143998</FirstStation>
     <LastStation>303999</LastStation>
   </Line>
+  <Line>
+    <LineNumber>993</LineNumber>
+    <Id>0</Id>
+    <FirstStation>143998</FirstStation>
+    <LastStation>673029</LastStation>
+    <Area>NORTH</Area>
+  </Line>
 </ArrayOfLine>
-

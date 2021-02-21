@@ -326,7 +326,6 @@ namespace DL
         }
         public IEnumerable<LineStation> getPartOfLineStations(Predicate<LineStation> LineStationDAOCondition)
         {
-
             List<LineStation> ListLineStations = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
             IEnumerable<LineStation> TempLineStationDAO = from LineStation item in ListLineStations
                                                           where LineStationDAOCondition(item)
