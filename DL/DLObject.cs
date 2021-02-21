@@ -90,6 +90,7 @@ namespace DL
     //        return true;
     //    }
 
+<<<<<<< HEAD
     //    public bool updatingBusLine(Line busLineNew)
     //    {
     //        DO.Line Lineold = DataSource.listLine.Find(b => b.Id == busLineNew.Id);
@@ -120,6 +121,37 @@ namespace DL
     //        return from Line in DataSource.listLine
     //               select Line.Clone();
     //    }
+=======
+        //public bool updatingBusLine(Line busLineNew)
+        //{
+        //    DO.Line Lineold = DataSource.listLine.Find(b => b.Id == busLineNew.Id);
+        //    if (Lineold != null)
+        //    {
+        //        DataSource.listLine.Remove(Lineold);
+        //        DataSource.listLine.Add(busLineNew.Clone());
+        //        return true;
+        //    }
+        //    throw new LineException(busLineNew.Id, "the line is not exists in the system");
+        //    //return false;
+        //}
+
+        //public bool deleteBusLine(Line busLineNew)
+        //{
+        //if (!DataSource.listLine.Exists(busold => busold.LineNumber == busLineNew.LineNumber))
+        //    {
+        //        throw new LineException(busLineNew.Id, "the bus is not exists in the system");
+        //        //return false;
+        //    }
+        //    DataSource.listLine.RemoveAll(busold => busold.LineNumber != busLineNew.LineNumber);
+        //    return true;
+        //}
+
+        //public IEnumerable<Line> GetAllBusesLine()
+        //{
+        //    return from Line in DataSource.listLine
+        //           select Line.Clone();
+        //}
+>>>>>>> aae09601c4729f00cb819a046e483b4a44dda42f
 
 
     //    public Line GetOneBusLine(int Id)
