@@ -237,12 +237,12 @@ namespace BL.BLAPI
                     forNow.StationID = lineStationNext.Station;
                     forNow.LineStationIndex = lineStationNext.LineStationIndex;
                     forNow.NameStation = dl.GetOneStation(lineStationNext.Station).Name;
-                    TimeSpan count = new TimeSpan(0, 0, 0);
-                    for (int i = forNow.LineStationIndex; i > 1; i--)//חישוב זמן הנסיעה של התחנה הנוכחית מתחנת המוצא
-                    {
-                        count += dl.GetOneAdjacentStation(listStationInLineOrder.ToArray()[i - 1].Station, listStationInLineOrder.ToArray()[i - 2].Station).Time;
-                    }
-                    forNow.TimeFromFirstStation = count;
+                    //TimeSpan count = new TimeSpan(0, 0, 0);
+                    //for (int i = forNow.LineStationIndex; i > 1; i--)//חישוב זמן הנסיעה של התחנה הנוכחית מתחנת המוצא
+                    //{
+                    //    count += dl.GetOneAdjacentStation(listStationInLineOrder.ToArray()[i - 1].Station, listStationInLineOrder.ToArray()[i - 2].Station).Time;
+                    //}
+                    //forNow.TimeFromFirstStation = count;
                     if (dl.GetOneAdjacentStation(current.Station, prev.Station) != null)
                     {
                         forNow.Distance = dl.GetOneAdjacentStation(current.Station, prev.Station).Distance;//הצבת המרחק מתוך זוג התחנות העוקבות בשדה מרחק של התחנה שלנו מקודמתה

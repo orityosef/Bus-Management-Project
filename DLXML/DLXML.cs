@@ -41,7 +41,7 @@ namespace DL
             if (bus1 != null)
                 throw new BusException("license exists allready");
 
-            XElement busElem = new XElement("BusDAO",
+            XElement busElem = new XElement("BusD",
                                    new XElement("LicenseNum", busNew.LicenseNum),//העתקה עמוקה
                                    new XElement("Fromdate", busNew.Fromdate),
                                    new XElement("TotalTrip", busNew.TotalTrip),
@@ -145,21 +145,43 @@ namespace DL
         #region Line
         public bool addBusLine(Line busLineNew)
         {
-            List<DO.Line> listLine = XMLTools.LoadListFromXMLSerializer<DO.Line>(linePath);//שליפת הקובץ שמכיל את רשימת הקווים
-            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
-            if (listLine.FirstOrDefault(s => s.LineNumber == busLineNew.LineNumber) != null)
-                throw new LineException("Identify-Number-Line exists allready");
-            XElement dlConfig = XElement.Load(@"config.xml");
-            int identifyNumber = int.Parse(dlConfig.Element("Id").Value); ;
-            busLineNew.Id = identifyNumber++;
-            dlConfig.Element("Id").Value = identifyNumber.ToString();
-            dlConfig.Save(@"config.xml");
-            listLine.Add(busLineNew); //no need to Clone()
-            ListLineStation.Add(new LineStation { Station = busLineNew.FirstStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 1 });
-            ListLineStation.Add(new LineStation { Station = busLineNew.LastStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 2 });
-            XMLTools.SaveListToXMLSerializer(listLine, linePath);
-            XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
-            return true;
+           
+                XElement linesRootElem = XMLTools.LoadListFromXMLElement(linePath);
+
+                XElement line1 = (from p in linesRootElem.Elements()
+                                 where p.Element("LineNumber").Value == busLineNew.LineNumber.ToString()
+                                 select p).FirstOrDefault();
+
+                if (line1 != null)
+                    throw new BusException("LineNumber exists allready");
+
+                XElement lineElem = new XElement("Line",
+                                       new XElement("LineNumber", busLineNew.LineNumber),//העתקה עמוקה
+                                       new XElement("Id", busLineNew.Id),
+                                       new XElement("FirstStation", busLineNew.FirstStation),
+                                       new XElement("LastStation", busLineNew.LastStation),
+                                       new XElement("Area", busLineNew.Area));
+
+            linesRootElem.Add(lineElem);
+
+                XMLTools.SaveListToXMLElement(linesRootElem, linePath);
+                return true;
+            
+            //List<DO.Line> listLine = XMLTools.LoadListFromXMLSerializer<DO.Line>(linePath);//שליפת הקובץ שמכיל את רשימת הקווים
+            //List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            //if (listLine.FirstOrDefault(s => s.LineNumber == busLineNew.LineNumber) != null)
+            //    throw new LineException("Identify-Number-Line exists allready");
+            //XElement dlConfig = XElement.Load(@"config.xml");
+            //int identifyNumber = int.Parse(dlConfig.Element("Id").Value); ;
+            //busLineNew.Id = identifyNumber++;
+            //dlConfig.Element("Id").Value = identifyNumber.ToString();
+            //dlConfig.Save(@"config.xml");
+            //listLine.Add(busLineNew); //no need to Clone()
+            //ListLineStation.Add(new LineStation { Station = busLineNew.FirstStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 1 });
+            //ListLineStation.Add(new LineStation { Station = busLineNew.LastStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 2 });
+            //XMLTools.SaveListToXMLSerializer(listLine, linePath);
+            //XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
+            //return true;
         }
 
         public bool updatingBusLine(Line busLine)

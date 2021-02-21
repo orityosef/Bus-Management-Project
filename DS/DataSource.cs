@@ -403,8 +403,8 @@ namespace DS
             //נבטים דימונה
             listAdjacentStation.Add(new AdjacentStation
             {
-                Station1 = 246801,
-                Station2 = 764581,
+                Station2 = 246801,
+                Station1 = 764581,
                 Distance = distance,
                 Time = new TimeSpan(0, 34, 0)
             });

@@ -70,4 +70,11 @@
     <FuelRemain>1200</FuelRemain>
     <Status>ReadyToGo</Status>
   </BusDAO>
+  <BusDAO>
+    <LicenseNum>12398123</LicenseNum>
+    <Fromdate>2021-02-21T00:00:00</Fromdate>
+    <TotalTrip>123</TotalTrip>
+    <FuelRemain>1200</FuelRemain>
+    <Status>ReadyToGo</Status>
+  </BusDAO>
 </ArrayOfBus>
