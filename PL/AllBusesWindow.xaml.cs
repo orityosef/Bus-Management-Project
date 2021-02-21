@@ -31,7 +31,8 @@ namespace PL
         public AllBusesWindow()
         {
             InitializeComponent();
-            AllBuses.ItemsSource = bl.GetAllBuses();
+            AllBuses.DataContext = bl.GetAllBuses().ToString();
+           // AllBuses.ItemsSource = bl.GetAllBuses();
             //  AllBuses.ItemsSource = Buss; //Displays buses on screen
         }
         private void Treatment_Click(object sender, RoutedEventArgs e)

@@ -90,7 +90,7 @@ namespace DL
     //        return true;
     //    }
 
-<<<<<<< HEAD
+
     //    public bool updatingBusLine(Line busLineNew)
     //    {
     //        DO.Line Lineold = DataSource.listLine.Find(b => b.Id == busLineNew.Id);
@@ -121,7 +121,7 @@ namespace DL
     //        return from Line in DataSource.listLine
     //               select Line.Clone();
     //    }
-=======
+
         //public bool updatingBusLine(Line busLineNew)
         //{
         //    DO.Line Lineold = DataSource.listLine.Find(b => b.Id == busLineNew.Id);
@@ -151,7 +151,7 @@ namespace DL
         //    return from Line in DataSource.listLine
         //           select Line.Clone();
         //}
->>>>>>> aae09601c4729f00cb819a046e483b4a44dda42f
+
 
 
     //    public Line GetOneBusLine(int Id)

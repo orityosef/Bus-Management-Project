@@ -1,4 +1,5 @@
 ﻿using DLAPI;
+
 using DO;
 using System;
 using System.Collections.Generic;
@@ -115,19 +116,9 @@ namespace DL
         }
         public IEnumerable<Bus> GetAllBuses()
         {
-            XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
-
-            return (from bus in busesRootElem.Elements()
-                    select new Bus()
-                    {
-                        LicenseNum = Int32.Parse(bus.Element("LicenseNum").Value),
-                        Fromdate = DateTime.Parse(bus.Element("StartOfWork").Value),
-                        TotalTrip = Int32.Parse(bus.Element("TotalTrip").Value),
-                        FuelRemain = Int32.Parse(bus.Element("Fuel").Value),
-
-                        Status = (Status)Enum.Parse(typeof(Status), bus.Element("Status").Value),
-                    }
-                   );
+            List<Bus> listBus = XMLTools.LoadListFromXMLSerializer<Bus>(userPath);
+            return from Bus in listBus
+                   select Bus.Clone();
         }
 
 
