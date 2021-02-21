@@ -21,7 +21,7 @@ namespace PL
     public partial class AllStationsWindow : Window
     {
 
-        readonly IBL bl = BLFactory.GetBL("1");
+         IBL bl = BLFactory.GetBL("1");
 
         public AllStationsWindow()
         {

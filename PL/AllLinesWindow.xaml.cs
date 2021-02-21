@@ -21,7 +21,7 @@ namespace PL
     public partial class AllLinesWindow : Window
     {
         //  public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
-        readonly IBL bl = BLFactory.GetBL("1");
+         IBL bl = BLFactory.GetBL("1");
 
         public AllLinesWindow()
         {

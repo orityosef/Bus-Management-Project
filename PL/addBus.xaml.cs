@@ -22,7 +22,7 @@ namespace PL
     public partial class addBus : Window
     {
 
-        IBL bl = BLFactory.GetBL("1");
+         IBL bl = BLFactory.GetBL("1");
         private Bus newItem = new Bus();
        
         public Bus newItem1 { get => newItem; set => newItem = value; }

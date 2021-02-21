@@ -9,15 +9,16 @@ using System.Xml.Linq;
 
 namespace DL
 {
-    public class DLXML:IDL
-    { 
-      #region singelton
-    static readonly DLXML instance = new DLXML();
-    static DLXML() { }// static ctor to ensure instance init is done just before first usage
-    DLXML() { } // default => private
-    public static DLXML Instance { get => instance; }// The public Instance property to use
+    public class DLXML : IDL
+    {
+        #region singelton
+        static readonly DLXML instance = new DLXML();
+        static DLXML() { }// static ctor to ensure instance init is done just before first usage
+        DLXML() { } // default => private
+        public static DLXML Instance { get => instance; }// The public Instance property to use
 
         #endregion
+
         #region DS XML File
         string busPath = @"XMLBus.xml"; //XElement
         string linePath = @"XMLLine.xml"; //XMLSerializer
@@ -51,69 +52,69 @@ namespace DL
             XMLTools.SaveListToXMLElement(busesRootElem, busPath);
             return true;
         }
-    
 
-    public bool deleteBus(Bus busNew)
-    {
 
-        XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
-
-        XElement bus1 = (from p in busesRootElem.Elements()
-                         where p.Element("LicenseNum").Value == busNew.LicenseNum.ToString()
-                         select p).FirstOrDefault();
-
-        if (bus1 != null)
+        public bool deleteBus(Bus busNew)
         {
-            bus1.Remove();
-            XMLTools.SaveListToXMLElement(busesRootElem, busPath);
-            return true;
+
+            XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
+
+            XElement bus1 = (from p in busesRootElem.Elements()
+                             where p.Element("LicenseNum").Value == busNew.LicenseNum.ToString()
+                             select p).FirstOrDefault();
+
+            if (bus1 != null)
+            {
+                bus1.Remove();
+                XMLTools.SaveListToXMLElement(busesRootElem, busPath);
+                return true;
+            }
+            else
+                throw new BusException("Does not exist in the system");
         }
-        else
-            throw new BusException("Does not exist in the system");
-    }
 
-    public bool updatingBus(Bus busNew)
-    {
-        XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
-
-        XElement bus1 = (from p in busesRootElem.Elements()
-                         where p.Element("License").Value == busNew.LicenseNum.ToString()
-                         select p).FirstOrDefault();
-        if (bus1 != null)
+        public bool updatingBus(Bus busNew)
         {
-            bus1.Element("LicenseNum").Value = busNew.LicenseNum.ToString();//העתקה עמוקה
-            bus1.Element("Fromdate").Value = busNew.Fromdate.ToString();
-            bus1.Element("TotalTrip").Value = busNew.TotalTrip.ToString();
-            bus1.Element("FuelRemain").Value = busNew.FuelRemain.ToString();
-            bus1.Element("Status").Value = busNew.Status.ToString();
+            XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
 
-            XMLTools.SaveListToXMLElement(busesRootElem, busPath);
-            return true;
+            XElement bus1 = (from p in busesRootElem.Elements()
+                             where p.Element("License").Value == busNew.LicenseNum.ToString()
+                             select p).FirstOrDefault();
+            if (bus1 != null)
+            {
+                bus1.Element("LicenseNum").Value = busNew.LicenseNum.ToString();//העתקה עמוקה
+                bus1.Element("Fromdate").Value = busNew.Fromdate.ToString();
+                bus1.Element("TotalTrip").Value = busNew.TotalTrip.ToString();
+                bus1.Element("FuelRemain").Value = busNew.FuelRemain.ToString();
+                bus1.Element("Status").Value = busNew.Status.ToString();
+
+                XMLTools.SaveListToXMLElement(busesRootElem, busPath);
+                return true;
+            }
+            else
+                throw new DO.BusException("The license number " + busNew.LicenseNum + " not found");
         }
-        else
-            throw new DO.BusException("The license number " + busNew.LicenseNum + " not found");
-    }
-    public Bus GetOneBus(int License)
-    {
+        public Bus GetOneBus(int License)
+        {
             XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
 
             Bus p = (from bus in busesRootElem.Elements()
-                        where bus.Element("LicenseNum").Value == License.ToString()
+                     where bus.Element("LicenseNum").Value == License.ToString()
                      select new Bus()
-                        {
+                     {
                          LicenseNum = Int32.Parse(bus.Element("LicenseNum").Value),
                          Fromdate = DateTime.Parse(bus.Element("Fromdate").Value),
                          TotalTrip = Int32.Parse(bus.Element("TotalTrip").Value),
                          FuelRemain = Int32.Parse(bus.Element("FuelRemain").Value),
                          Status = (Status)Enum.Parse(typeof(Status), bus.Element("Status").Value),
-                        }
+                     }
                         ).FirstOrDefault();
             if (p == null)
                 throw new DO.BusException("license not found");
             return p;
         }
-    public IEnumerable<Bus> GetAllBuses()
-    {
+        public IEnumerable<Bus> GetAllBuses()
+        {
             XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
 
             return (from bus in busesRootElem.Elements()
@@ -130,314 +131,385 @@ namespace DL
         }
 
 
-    #endregion Bus
+        #endregion Bus
 
-    #region Line
-    public bool addBusLine(Line busLineNew)
-    {
-        if (DataSource.listLine.Exists(busold => busold.Id == busLineNew.Id))
+        #region Line
+        public bool addBusLine(Line busLineNew)
         {
-            throw new LineException(busLineNew.Id, "the Line is exists in the system");
-            //return false;
-        }
-
-        DataSource.listLine.Add(busLineNew.Clone());
-        return true;
-    }
-
-    public bool updatingBusLine(Line busLineNew)
-    {
-        DO.Line Lineold = DataSource.listLine.Find(b => b.Id == busLineNew.Id);
-        if (Lineold != null)
-        {
-            DataSource.listLine.Remove(Lineold);
-            DataSource.listLine.Add(busLineNew.Clone());
+            List<DO.Line> listLine = XMLTools.LoadListFromXMLSerializer<DO.Line>(linePath);//שליפת הקובץ שמכיל את רשימת הקווים
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            if (listLine.FirstOrDefault(s => s.LineNumber == busLineNew.LineNumber) != null)
+                throw new LineException("Identify-Number-Line exists allready");
+            XElement dlConfig = XElement.Load(@"config.xml");
+            int identifyNumber = int.Parse(dlConfig.Element("Id").Value); ;
+            busLineNew.Id = identifyNumber++;
+            dlConfig.Element("Id").Value = identifyNumber.ToString();
+            dlConfig.Save(@"config.xml");
+            listLine.Add(busLineNew); //no need to Clone()
+            ListLineStation.Add(new LineStation { Station = busLineNew.FirstStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 1 });
+            ListLineStation.Add(new LineStation { Station = busLineNew.LastStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 2 });
+            XMLTools.SaveListToXMLSerializer(listLine, linePath);
+            XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
             return true;
         }
-        throw new LineException(busLineNew.Id, "the line is not exists in the system");
-        //return false;
-    }
 
-    public bool deleteBusLine(Line busLineNew)
-    {
-
-        if (DataSource.listLine.Exists(busold => busold.Id != busLineNew.Id))
+        public bool updatingBusLine(Line busLine)
         {
-            throw new LineException(busLineNew.Id, "the bus is not exists in the system");
-            //return false;
-        }
-        DataSource.listLine.RemoveAll(busold => busold.Id != busLineNew.Id);
-        return true;
-    }
-
-    public IEnumerable<Line> GetAllBusesLine()
-    {
-        return from Line in DataSource.listLine
-               select Line.Clone();
-    }
-
-
-    public Line GetOneBusLine(int Id)
-    {
-        DO.Line busold = DataSource.listLine.Find(b => b.Id == Id);
-        if (busold != null)
-        {
-            return busold;
-
-        }
-        throw new LineException("the Line is not exists in the system");
-    }
-
-    #endregion Line
-
-    #region Station
-    public bool addStation(Station StationNew)
-    {
-        if (DataSource.listStation.Exists(Stationold => Stationold.Code == StationNew.Code))
-        {
-            throw new StationException(StationNew.Code, "the station is exists in the system");
-            //return false;
-        }
-
-        DataSource.listStation.Add(StationNew.Clone());
-        return true;
-    }
-
-    public bool updatingStation(Station StationNew)
-    {
-        DO.Station StationOld = DataSource.listStation.Find(b => b.Code == StationNew.Code);
-        if (StationOld != null)
-        {
-            DataSource.listStation.Remove(StationOld);
-            DataSource.listStation.Add(StationNew.Clone());
+            List<Line> ListBusLines = XMLTools.LoadListFromXMLSerializer<Line>(linePath);
+            Line line = ListBusLines.Find(p => p.LineNumber == busLine.LineNumber);
+            if (line != null)
+            {
+                Line currentLine = GetOneBusLine(busLine.LineNumber);//שמירה על הערכים הקודמים של הקו
+                busLine.LineNumber = currentLine.LineNumber;
+                busLine.FirstStation = currentLine.FirstStation;
+                busLine.LastStation = currentLine.LastStation;
+                ListBusLines.Remove(line);
+                ListBusLines.Add(busLine); //no need to Clone()
+            }
+            else
+                throw new DO.LineException("The Identify-Number-Line " + busLine.LineNumber + " not found");
+            XMLTools.SaveListToXMLSerializer(ListBusLines, linePath);
             return true;
         }
-        throw new StationException(StationNew.Code, "the Station is not exists in the system");
-        //return false;
-    }
-
-    public bool deleteStation(Station StationNew)
-    {
-        if (DataSource.listStation.Exists(StationOld => StationOld.Code != StationNew.Code))
+        public bool deleteBusLine(Line busLine)
         {
-            throw new StationException(StationNew.Code, "the bus is not exists in the system");
-            //return false;
-        }
-        DataSource.listStation.RemoveAll(StationOld => StationOld.Code != StationNew.Code);
-        return true;
-    }
-
-    public IEnumerable<Station> GetAllStation()
-    {
-        return from Station in DataSource.listStation
-               select Station.Clone();
-    }
-
-
-
-    public Station GetOneStation(int code)
-    {
-        DO.Station Stationold = DataSource.listStation.Find(b => b.Code == code);
-        if (Stationold != null)
-        {
-            return Stationold;
-
-        }
-        throw new StationException(code, "the Station is not exists in the system");
-    }
-    #endregion Station
-
-    #region LineStation
-    public bool addLineStation(LineStation LineStationNew)
-    {
-        if (DataSource.listLineStation.Exists(LineStationold => LineStationold.LineNumber == LineStationNew.LineNumber))
-        {
-            throw new LineException(LineStationNew.LineNumber, "the Line Station is exists in the system");
-            //return false;
-        }
-
-        DataSource.listLineStation.Add(LineStationNew.Clone());
-        return true;
-    }
-    public IEnumerable<LineStation> getPartOfLineStations(Predicate<LineStation> LineStationDAOCondition)
-    {
-        IEnumerable<LineStation> TempLineStationDAO = from LineStation item in DataSource.listLineStation
-                                                      where LineStationDAOCondition(item)
-                                                      select item.Clone();
-        if (TempLineStationDAO.Count() == 0)
-            throw new LineStationDException("There are no line stations that meet the condition");
-        return TempLineStationDAO;
-    }
-
-    public bool updatingLineStation(LineStation LineStationNew)
-    {
-        DO.LineStation LineStationold = DataSource.listLineStation.Find(b => b.LineNumber == LineStationNew.LineNumber);
-        if (LineStationold != null)
-        {
-            DataSource.listLineStation.Remove(LineStationold);
-            DataSource.listLineStation.Add(LineStationNew.Clone());
+            List<Line> ListBusLines = XMLTools.LoadListFromXMLSerializer<Line>(linePath);
+            Line line = ListBusLines.Find(p => p.LineNumber == busLine.LineNumber);
+            if (line != null)
+            {
+                ListBusLines.Remove(line);
+            }
+            else
+                throw new LineException("Does not exist in the system");
+            XMLTools.SaveListToXMLSerializer(ListBusLines, linePath);
             return true;
         }
-        throw new LineException(LineStationNew.LineNumber, "the Line Station is not exists in the system");
-        //return false;
-    }
 
-    public bool deleteLineStation(LineStation LineStationNew)
-    {
-        if (DataSource.listLineStation.Exists(LineStationold => LineStationold.LineNumber != LineStationNew.LineNumber))
+        public IEnumerable<Line> GetAllBusesLine()
         {
-            throw new LineException(LineStationNew.LineNumber, "the Line Station is not exists in the system");
-            //return false;
-        }
-        DataSource.listLineStation.RemoveAll(LineStationold => LineStationold.LineNumber != LineStationNew.LineNumber);
-        return true;
-    }
+            List<Line> ListBusLines = XMLTools.LoadListFromXMLSerializer<Line>(linePath);
 
-    public IEnumerable<LineStation> GetAllLineStation()
-    {
-        return from LineStation in DataSource.listLineStation
-               select LineStation.Clone();
-    }
-
-
-    public LineStation GetOneLineStation(int LineNumber)
-    {
-        DO.LineStation LineStationold = DataSource.listLineStation.Find(b => b.LineNumber == LineNumber);
-        if (LineStationold != null)
-        {
-            return LineStationold;
-
-        }
-        throw new LineException(LineNumber, "the LineStation is not exists in the system");
-    }
-
-    #endregion LineStation
-
-    #region User
-    public bool addUser(User UserNew)
-    {
-        if (DataSource.listUser.Exists(Userold => Userold.UserName == UserNew.UserName))
-        {
-            throw new UserException(UserNew.UserName, "the User is exists in the system");
-            //return false;
+            return from line in ListBusLines
+                   select line; //no need to Clone()
         }
 
-        DataSource.listUser.Add(UserNew.Clone());
-        return true;
-    }
 
-    public bool updatingUser(User UserNew)
-    {
-        DO.User Userold = DataSource.listUser.Find(b => b.UserName == UserNew.UserName);
-        if (Userold != null)
+        public Line GetOneBusLine(int LineNumber)
         {
-            DataSource.listUser.Remove(Userold);
-            DataSource.listUser.Add(UserNew.Clone());
+            List<Line> ListBusLines = XMLTools.LoadListFromXMLSerializer<Line>(linePath);
+
+            DO.Line line = ListBusLines.Find(p => p.LineNumber == LineNumber);
+            if (line != null)
+                return line; //no need to Clone()
+            else
+                throw new DO.LineException("The Identify-Number-Line " + LineNumber + " not found");
+        }
+
+        #endregion Line
+
+        #region Station
+        public bool addStation(Station StationNew)
+        {
+            List<Station> ListStations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+
+            if (ListStations.FirstOrDefault(s => s.Code == StationNew.Code) != null)
+                throw new StationException("Code Station exists allready");
+            ListStations.Add(StationNew); //no need to Clone()
+            XMLTools.SaveListToXMLSerializer(ListStations, stationPath);
             return true;
         }
-        throw new UserException(UserNew.UserName, "the User is not exists in the system");
-        //return false;
-    }
 
-    public bool deleteUser(User UserNew)
-    {
-        if (DataSource.listUser.Exists(Userold => Userold.UserName != UserNew.UserName))
+        public bool updatingStation(Station StationNew)
         {
-            throw new UserException(UserNew.UserName, "the User is not exists in the system");
-            //return false;
-        }
-        DataSource.listUser.RemoveAll(Userold => Userold.UserName != UserNew.UserName);
-        return true;
-    }
-
-    public IEnumerable<User> GetAllUser()
-    {
-        return from User in DataSource.listUser
-               select User.Clone();
-    }
-
-
-
-    public User GetOneUser(string UsserName)
-    {
-        DO.User Userold = DataSource.listUser.Find(b => b.UserName.ToString() == UsserName);
-        if (Userold != null)
-        {
-            return Userold;
-
-        }
-        throw new UserException(UsserName, "the User is not exists in the system");
-    }
-
-    #endregion User
-
-    #region AdjacentStation
-    public bool addAdjacentStation(AdjacentStation AdjacentStationNew)
-    {
-        if (DataSource.listAdjacentStation.Exists(AdjacentStationold => (AdjacentStationold.Station1 == AdjacentStationNew.Station1) && (AdjacentStationold.Station2 == AdjacentStationNew.Station2)))
-        {
-            throw new AdjacentStationException(AdjacentStationNew.Station1, AdjacentStationNew.Station2);
-            //return false;
-        }
-        var cloned = AdjacentStationNew.Clone();
-        DataSource.listAdjacentStation.Add(cloned);
-        return true;
-    }
-
-    public bool updatingAdjacentStation(AdjacentStation AdjacentStationNew)
-    {
-        DO.AdjacentStation AdjacentStationold = DataSource.listAdjacentStation.Find(A => (A.Station1 == AdjacentStationNew.Station1) && (A.Station2 == AdjacentStationNew.Station2));
-        if (AdjacentStationold != null)
-        {
-            DataSource.listAdjacentStation.Remove(AdjacentStationold);
-            DataSource.listAdjacentStation.Add(AdjacentStationNew.Clone());
+            List<Station> ListStations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            Station sta = ListStations.Find(p => p.Code == StationNew.Code);
+            if (sta != null)
+            {
+                ListStations.Remove(sta);
+                ListStations.Add(StationNew); //no nee to Clone()
+            }
+            else
+                throw new DO.StationException("The Code Station " + StationNew.Code + " not found");
+            XMLTools.SaveListToXMLSerializer(ListStations, stationPath);
             return true;
         }
-        throw new AdjacentStationException(AdjacentStationNew.Station1, AdjacentStationNew.Station2, "the AdjacentStation is not exists in the system");
-        //return false;
-    }
 
-    public bool deleteAdjacentStation(AdjacentStation AdjacentStationNew)
-    {
-        if (DataSource.listAdjacentStation.Exists(AdjacentStationold => (AdjacentStationold.Station1 != AdjacentStationNew.Station1) && (AdjacentStationold.Station2 != AdjacentStationNew.Station2)))
+        public bool deleteStation(Station StationNew)
         {
-            throw new AdjacentStationException(AdjacentStationNew.Station1, AdjacentStationNew.Station2, "the AdjacentStation is not exists in the system");
-            //return false;
+            List<Station> ListStations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            Station sta = ListStations.Find(p => p.Code == StationNew.Code);
+            if (sta != null)
+            {
+
+                ListStations.Remove(sta);
+                //מחיקת האובייקטים של תחנות עוקבות שקשורות לתחנה הזאת
+            }
+            else
+                throw new StationException("Does not exist in the system");
+
+            XMLTools.SaveListToXMLSerializer(ListStations, stationPath);
+            return true;
+        }
+
+        public IEnumerable<Station> GetAllStation()
+        {
+            List<Station> ListBusStations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            return from station in ListBusStations
+                   select station; //no need to Clone()
+        }
+
+
+
+        public Station GetOneStation(int code)
+        {
+            List<Station> ListBusStations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+
+            DO.Station sta = ListBusStations.Find(p => p.Code == code);
+            if (sta != null)
+                return sta; //no need to Clone()
+            else
+                throw new DO.StationException("The Code Station " + code + " not found");
+        }
+        #endregion Station
+
+
+        #region LineStation
+        public bool addLineStation(LineStation LineStationNew)
+        {
+            List<LineStation> ListLineStations = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            if (ListLineStations.FirstOrDefault(mishehu => mishehu.LineNumber == LineStationNew.LineNumber && mishehu.Station == LineStationNew.Station) != null)
+                throw new LineStationDException("The station already exists on the line");
+            ListLineStations.Add(LineStationNew); //no need to Clone()
+            XMLTools.SaveListToXMLSerializer(ListLineStations, lineStationPath);
+            return true;
+        }
+        public IEnumerable<LineStation> getPartOfLineStations(Predicate<LineStation> LineStationDAOCondition)
+        {
+
+            List<LineStation> ListLineStations = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            IEnumerable<LineStation> TempLineStationDAO = from LineStation item in ListLineStations
+                                                          where LineStationDAOCondition(item)
+                                                          select item;//no need to Clone()
+            if (TempLineStationDAO.Count() == 0)
+                throw new LineStationDException("There are no line stations that meet the condition");
+            return TempLineStationDAO;
+        }
+
+        public bool updatingLineStation(LineStation LineStationNew)
+        {
+            List<LineStation> ListLineStations = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            LineStation sta = ListLineStations.Find(mishehu => mishehu.LineNumber == LineStationNew.LineNumber && mishehu.Station == LineStationNew.Station);
+            if (sta != null)
+            {
+                ListLineStations.Remove(sta);
+                ListLineStations.Add(LineStationNew); //no nee to Clone()
+            }
+            else
+                throw new DO.LineStationDException("The Station number " + LineStationNew.Station + " not found in the line " + LineStationNew.LineNumber);
+            XMLTools.SaveListToXMLSerializer(ListLineStations, lineStationPath);
+            return true;
+        }
+
+        public bool deleteLineStation(LineStation LineStationNew)
+        {
+            List<LineStation> ListLineStations = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            LineStation sta = ListLineStations.Find(item => item.LineNumber == LineStationNew.LineNumber && item.Station == LineStationNew.Station);
+            if (sta != null)
+            {
+                ListLineStations.Remove(sta);
+            }
+            else
+                throw new LineStationDException("Does not exist in the system");
+            XMLTools.SaveListToXMLSerializer(ListLineStations, lineStationPath);
+            return true;
+        }
+
+        public IEnumerable<LineStation> GetAllLineStation()
+        {
+            List<LineStation> ListLineStations = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            return from station in ListLineStations
+                   select station; //no need to Clone()
+        }
+
+
+        public LineStation GetOneLineStation(int LineNumber)
+        {
+            List<LineStation> ListLineStations = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+
+            DO.LineStation sta = ListLineStations.Find(p => p.LineNumber == LineNumber);
+            if (sta != null)
+                return sta; //no need to Clone()
+            else
+                throw new DO.LineStationDException("The Station number " + LineNumber);
+        }
+
+        #endregion LineStation
+
+
+        #region User
+        public bool addUser(User UserNew)
+        {
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+            if (ListUsers.FirstOrDefault(mishehu => mishehu.UserName == UserNew.UserName) != null)
+                throw new UserException("שם המשתמש כבר קיים");
+            ListUsers.Add(UserNew); //no need to Clone()
+            XMLTools.SaveListToXMLSerializer(ListUsers, userPath);
+            return true;
+        }
+
+        public bool updatingUser(User UserNew)
+        {
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+            User sta = ListUsers.Find(mishehu => mishehu.UserName == UserNew.UserName);
+            if (sta != null)
+            {
+                ListUsers.Remove(sta);
+                ListUsers.Add(UserNew); //no need to Clone()
+            }
+            else
+                throw new DO.UserException("The UserName " + UserNew.UserName + " not found");
+            XMLTools.SaveListToXMLSerializer(ListUsers, userPath);
+            return true;
+        }
+
+        public bool deleteUser(User UserNew)
+        {
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+            User sta = ListUsers.Find(item => item.UserName == UserNew.UserName);
+            if (sta != null)
+            {
+                ListUsers.Remove(sta);
+            }
+            else
+                throw new UserException("Does not exist in the system");
+            XMLTools.SaveListToXMLSerializer(ListUsers, userPath);
+            return true;
+        }
+
+        public IEnumerable<User> GetAllUser()
+        {
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+            return from user in ListUsers
+                   select user; //no need to Clone()
+        }
+
+
+
+        public User GetOneUser(string UsserName)
+        {
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+            DO.User user = ListUsers.Find(p => p.UserName == UsserName);
+            if (user != null)
+                return user; //no need to Clone()
+            else
+                throw new DO.UserException("The UserName number " + UsserName + " not found");
+        }
+
+        #endregion User
+
+        #region AdjacentStation
+        public bool addAdjacentStation(AdjacentStation AdjacentStationNew)
+        {
+            XElement pairsRootElem = XMLTools.LoadListFromXMLElement(AdjacentStationPath);
+
+            XElement pair1 = (from p in pairsRootElem.Elements()
+                              where p.Element("Station1").Value == AdjacentStationNew.Station1.ToString() && p.Element("Station2").Value == AdjacentStationNew.Station2.ToString() || p.Element("Station2").Value == AdjacentStationNew.Station1.ToString() && p.Element("Station1").Value == AdjacentStationNew.Station2.ToString()
+                              select p).FirstOrDefault();
+
+            if (pair1 != null)
+                throw new AdjacentStationException("The pair of stations already exists");
+
+            XElement pairElem = new XElement("PairConsecutiveStationsDAO",
+                                   new XElement("Station1", AdjacentStationNew.Station1),
+                                   new XElement("Station2", AdjacentStationNew.Station2),
+                                   new XElement("Distance", AdjacentStationNew.Distance),
+                                   new XElement("Time", AdjacentStationNew.Time.ToString()));
+
+            pairsRootElem.Add(pairElem);
+
+            XMLTools.SaveListToXMLElement(pairsRootElem, AdjacentStationPath);
+            return true;
 
         }
-        DataSource.listAdjacentStation.Remove(AdjacentStationNew);
-        return true;
+
+        public bool updatingAdjacentStation(AdjacentStation AdjacentStationNew)
+        {
+            XElement pairsRootElem = XMLTools.LoadListFromXMLElement(AdjacentStationPath);
+
+            XElement pair1 = (from p in pairsRootElem.Elements()
+                              where p.Element("Station1").Value == AdjacentStationNew.Station1.ToString() && p.Element("Station2").Value == AdjacentStationNew.Station2.ToString() || p.Element("Station2").Value == AdjacentStationNew.Station1.ToString() && p.Element("Station1").Value == AdjacentStationNew.Station2.ToString()
+                              select p).FirstOrDefault();
+
+            if (pair1 != null)
+            {
+
+                pair1.Element("Station1").Value = AdjacentStationNew.Station1.ToString();
+                pair1.Element("Station2").Value = AdjacentStationNew.Station2.ToString();
+                pair1.Element("Distance").Value = AdjacentStationNew.Distance.ToString();
+                pair1.Element("Time").Value = AdjacentStationNew.Time.ToString();
+
+                XMLTools.SaveListToXMLElement(pairsRootElem, AdjacentStationPath);
+                return true;
+            }
+            else
+                throw new DO.AdjacentStationException("The pair of stations does not exist in the system");
+        }
+        public bool deleteAdjacentStation(AdjacentStation AdjacentStationNew)
+        {
+            XElement pairsRootElem = XMLTools.LoadListFromXMLElement(AdjacentStationPath);
+
+            XElement pair1 = (from p in pairsRootElem.Elements()
+                              where p.Element("Station1").Value == AdjacentStationNew.Station1.ToString() && p.Element("Station2").Value == AdjacentStationNew.Station2.ToString() || p.Element("Station2").Value == AdjacentStationNew.Station1.ToString() && p.Element("Station1").Value == AdjacentStationNew.Station2.ToString()
+                              select p).FirstOrDefault();
+
+            if (pair1 != null)
+            {
+                pair1.Remove();
+                XMLTools.SaveListToXMLElement(pairsRootElem, AdjacentStationPath);
+                return true;
+            }
+            else
+                throw new AdjacentStationException("Does not exist in the system");
+        }
+
+        public IEnumerable<AdjacentStation> GetAllAdjacentStation()
+        {
+            XElement pairsRootElem = XMLTools.LoadListFromXMLElement(AdjacentStationPath);
+
+            return (from pair in pairsRootElem.Elements()
+                    select new AdjacentStation()
+                    {
+                        Station1 = Int32.Parse(pair.Element("Station1").Value),
+                        Station2 = Int32.Parse(pair.Element("Station2").Value),
+                        Distance = Double.Parse(pair.Element("Distance").Value),
+                        Time = TimeSpan.Parse(pair.Element("Time").Value),
+                    }
+                   );
+        }
+
+
+
+
+        public AdjacentStation GetOneAdjacentStation(int Station1, int Station2)
+        {
+
+            XElement pairsRootElem = XMLTools.LoadListFromXMLElement(AdjacentStationPath);
+
+            AdjacentStation p = (from pair in pairsRootElem.Elements()
+                                 where pair.Element("Station1").Value == Station1.ToString() && pair.Element("Station2").Value == Station2.ToString() || pair.Element("Station1").Value == Station2.ToString() && pair.Element("Station2").Value == Station2.ToString()
+                                 select new AdjacentStation()
+                                 {
+                                     Station1 = Int32.Parse(pair.Element("Station1").Value),
+                                     Station2 = Int32.Parse(pair.Element("Station2").Value),
+                                     Distance = Double.Parse(pair.Element("Distance").Value),
+                                     Time = TimeSpan.Parse(pair.Element("Time").Value),
+                                 }
+                                            ).FirstOrDefault();
+            if (p == null)
+                return null;
+            return p;
+        }
+        #endregion AdjacentStation
+
     }
-
-    public IEnumerable<AdjacentStation> GetAllAdjacentStation()
-    {
-        return from stations in DataSource.listAdjacentStation
-               select stations.Clone();
-    }
-
-
-
-    //public AdjacentStation GetOneAdjacentStation(int Station1, int Station2)
-    //{
-    //    DO.AdjacentStation AdjacentStationold = DataSource.listAdjacentStation.Find(b => (b.Station1== Station1)&& (b.Station2 == Station2));
-    //    if (AdjacentStationold != null)
-    //    {
-    //        return AdjacentStationold;
-
-    //    }
-    //    throw new AdjacentStationException(Station1, Station2, "the AdjacentStation is not exists in the system");
-    //}
-    public AdjacentStation GetOneAdjacentStation(int Station1, int Station2)
-    {
-        DO.AdjacentStation stations1 = DataSource.listAdjacentStation.Find(p => p.Station1 == Station1 && p.Station2 == Station2 || p.Station2 == Station1 && p.Station1 == Station2);
-
-        if (stations1 != null)
-            return stations1.Clone();
-        else
-            return null;//throw new DO.PairConsecutiveStationsExceptionDO("No object found for this pair of stations");
-    }
-
-    #endregion AdjacentStation
-
-
 }
