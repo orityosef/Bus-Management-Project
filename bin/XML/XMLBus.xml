@@ -8,14 +8,14 @@
     <FuelRemain>90</FuelRemain>
   </Bus>
    <Bus>
-     <Status>MidRide</Status>
+     <Status>ReadyToGo</Status>
      <LicenseNum>6543217</LicenseNum>
      <Fromdate>15/10/2001 13:52:01</Fromdate>
      <TotalTrip>5000</TotalTrip>
      <FuelRemain>1200</FuelRemain>
    </Bus>
    <Bus>
-         <Status>Treatment</Status>
+     <Status>ReadyToGo</Status>
          <LicenseNum>15823409</LicenseNum>
          <Fromdate>30/03/1999 13:52:01</Fromdate>
          <TotalTrip>450</TotalTrip>

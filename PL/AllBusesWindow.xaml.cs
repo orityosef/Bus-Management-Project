@@ -25,15 +25,13 @@ namespace PL
     /// </summary>
     public partial class AllBusesWindow : Window
     {
-        //  public ObservableCollection<Bus> Buss = new ObservableCollection<Bus>();
+       
          IBL bl = BLFactory.GetBL("1");
 
         public AllBusesWindow()
         {
             InitializeComponent();
-            AllBuses.DataContext = bl.GetAllBuses().ToString();
-           // AllBuses.ItemsSource = bl.GetAllBuses();
-            //  AllBuses.ItemsSource = Buss; //Displays buses on screen
+            AllBuses.ItemsSource = bl.GetAllBuses();
         }
         private void Treatment_Click(object sender, RoutedEventArgs e)
         {

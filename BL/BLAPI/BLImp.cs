@@ -100,9 +100,11 @@ namespace BL.BLAPI
         //הבאת כל הרשימה של האוטובוסים
         public IEnumerable<Bus> GetAllBuses()
         {
-            var result = from Bus in dl.GetAllBuses()
-                         select ConvertDtoB(Bus);
-            return result;
+            return from bus in dl.GetAllBuses()
+                   select ConvertDtoB(bus);
+            //var result = from Bus in dl.GetAllBuses().ToList()
+            //             select ConvertDtoB(Bus);
+           // return result;
         }
         //הבאת אוטובוס בודד
         public Bus GetOneBus(int License)
