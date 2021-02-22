@@ -48,4 +48,10 @@
     <Latitude>31.219761</Latitude>
     <Longitude>34.882488</Longitude>
   </Station>
+  <Station>
+    <Code>326789</Code>
+    <Name>nnfkd</Name>
+    <Latitude>32.3242</Latitude>
+    <Longitude>31.26467</Longitude>
+  </Station>
 </ArrayOfStation>
