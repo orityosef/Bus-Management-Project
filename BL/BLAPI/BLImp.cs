@@ -436,31 +436,19 @@ namespace BL.BLAPI
         private Station GetOneSation(int stationID)
         {
 
-            //DO.Station StationDo = new DO.Station();
-            //Station StationBo = new Station();
-            //try
-            //{
-            //    StationDo = dl.GetOneStation(stationID);
-            //    StationBo = ConvertDtoB(StationDo);
-            //    return StationBo;
-
-            //}
-            //catch (DO.StationException ex)
-            //{
-            //    throw new BO.StationException("Station license is illegal", ex);
-            //}
-            Station result = new Station();
-            DO.Station busStation;
+            DO.Station StationDo = new DO.Station();
+            Station StationBo = new Station();
             try
             {
-                busStation = dl.GetOneStation(stationID);
+                StationDo = dl.GetOneStation(stationID);
+                StationBo = ConvertDtoB(StationDo);
+                return StationBo;
+
             }
             catch (DO.StationException ex)
             {
-                throw new BO.StationException("Code Station number not found", ex);
+                throw new StationException("Station license is illegal", ex);
             }
-            result = ConvertDtoB(busStation);
-            return result;
         }
 
         public bool addStation(Station StationNew)

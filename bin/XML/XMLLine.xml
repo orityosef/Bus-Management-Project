@@ -14,11 +14,4 @@
     <FirstStation>246801</FirstStation>
     <LastStation>303988</LastStation>
   </Line>
-  <Line>
-    <Id>4</Id>
-    <LineNumber>480</LineNumber>
-    <Area>CENTER</Area>
-    <FirstStation>143998</FirstStation>
-    <LastStation>303999</LastStation>
-  </Line>
 </ArrayOfLine>
