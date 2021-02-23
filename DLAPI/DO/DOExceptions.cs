@@ -96,7 +96,26 @@ namespace DO
             base(message, innerException)
         { xmlFilePath = xmlPath; }
 
-        public override string ToString() => base.ToString() + $", fail to load or create xml file: {xmlFilePath}";
+
+            public override string ToString() => base.ToString() + $", fail to load or create xml file: {xmlFilePath}";
+        }
+    public class BusOnTripException : Exception
+    {
+        public BusOnTripException()
+        {
+        }
+
+        public BusOnTripException(string message) : base(message)
+        {
+        }
+
+        public BusOnTripException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected BusOnTripException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
     }
 
 }

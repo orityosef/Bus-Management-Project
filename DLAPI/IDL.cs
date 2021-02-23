@@ -67,6 +67,15 @@ namespace DLAPI
         AdjacentStation GetOneAdjacentStation(int Station1, int Station2);
         #endregion AdjacentStation
 
+        #region BusOnTrip
+        bool addLineTrip(BusOnTrip lineTrip);
+        bool updateLineTrip(BusOnTrip lineTrip);
+        bool deleteLineTrip(BusOnTrip lineTrip);
+        IEnumerable<BusOnTrip> getAllLineTrips();
+        IEnumerable<BusOnTrip> getPartOfLineTrip(Predicate<BusOnTrip> LineTripDAOCondition);
+        BusOnTrip getOneObjectLineTripDAO(int identifyNumber, TimeSpan tripStart);
+            
+        #endregion
     }
 }
 

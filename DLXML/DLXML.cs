@@ -27,6 +27,7 @@ namespace DL
         string lineStationPath = @"XMLlineStation.xml"; //XMLSerializer
         string AdjacentStationPath = @"XMLAdjacentStation.xml"; //XElement
         string userPath = @"XMLUser.xml"; //XMLSerializer
+        string lineTripsPath = @"lineTripsXml.xml"; //XElement
         #endregion
 
         #region Bus
@@ -530,5 +531,104 @@ namespace DL
         }
         #endregion AdjacentStation
 
+
+        #region lineTrip
+        public bool addLineTrip(BusOnTrip lineTrip)
+        {
+            XElement lineTripsRootElem = XMLTools.LoadListFromXMLElement(lineTripsPath);
+
+            XElement lineTrips1 = (from p in lineTripsRootElem.Elements()
+                                   where p.Element("IdentifyNumber").Value == lineTrip.IdentifyNumber.ToString() && p.Element("TripStart").Value == lineTrip.TripStart.ToString()
+                                   select p).FirstOrDefault();
+
+            if (lineTrips1 != null)
+                throw new BusOnTripException("The line exit already exists");//הוצאנו חריגה במצב שהיציאת קו הסאת כבר קיימת במערכת. מצד שני, ייתכן שזה דבר תקין, צריך לחשוב
+
+            XElement lineTripElem = new XElement("LineTripDAO",
+                                   new XElement("IdentifyNumber", lineTrip.IdentifyNumber),
+                                   new XElement("TripStart", lineTrip.TripStart.ToString()));
+
+            lineTripsRootElem.Add(lineTripElem);
+
+            XMLTools.SaveListToXMLElement(lineTripsRootElem, lineTripsPath);
+            return true;
+        }
+        public bool updateLineTrip(BusOnTrip lineTrip)
+        {
+            XElement lineTripsRootElem = XMLTools.LoadListFromXMLElement(lineTripsPath);
+
+            XElement lineTrips1 = (from p in lineTripsRootElem.Elements()
+                                   where p.Element("IdentifyNumber").Value == lineTrip.IdentifyNumber.ToString() && p.Element("TripStart").Value == lineTrip.TripStart.ToString()
+                                   select p).FirstOrDefault();
+            if (lineTrips1 != null)
+            {
+                lineTrips1.Element("IdentifyNumber").Value = lineTrip.IdentifyNumber.ToString();
+                lineTrips1.Element("TripStart").Value = lineTrip.TripStart.ToString();
+
+                XMLTools.SaveListToXMLElement(lineTripsRootElem, lineTripsPath);
+                return true;
+            }
+            else
+                throw new DO.BusOnTripException("The line exit was not found");
+        }
+        public bool deleteLineTrip(BusOnTrip lineTrip)
+        {
+            XElement lineTripsRootElem = XMLTools.LoadListFromXMLElement(lineTripsPath);
+
+            XElement lineTrips1 = (from p in lineTripsRootElem.Elements()
+                                   where p.Element("IdentifyNumber").Value == lineTrip.IdentifyNumber.ToString() && p.Element("TripStart").Value == lineTrip.TripStart.ToString()
+                                   select p).FirstOrDefault();
+
+            if (lineTrips1 != null)
+            {
+                lineTrips1.Remove();
+                XMLTools.SaveListToXMLElement(lineTripsRootElem, lineTripsPath);
+                return true;
+            }
+            else
+                throw new DO.BusOnTripException("The line exit was not found");
+        }
+        public IEnumerable<BusOnTrip> getAllLineTrips()
+        {
+            XElement lineTripsRootElem = XMLTools.LoadListFromXMLElement(lineTripsPath);
+
+            return (from lineTrip in lineTripsRootElem.Elements()
+                    select new BusOnTrip()
+                    {
+                        IdentifyNumber = Int32.Parse(lineTrip.Element("IdentifyNumber").Value),
+                        TripStart = TimeSpan.Parse(lineTrip.Element("TripStart").Value),
+                    }
+                   );
+        }
+        public IEnumerable<BusOnTrip> getPartOfLineTrip(Predicate<BusOnTrip> LineTripDAOCondition)
+        {
+            XElement lineTripsRootElem = XMLTools.LoadListFromXMLElement(lineTripsPath);
+
+            return from lineTrip in lineTripsRootElem.Elements()
+                   let p1 = new BusOnTrip()
+                   {
+                       IdentifyNumber = Int32.Parse(lineTrip.Element("IdentifyNumber").Value),
+                       TripStart = TimeSpan.Parse(lineTrip.Element("TripStart").Value),
+                   }
+                   where LineTripDAOCondition(p1)
+                   select p1;
+        }
+        public BusOnTrip getOneObjectLineTripDAO(int identifyNumber, TimeSpan tripStart)
+        {
+            XElement lineTripsRootElem = XMLTools.LoadListFromXMLElement(lineTripsPath);
+
+            BusOnTrip p = (from lineTrip in lineTripsRootElem.Elements()
+                             where lineTrip.Element("IdentifyNumber").Value == identifyNumber.ToString() && lineTrip.Element("TripStart").Value == tripStart.ToString()
+                             select new BusOnTrip()
+                             {
+                                 IdentifyNumber = Int32.Parse(lineTrip.Element("IdentifyNumber").Value),
+                                 TripStart = TimeSpan.Parse(lineTrip.Element("TripStart").Value),
+                             }
+                        ).FirstOrDefault();
+            if (p == null)
+                return null;
+            return p;
+        }
+        #endregion
     }
 }
