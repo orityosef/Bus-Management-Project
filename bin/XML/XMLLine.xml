@@ -1,5 +1,12 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfLine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Line>
+    <Id>1</Id>
+    <LineNumber>836</LineNumber>
+    <Area>GENERAL</Area>
+    <FirstStation>234567</FirstStation>
+    <LastStation>303999</LastStation>
+  </Line>
   <Line>
     <Id>2</Id>
     <LineNumber>450</LineNumber>
@@ -13,5 +20,19 @@
     <Area>SOUTH</Area>
     <FirstStation>246801</FirstStation>
     <LastStation>303988</LastStation>
+  </Line>
+  <Line>
+    <LineNumber>480</LineNumber>
+    <Id>4</Id>
+    <Area>CENTER</Area>
+    <FirstStation>303999</FirstStation>
+    <LastStation>143998</LastStation>
+  </Line>
+  <Line>
+    <LineNumber>993</LineNumber>
+    <Id>0</Id>
+    <FirstStation>143998</FirstStation>
+    <LastStation>987654</LastStation>
+    <Area>NORTH</Area>
   </Line>
 </ArrayOfLine>
