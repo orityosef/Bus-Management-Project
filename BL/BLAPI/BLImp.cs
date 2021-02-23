@@ -950,6 +950,7 @@ namespace BL.BLAPI
                 orderby way.TimeOfTrip
                 select way;
             return orderList.ToList();
+
         }
         //פונקציות עבור לוח אלקטרוני
         public IEnumerable<LineTimingBO> GetLineTimingsPerStation(Station cuurentStation, TimeSpan now)
