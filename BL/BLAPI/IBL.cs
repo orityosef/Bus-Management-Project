@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.BO;
 using BO;
 namespace BL.BLAPI
 {
@@ -70,6 +71,11 @@ namespace BL.BLAPI
         bool existingUser(string userName, string passWord);
 
         #endregion
+        //עבור לוח אלקטרוני
+        IEnumerable<LineTimingBO> GetLineTimingsPerStation(Station cuurentStation, TimeSpan now);
+        bool addLineTrip(BusOnTrip lineTrip);
+        bool deleteLineTrip(BusOnTrip lineTrip);
+     
 
         # region  MiniStation
         IEnumerable<MiniStation> GetAllMiniStations();

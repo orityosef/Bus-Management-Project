@@ -9,17 +9,11 @@ namespace DO
 {
     public class BusOnTrip
     {
-        public int Name { get; set; }
-        public int LicenseNum { get; set; }
-        public int LineId { get; set; }
-        public TimeSpan PlannedTakeOff { get; set; }
-        public TimeSpan ActalTakeOff { get; set; }
-        public int PrevStation { get; set; }
-        public TimeSpan PrevStationAt { get; set; }
-        public TimeSpan NextStationAt { get; set; }
+        public int IdentifyNumber { get; set; } //מספר מזהה קו
+        public TimeSpan TripStart { get; set; }//זמן יציאה
         public override string ToString()
         {
-            return this.ToStringProperty();
+            return TripStart.ToString();
         }
 
     }

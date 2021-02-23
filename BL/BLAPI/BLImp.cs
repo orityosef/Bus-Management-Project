@@ -104,7 +104,7 @@ namespace BL.BLAPI
                    select ConvertDtoB(bus);
             //var result = from Bus in dl.GetAllBuses().ToList()
             //             select ConvertDtoB(Bus);
-           // return result;
+            // return result;
         }
         //הבאת אוטובוס בודד
         public Bus GetOneBus(int License)
@@ -951,5 +951,89 @@ namespace BL.BLAPI
                 select way;
             return orderList.ToList();
         }
+        //פונקציות עבור לוח אלקטרוני
+        public IEnumerable<LineTimingBO> GetLineTimingsPerStation(Station cuurentStation, TimeSpan now)
+        {
+            List<LineTimingBO> result = new List<LineTimingBO>();
+            if (cuurentStation.ListOfLines != null)
+            {
+
+                foreach (LineInStation line in cuurentStation.ListOfLines)//נעבור על כל הקווים שעוברים בתחנה
+                {
+                    LineTimingBO lineTiming = new LineTimingBO();
+                    lineTiming.IdentifyNumber = line.IdentifyNumber;
+                    lineTiming.LineNumber = line.LineNumber;
+                    lineTiming.LastStationName = line.LastStationName;
+                    Line curLine = GetOneBusLine(line.IdentifyNumber);
+                    TimeSpan TimeTripFromStart = new TimeSpan(0, 0, 0);
+                    foreach (LineStation lineStation in curLine.ListOfStations)//חישוב כמה זמן לוקח לקו הספציפי להגיע לתחנה שלנו
+                    {
+                        if (lineStation.StationID == cuurentStation.Code)
+                            TimeTripFromStart = lineStation.TimeFromFirstStation;
+                    }
+                    try
+                    {
+                        //נוצרת רשימה של יציאות הקו הרלוונטיות, כלומר שייכות לקו הנוכחי ועוברות בתחנה בחצי השעה הקרובה
+                        List<BusOnTrip> relevantTripToLine = dl.getPartOfLineTrip(item => item.IdentifyNumber == line.IdentifyNumber && item.TripStart + TimeTripFromStart > now && item.TripStart + TimeTripFromStart < now + new TimeSpan(0, 30, 0)).ToList();
+                        foreach (BusOnTrip lineTrip in relevantTripToLine)
+                        {
+                            lineTiming.TripStart = lineTrip.TripStart;
+                            lineTiming.ExpectedTimeTillArrive = lineTrip.TripStart + TimeTripFromStart;
+                            lineTiming.MoreHowMinutesCome = (lineTiming.ExpectedTimeTillArrive - now).Minutes;
+                            result.Add(lineTiming);
+                        }
+                    }
+                    catch { }//במקרה של תחנה שלא עוברים בה קווים בחצי השעה הקרובה
+                }
+            }
+            return result;
+        }
+        private BusOnTrip convertDAO(BusOnTrip lineTrip)
+        {
+            BusOnTrip lineTripDAO = new BusOnTrip
+            {
+                IdentifyNumber = lineTrip.IdentifyNumber,
+                TripStart = lineTrip.TripStart,
+            };
+            return lineTripDAO;
+        }
+
+        private BusOnTrip convertoBO(DO.BusOnTrip lineTrip)
+        {
+            BusOnTrip result = new BusOnTrip
+            {
+                IdentifyNumber = lineTrip.IdentifyNumber,
+                TripStart = lineTrip.TripStart,
+            };
+            return result;
+        }
+        public bool addLineTrip(BusOnTrip lineTrip)
+        {
+            bool result;
+            try
+            {
+                result = dl.addLineTrip(convertDAO(lineTrip));
+            }
+            catch (DO.BusOnTripException ex)
+            {
+                throw new BusOnTripException("יציאת הקו כבר קיימת במערכת", ex);
+            }
+            return result;
+        }
+        public bool deleteLineTrip(BusOnTrip lineTrip)
+        {
+            bool result;
+            try
+            {
+                result = dl.deleteLineTrip(convertDAO(lineTrip));
+            }
+            catch (DO.BusOnTripException ex)
+            {
+                throw new BO.BusOnTripException("Does not exist in the system", ex);
+            }
+            return result;
+        }
+
+
     }
 }
