@@ -16,7 +16,7 @@
         <TextBox x:Name="latitude" HorizontalAlignment="Left" Height="23" Margin="275,150,0,0" TextWrapping="Wrap" Text="{Binding Path=Latitude, Mode=OneWayToSource}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="longitude" HorizontalAlignment="Left" Height="23" Margin="275,200,0,0" TextWrapping="Wrap" Text="{Binding Path=Longitude, Mode=OneWayToSource}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="Name" HorizontalAlignment="Left" Height="23" Margin="272,250,0,0" TextWrapping="Wrap" Text="{Binding Path=Name, Mode=OneWayToSource}" VerticalAlignment="Top" Width="120"/>
-               <Button Content="Add"  HorizontalAlignment="Left" Margin="203,314,0,0" VerticalAlignment="Top" Width="126" Height="30" Click="Button_ClickAddStation">
+               <Button Content="Add"  HorizontalAlignment="Left" Margin="202,308,0,0" VerticalAlignment="Top" Width="126" Height="30" Click="Button_ClickAddStation">
             <Button.Style>
                 <Style>
                     <Style.Triggers>

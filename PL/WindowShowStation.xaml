@@ -50,6 +50,6 @@
                 <DataGridTextColumn Header="מספר קו" Binding="{Binding LineNumber}" />
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock x:Name="timerTextBlock" HorizontalAlignment="Left" Margin="22.8,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="58" Width="208" Grid.Column="1" Grid.Row="1"/>
+        <TextBlock x:Name="timerTextBlock" HorizontalAlignment="Left" Margin="271.333,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="58" Width="208" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>

@@ -60,10 +60,11 @@ namespace PL
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
-        private void showDataStations_doubleClick(object sender, RoutedEventArgs e)//חלון נתוני תחנה
+        private void show_Click(object sender, RoutedEventArgs e)//חלון נתוני תחנה
         {
-            var fxElt = sender as ListBox;
-            Station CurrentStation = fxElt.SelectedItem as Station;
+            Button btn = sender as Button;
+            var fxElt = sender as FrameworkElement;
+            Station CurrentStation = fxElt.DataContext as Station;
             WindowShowStation showStationWindow = new WindowShowStation(bl, CurrentStation);
             showStationWindow.ShowDialog();
         }
