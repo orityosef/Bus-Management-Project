@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using BO; 
@@ -81,4 +82,24 @@ namespace BL.BO
         public override string ToString() => base.ToString() + $", Invalid Station1: {st1} and  Invalid station2: {st2}";
     }
 
-}
+    [Serializable]
+    internal class BusOnTripException : Exception
+    {
+        public BusOnTripException()
+        {
+        }
+
+        public BusOnTripException(string message) : base(message)
+        {
+        }
+
+        public BusOnTripException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+       
+        protected BusOnTripException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+
+    }

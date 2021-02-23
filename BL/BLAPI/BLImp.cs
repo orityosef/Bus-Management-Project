@@ -958,24 +958,24 @@ namespace BL.BLAPI
             if (cuurentStation.ListOfLines != null)
             {
 
-                foreach (LineInStation line in cuurentStation.ListOfLines)//נעבור על כל הקווים שעוברים בתחנה
+                foreach (LineInStation lineInSb in cuurentStation.ListOfLines)//נעבור על כל הקווים שעוברים בתחנה
                 {
                     LineTimingBO lineTiming = new LineTimingBO();
-                    lineTiming.IdentifyNumber = line.IdentifyNumber;
-                    lineTiming.LineNumber = line.LineNumber;
-                    lineTiming.LastStationName = line.LastStationName;
-                    Line curLine = GetOneBusLine(line.IdentifyNumber);
+                    lineTiming.IdentifyNumber = lineInSb.IdentifyNumber;
+                    lineTiming.LineNumber = lineInSb.LineNumber;
+                    lineTiming.LastStationName = lineInSb.LastStationName;
+                    Line curLine = GetOneBusLine(lineInSb.IdentifyNumber);
                     TimeSpan TimeTripFromStart = new TimeSpan(0, 0, 0);
-                    foreach (LineStation lineStation in curLine.ListOfStations)//חישוב כמה זמן לוקח לקו הספציפי להגיע לתחנה שלנו
+                    foreach (LineStation lineSt in curLine.ListOfStations)//חישוב כמה זמן לוקח לקו הספציפי להגיע לתחנה שלנו
                     {
-                        if (lineStation.StationID == cuurentStation.Code)
-                            TimeTripFromStart = lineStation.TimeFromFirstStation;
+                        if (lineSt.StationID == cuurentStation.Code)
+                            TimeTripFromStart = lineSt.TimeFromFirstStation;
                     }
                     try
                     {
                         //נוצרת רשימה של יציאות הקו הרלוונטיות, כלומר שייכות לקו הנוכחי ועוברות בתחנה בחצי השעה הקרובה
-                        List<BusOnTrip> relevantTripToLine = dl.getPartOfLineTrip(item => item.IdentifyNumber == line.IdentifyNumber && item.TripStart + TimeTripFromStart > now && item.TripStart + TimeTripFromStart < now + new TimeSpan(0, 30, 0)).ToList();
-                        foreach (BusOnTrip lineTrip in relevantTripToLine)
+                        List<DO.BusOnTrip> relevantTripToLine = dl.getPartOfLineTrip(item => item.IdentifyNumber == lineInSb.IdentifyNumber && item.TripStart + TimeTripFromStart > now && item.TripStart + TimeTripFromStart < now + new TimeSpan(0, 30, 0)).ToList();
+                        foreach (DO.BusOnTrip lineTrip in relevantTripToLine)
                         {
                             lineTiming.TripStart = lineTrip.TripStart;
                             lineTiming.ExpectedTimeTillArrive = lineTrip.TripStart + TimeTripFromStart;
@@ -988,17 +988,16 @@ namespace BL.BLAPI
             }
             return result;
         }
-        private BusOnTrip convertDAO(BusOnTrip lineTrip)
+        private DO.BusOnTrip ConvertBtoD(BusOnTrip lineTrip)
         {
-            BusOnTrip lineTripDAO = new BusOnTrip
+            DO.BusOnTrip lineTripDAO = new DO.BusOnTrip
             {
                 IdentifyNumber = lineTrip.IdentifyNumber,
                 TripStart = lineTrip.TripStart,
             };
             return lineTripDAO;
         }
-
-        private BusOnTrip convertoBO(DO.BusOnTrip lineTrip)
+        private BusOnTrip ConvertDtoB(DO.BusOnTrip lineTrip)
         {
             BusOnTrip result = new BusOnTrip
             {
@@ -1012,7 +1011,7 @@ namespace BL.BLAPI
             bool result;
             try
             {
-                result = dl.addLineTrip(convertDAO(lineTrip));
+                result = dl.addLineTrip(ConvertBtoD(lineTrip));
             }
             catch (DO.BusOnTripException ex)
             {
@@ -1025,11 +1024,11 @@ namespace BL.BLAPI
             bool result;
             try
             {
-                result = dl.deleteLineTrip(convertDAO(lineTrip));
+                result = dl.deleteLineTrip(ConvertBtoD(lineTrip));
             }
             catch (DO.BusOnTripException ex)
             {
-                throw new BO.BusOnTripException("Does not exist in the system", ex);
+                throw new BusOnTripException("Does not exist in the system", ex);
             }
             return result;
         }
