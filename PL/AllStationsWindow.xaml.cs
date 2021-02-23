@@ -1,4 +1,5 @@
 ﻿using BL.BLAPI;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,13 @@ namespace PL
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
+        private void showDataStations_doubleClick(object sender, RoutedEventArgs e)//חלון נתוני תחנה
+        {
+            var fxElt = sender as ListBox;
+            Station CurrentStation = fxElt.SelectedItem as Station;
+            WindowShowStation showStationWindow = new WindowShowStation(bl, CurrentStation);
+            showStationWindow.ShowDialog();
         }
     }
 }

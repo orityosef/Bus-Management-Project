@@ -4,13 +4,13 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using BO; 
+using BO;
 namespace BL.BO
 {
     [Serializable]
     public class BusException : Exception
-        {
-            public int LicenseNumB;
+    {
+        public int LicenseNumB;
 
         public BusException(string message) : base(message)
         {
@@ -18,8 +18,8 @@ namespace BL.BO
 
         public BusException(string message, Exception innerException) :
                 base(message, innerException) => LicenseNumB = ((DO.BusException)innerException).LicenseNum;
-            public override string ToString() => base.ToString() + $" Invalid license number: {LicenseNumB}";
-        }
+        public override string ToString() => base.ToString() + $" Invalid license number: {LicenseNumB}";
+    }
     [Serializable]
     public class StationException : Exception
     {
@@ -57,17 +57,17 @@ namespace BL.BO
 
     [Serializable]
     public class LineStationBException : Exception
+    {
+        public int LineNumberB;
+        public int stationB;
+        public LineStationBException(string message, Exception innerException) :
+            base(message, innerException)
         {
-            public int LineNumberB;
-            public int stationB;
-            public LineStationBException(string message, Exception innerException) :
-                base(message, innerException)
-            {
             LineNumberB = ((DO.LineException)innerException).ID;
             stationB = ((DO.StationException)innerException).Code;
-            }
-            public override string ToString() => base.ToString() + $", Invalid line id: {LineNumberB} and  Invalid station ID: {stationB}";
         }
+        public override string ToString() => base.ToString() + $", Invalid line id: {LineNumberB} and  Invalid station ID: {stationB}";
+    }
     [Serializable]
     public class AdjacentStationException : Exception
     {
@@ -97,9 +97,10 @@ namespace BL.BO
         {
         }
 
-       
+
         protected BusOnTripException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 
     }
+}

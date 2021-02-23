@@ -907,6 +907,7 @@ namespace BL.BLAPI
         }
 
         #endregion
+        //פונקציות עבור לוח אלקטרוני
         public List<WayForPass> GetRelevantWays(int codeStation1, int codeStation2)
         {
             List<WayForPass> result = new List<WayForPass>();
@@ -952,7 +953,7 @@ namespace BL.BLAPI
             return orderList.ToList();
 
         }
-        //פונקציות עבור לוח אלקטרוני
+        
         public IEnumerable<LineTimingBO> GetLineTimingsPerStation(Station cuurentStation, TimeSpan now)
         {
             List<LineTimingBO> result = new List<LineTimingBO>();
@@ -1033,7 +1034,6 @@ namespace BL.BLAPI
             }
             return result;
         }
-
 
     }
 }
