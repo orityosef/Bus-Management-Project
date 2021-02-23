@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ArrayOfLine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Line>
     <Id>1</Id>
@@ -22,17 +22,11 @@
     <LastStation>303988</LastStation>
   </Line>
   <Line>
-    <LineNumber>480</LineNumber>
     <Id>4</Id>
+    <LineNumber>480</LineNumber>
     <Area>CENTER</Area>
     <FirstStation>303999</FirstStation>
     <LastStation>143998</LastStation>
   </Line>
-  <Line>
-    <LineNumber>993</LineNumber>
-    <Id>0</Id>
-    <FirstStation>143998</FirstStation>
-    <LastStation>987654</LastStation>
-    <Area>NORTH</Area>
-  </Line>
+ 
 </ArrayOfLine>

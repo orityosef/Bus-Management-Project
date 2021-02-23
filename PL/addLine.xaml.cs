@@ -94,11 +94,11 @@ namespace PL
                 //    throw new Exception("אין עדיין מידע עבור זוג התחנות הללו");
                 //}
                 bl.addLine(newItem);
-                MessageBox.Show("!בוצע בהצלחה", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Done", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
             }
-            catch (StationException ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
-            catch (BusException ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); Close(); }
+            catch (StationException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (BusException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error); Close(); }
 
         }
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)

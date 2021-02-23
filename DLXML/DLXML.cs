@@ -146,19 +146,19 @@ namespace DL
         public bool addBusLine(Line busLineNew)
         {
             List<DO.Line> listLine = XMLTools.LoadListFromXMLSerializer<DO.Line>(linePath);//שליפת הקובץ שמכיל את רשימת הקווים
-            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            List<DO.LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            List<DO.AdjacentStation> ListAdjacentStation = XMLTools.LoadListFromXMLSerializer<AdjacentStation>(AdjacentStationPath);
             if (listLine.FirstOrDefault(s => s.LineNumber == busLineNew.LineNumber) != null)
                 throw new LineException("Identify-Number-Line exists allready");
             XElement dlConfig = XElement.Load(@"config.xml");
-            int identifyNumber = int.Parse(dlConfig.Element("Id").Value); ;
-            busLineNew.Id = identifyNumber++;
-            dlConfig.Element("Id").Value = identifyNumber.ToString();
-            dlConfig.Save(@"config.xml");
+            
             listLine.Add(busLineNew); //no need to Clone()
-            ListLineStation.Add(new LineStation { Station = busLineNew.FirstStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 1 });
-            ListLineStation.Add(new LineStation { Station = busLineNew.LastStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 2 });
+            ListAdjacentStation.Add(new AdjacentStation { Station1 = busLineNew.FirstStation, Station2 = busLineNew.LastStation, Time = new TimeSpan(2, 34, 0), Distance = 103.9 });
+            ListLineStation.Add(new LineStation { Station = busLineNew.FirstStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 1 , NextStation = busLineNew.LastStation });
+            ListLineStation.Add(new LineStation { Station = busLineNew.LastStation, LineNumber = busLineNew.LineNumber, LineStationIndex = 2 , PrevStation= busLineNew.FirstStation });
             XMLTools.SaveListToXMLSerializer(listLine, linePath);
             XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
+            XMLTools.SaveListToXMLSerializer(ListAdjacentStation, AdjacentStationPath);
             return true;
         }
 
@@ -320,8 +320,8 @@ namespace DL
             LineStation sta = ListLineStations.Find(mishehu => mishehu.LineNumber == LineStationNew.LineNumber && mishehu.Station == LineStationNew.Station);
             if (sta != null)
             {
-                ListLineStations.Remove(sta);
-                ListLineStations.Add(LineStationNew); //no nee to Clone()
+              
+               //no nee to Clone()
             }
             else
                 throw new DO.LineStationDException("The Station number " + LineStationNew.Station + " not found in the line " + LineStationNew.LineNumber);

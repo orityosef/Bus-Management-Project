@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SOLUTION.item", "SOLUTION.i
 		bin\config.xml = bin\config.xml
 		bin\XML\XMLAdjacentStation.xml = bin\XML\XMLAdjacentStation.xml
 		bin\XML\XMLBus.xml = bin\XML\XMLBus.xml
+		bin\xml\XMLBusOnTrip.xml = bin\xml\XMLBusOnTrip.xml
 		bin\XML\XMLLine.xml = bin\XML\XMLLine.xml
 		bin\XML\XMLLineStation.xml = bin\XML\XMLLineStation.xml
 		bin\XML\XMLStation.xml = bin\XML\XMLStation.xml

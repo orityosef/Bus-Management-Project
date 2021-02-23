@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ArrayOfLineStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <LineStation>
     <LineNumber>836</LineNumber>
@@ -79,11 +79,10 @@
   </LineStation>
   <LineStation>
     <LineNumber>480</LineNumber>
-    <Station>143998</Station>
-    <LineStationIndex>1</LineStationIndex>
-    <PrevStation>0</PrevStation>
-    <NextStation>673029</NextStation>
+    <Station>303999</Station>
+    <LineStationIndex>3</LineStationIndex>
+    <PrevStation>673029</PrevStation>
+    <NextStation>0</NextStation>
   </LineStation>
+
 </ArrayOfLineStation>
-
-

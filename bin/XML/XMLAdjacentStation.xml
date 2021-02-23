@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<AdjacentStationXml.xml>
+<ArrayOfAdjacentStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AdjacentStation>
     <Station1>234567</Station1>
     <Station2>852340</Station2>
@@ -106,6 +106,8 @@
     <Distance>39.45</Distance>
     <Time>01:08:08</Time>
   </AdjacentStation>>
-</AdjacentStationXml.xml>
+ 
+</ArrayOfAdjacentStation>
+
 
 
