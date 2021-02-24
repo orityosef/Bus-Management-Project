@@ -66,5 +66,10 @@ namespace PL
                 Thread.Sleep(1000);
             }
         }
+
+        private void lbLinesInStationOnSystem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

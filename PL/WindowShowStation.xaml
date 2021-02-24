@@ -33,7 +33,7 @@
             <ColumnDefinition Width="502*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="lbLinesInStationOnSystem" ItemTemplate="{StaticResource MyDataTemplateLinesInStations}"  HorizontalAlignment="Left" Height="243" Margin="42,24,0,0" VerticalAlignment="Top" Width="387"  SelectionMode="Single" ItemsSource="{Binding}" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+        <ListBox x:Name="lbLinesInStationOnSystem" ItemTemplate="{StaticResource MyDataTemplateLinesInStations}"  HorizontalAlignment="Left" Height="243" Margin="42,24,0,0" VerticalAlignment="Top" Width="387"  SelectionMode="Single" ItemsSource="{Binding}" Grid.ColumnSpan="2" Grid.RowSpan="2" SelectionChanged="lbLinesInStationOnSystem_SelectionChanged" />
         <TextBlock HorizontalAlignment="Left" Margin="229.8,53,0,0" TextWrapping="Wrap" Text="Station number:" VerticalAlignment="Top" Height="32" Width="103" Grid.Column="1" FontFamily="Times New Roman" FontSize="16"/>
         <TextBlock HorizontalAlignment="Left" Margin="358.8,53,0,0" TextWrapping="Wrap" Text="{Binding Code}" VerticalAlignment="Top" Height="19" Width="78" Grid.Column="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="229.8,103,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Height="19" Width="70" Grid.Column="1" FontFamily="Times New Roman" FontSize="16"/>
