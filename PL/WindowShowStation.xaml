@@ -17,7 +17,7 @@
                     <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="3" Text="{Binding Path=LineNumber}" FontSize="11" Foreground="#FF0D0D12"/>
-                <TextBlock Grid.Column="2"  Text=":תחנה אחרונה" FontFamily="Ink Free" FontSize="12" Foreground="#FF0A0A0E" FontWeight="Bold"/>
+                <TextBlock Grid.Column="2"  Text=":תחנה אחרונה" FontFamily="Times New Roman" FontSize="12" Foreground="#FF0A0A0E" FontWeight="Bold"/>
                 <TextBlock Grid.Column="1"  Text="{Binding Path=LastStationName}" FontSize="11" Foreground="#FF0D0D12"/>
                 <TextBlock Grid.Column="0"  Text="{Binding Path=LastStationNum}" FontSize="11" Foreground="#FF0D0D12" />
             </Grid>
@@ -50,6 +50,6 @@
                 <DataGridTextColumn Header="מספר קו" Binding="{Binding LineNumber}" />
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock x:Name="timerTextBlock" HorizontalAlignment="Left" Margin="271.333,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="58" Width="208" Grid.Column="1" Grid.Row="1"/>
+        <TextBlock x:Name="timerTextBlock" HorizontalAlignment="Left" Margin="271.333,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="58" Width="208" Grid.Column="1" Grid.Row="1" Foreground="Black" FontSize="25" FontFamily="Impact"/>
     </Grid>
 </Window>

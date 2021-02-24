@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="AllStationsWindow" Height="400" Width="600" Icon="Im/icon.jpeg">
+        Title="AllStationsWindow" Height="446.715" Width="664.233" Icon="Im/icon.jpeg">
     <Grid>
         <Grid Margin="10" RenderTransformOrigin="0.497,0.581">
             <ListView x:Name="AllStations">
