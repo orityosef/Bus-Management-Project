@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="addLine" Height="450" Width="500">
     <Grid>
-        <TextBlock x:Name="addLine111" Text="Adding a bus"  HorizontalAlignment="Left" Margin="194,0,0,374.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="36" Width="92"/>
+        <TextBlock x:Name="addLine111"  HorizontalAlignment="Left" Margin="194,0,0,374.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="36" Width="92"><Run Text="Adding a "/><Run FlowDirection="RightToLeft" Text="L"/><Run Text="ine"/></TextBlock>
         <TextBlock x:Name="explane" Text="Add a line number, in the area and two existing stations in the system." HorizontalAlignment="Left" Margin="73,46,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="23" Width="701"/>
         <TextBlock HorizontalAlignment="Left" Margin="140,100,0,0" TextWrapping="Wrap" Text="Line number:" VerticalAlignment="Top" Height="29" Width="102"/>
         <TextBlock HorizontalAlignment="Left" Margin="140,150,0,0" TextWrapping="Wrap" Text="Arae:" VerticalAlignment="Top" Height="29" Width="102"/>

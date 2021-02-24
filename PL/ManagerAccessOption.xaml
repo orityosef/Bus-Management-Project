@@ -16,7 +16,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="34,45,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Grid.Column="1"/>
         <PasswordBox x:Name="Password" HorizontalAlignment="Left" Margin="108,87,0,0" VerticalAlignment="Top" Width="120" Height="16" Grid.Column="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="36,87,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" Grid.Column="1"/>
-        <Button Content="Log in" HorizontalAlignment="Left" Margin="101.7,117,0,0" VerticalAlignment="Top" Width="75" Click="Button_ClickLogIn" Grid.Column="1">
+        <Button Content="Log in" HorizontalAlignment="Left" Margin="101.7,117,0,0" VerticalAlignment="Top" Width="75" Click="Button_ClickLogIn" Grid.Column="1" Background="#FF9BFDA6">
             <Button.Style>
                 <Style>
                     <Style.Triggers>

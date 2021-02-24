@@ -20,7 +20,7 @@
                                 <DataTemplate>
                                     <Button Content="delete"  Margin="0"
                                 VerticalAlignment="Center"
-                                Click="Delete_Click" Width="70"/>
+                                Click="Delete_Click" Width="70" Background="#FFFA7373"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -29,7 +29,7 @@
                                 <DataTemplate>
                                     <Button Content="show"  Margin="0"
                                 VerticalAlignment="Center"
-                                Click ="show_Click" Width="80"/>
+                                Click ="show_Click" Width="80" Background="#FFACC6F9"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -37,6 +37,6 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Button Content="Add Station"  Margin="76,307,53.333,26.667"   VerticalAlignment="Center" Click ="Button_ClickAddStation" Height="37"/>
+        <Button Content="Add Station"  Margin="76,307,53.333,26.667"   VerticalAlignment="Center" Click ="Button_ClickAddStation" Height="37"  Background="#FFA8E8C0"/>
     </Grid>
 </Window>

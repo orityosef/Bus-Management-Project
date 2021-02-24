@@ -21,7 +21,7 @@
                                 <DataTemplate>
                                     <Button Content="Refuelling"  Margin="0"
                                 VerticalAlignment="Center"
-                                Click="Refuelling_Click" Width="70"/>
+                                Click="Refuelling_Click" Width="70" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -39,7 +39,7 @@
                                 <DataTemplate>
                                     <Button Content="delete"  Margin="0"
                                 VerticalAlignment="Center"
-                                Click ="Delete_Click" Width="80"/>
+                                Click ="Delete_Click" Width="80" Background="#FFFA7373"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -47,7 +47,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        
-        <Button Content="Add Bus"  Margin="148,385,136.2,28.4"   VerticalAlignment="Center" Click ="Button_ClickAddBus" Height="37"/>
+
+        <Button Content="Add Bus"  Margin="148,385,136.2,28.4"   VerticalAlignment="Center" Click ="Button_ClickAddBus" Height="37" Background="#FFA8E8C0"/>
     </Grid>
 </Window>

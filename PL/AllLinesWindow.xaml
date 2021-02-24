@@ -20,7 +20,7 @@
                                 <DataTemplate>
                                     <Button Content="delete"  Margin="0"
                                 VerticalAlignment="Center"
-                                Click="Delete_Click" Width="70"/>
+                                Click="Delete_Click" Width="70" Background="#FFFA7373"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>           
                         </GridViewColumn>
@@ -28,6 +28,6 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Button Content="Add Line"  Margin="65,354,64.333,29.667"   VerticalAlignment="Center" Click ="Button_ClickAddLine" Height="37"/>
+        <Button Content="Add Line"  Margin="65,354,64.333,29.667"   VerticalAlignment="Center" Click ="Button_ClickAddLine" Height="37"  Background="#FFA8E8C0"/>
     </Grid>
 </Window>
