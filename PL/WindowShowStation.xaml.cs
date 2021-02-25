@@ -24,13 +24,13 @@ namespace PL
     /// </summary>
     public partial class WindowShowStation : Window
     {
-        IBL bl = BLFactory.GetBL("1");
+        IBL bl;
         private Stopwatch stopWatch;
         private bool isTimerRun;
         BackgroundWorker timerworker;
         TimeSpan tsStartTime;
 
-        public WindowShowStation(IBL _bl, BO.Station currentStation)
+        public WindowShowStation(IBL _bl, Station currentStation)
         {
             InitializeComponent();
             bl = _bl;
@@ -44,7 +44,7 @@ namespace PL
             isTimerRun = true;
             timerworker.RunWorkerAsync(currentStation);
             DataContext = currentStation;
-            try { lbLinesInStationOnSystem.ItemsSource = currentStation.ListOfLines.ToList(); }
+            try { lbLinesInStationOnSystem.DataContext = currentStation.ListOfLines.ToList(); }
             catch { }//תיתפס כאן חריגה במצב שבו אין קווים שעוברים בתחנה
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -65,11 +65,6 @@ namespace PL
                 timerworker.ReportProgress(231, e.Argument);
                 Thread.Sleep(1000);
             }
-        }
-
-        private void lbLinesInStationOnSystem_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
