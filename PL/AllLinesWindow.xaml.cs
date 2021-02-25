@@ -57,7 +57,15 @@ namespace PL
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
-            private void AllLine_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void show_Click(object sender, RoutedEventArgs e)//חלון נתוני תחנה
+        {
+            Button btn = sender as Button;
+            var fxElt = sender as FrameworkElement;
+            BO.Line CurrentLine = fxElt.DataContext as BO.Line;
+            WindowShowLine WindowShowLine = new WindowShowLine(bl, CurrentLine);
+            WindowShowLine.ShowDialog();
+        }
+        private void AllLine_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

@@ -270,11 +270,11 @@ namespace BL.BLAPI
                 first = false;
             }
             LineBo.ListOfStations = listStationTypeCorrect;
-            //IEnumerable<BusOnTrip> trips =
-            //    from trip in dl.getPartOfLineTrip(item => item.IdentifyNumber == busLine.IdentifyNumber)
-            //    orderby trip.TripStart
-            //    select convertoBO(trip);
-            //LineBo.ListOfStations = trips;
+            IEnumerable<BusOnTrip> trips =
+                from trip in dl.getPartOfLineTrip(item => item.IdentifyNumber == LineDo.Id)
+                orderby trip.TripStart
+                select ConvertDtoB(trip);
+            LineBo.ListOfTrips = trips;
             return LineBo;
         }
         public bool addLine(Line LineNew)

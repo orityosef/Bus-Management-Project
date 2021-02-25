@@ -64,7 +64,7 @@ namespace PL
         {
             Button btn = sender as Button;
             var fxElt = sender as FrameworkElement;
-            Station CurrentStation = fxElt.DataContext as Station;
+            BO.Station CurrentStation = fxElt.DataContext as BO.Station;
             WindowShowStation showStationWindow = new WindowShowStation(bl, CurrentStation);
             showStationWindow.ShowDialog();
         }

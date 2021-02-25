@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="AllLinesWindow" Height="450" Width="630" Icon="Im/icon.jpeg">
+        Title="AllLinesWindow" Height="450" Width="700" Icon="Im/icon.jpeg">
     <Grid>
         <Grid Margin="10" RenderTransformOrigin="0.497,0.581">
             <ListView x:Name="AllLine" SelectionChanged="AllLine_SelectionChanged" >
@@ -23,6 +23,15 @@
                                 Click="Delete_Click" Width="70" Background="#FFFA7373"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>           
+                        </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="show"  Margin="0"
+                                VerticalAlignment="Center"
+                                Click ="show_Click" Width="80" Background="#FFACC6F9"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>

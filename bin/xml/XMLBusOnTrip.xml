@@ -2,7 +2,7 @@
 <ArrayOfBusOnTrip xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <PairConsecutiveStationsDAO>
     <IdentifyNumber>1</IdentifyNumber>
-    <TripStart>06:30:00</TripStart>
+    <TripStart>06:15:00</TripStart>
   </PairConsecutiveStationsDAO>
   <PairConsecutiveStationsDAO>
     <IdentifyNumber>1</IdentifyNumber>

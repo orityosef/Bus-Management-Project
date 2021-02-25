@@ -30,7 +30,7 @@ namespace PL
         BackgroundWorker timerworker;
         TimeSpan tsStartTime;
 
-        public WindowShowStation(IBL _bl, Station currentStation)
+        public WindowShowStation(IBL _bl, BO.Station currentStation)
         {
             InitializeComponent();
             bl = _bl;

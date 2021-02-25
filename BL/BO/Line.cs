@@ -20,6 +20,7 @@ namespace BO
         public string LastStationN { get; set; }
         public List<Station> StationList { get; set; }
         public IEnumerable<LineStation> ListOfStations { get; set; }
+        public IEnumerable<BusOnTrip> ListOfTrips { get; set; }//רשימת יציאות הקו
         public override string ToString()
         {
             return " ";
