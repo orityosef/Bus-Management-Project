@@ -44,7 +44,7 @@ namespace PL
             isTimerRun = true;
             timerworker.RunWorkerAsync(currentStation);
             DataContext = currentStation;
-            try { lbLinesInStationOnSystem.DataContext = currentStation.ListOfLines.ToList(); }
+            try { lbLinesInStationOnSystem.ItemsSource = currentStation.ListOfLines.ToList(); }
             catch { }//תיתפס כאן חריגה במצב שבו אין קווים שעוברים בתחנה
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

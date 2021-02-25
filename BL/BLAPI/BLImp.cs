@@ -237,12 +237,12 @@ namespace BL.BLAPI
                     forNow.StationID = lineStationNext.Station;
                     forNow.LineStationIndex = lineStationNext.LineStationIndex;
                     forNow.NameStation = dl.GetOneStation(lineStationNext.Station).Name;
-                    //TimeSpan count = new TimeSpan(0, 0, 0);
-                    //for (int i = forNow.LineStationIndex; i > 1; i--)//חישוב זמן הנסיעה של התחנה הנוכחית מתחנת המוצא
-                    //{
-                    //   count += dl.GetOneAdjacentStation(listStationInLineOrder.ToArray()[i - 1].Station, listStationInLineOrder.ToArray()[i - 2].Station).Time;
-                    //}
-                    //forNow.TimeFromFirstStation = count;
+                    TimeSpan count = new TimeSpan(0, 0, 0);
+                    for (int i = forNow.LineStationIndex; i > 1; i--)//חישוב זמן הנסיעה של התחנה הנוכחית מתחנת המוצא
+                    {
+                        count += dl.GetOneAdjacentStation(listStationInLineOrder.ToArray()[i - 1].Station, listStationInLineOrder.ToArray()[i - 2].Station).Time;
+                    }
+                    forNow.TimeFromFirstStation = count;
                     if (dl.GetOneAdjacentStation(current.Station, prev.Station) != null)
                     {
                         forNow.Distance = dl.GetOneAdjacentStation(current.Station, prev.Station).Distance;//הצבת המרחק מתוך זוג התחנות העוקבות בשדה מרחק של התחנה שלנו מקודמתה
@@ -953,30 +953,30 @@ namespace BL.BLAPI
             return orderList.ToList();
 
         }
-        
+
         public IEnumerable<LineTimingBO> GetLineTimingsPerStation(Station cuurentStation, TimeSpan now)
         {
             List<LineTimingBO> result = new List<LineTimingBO>();
             if (cuurentStation.ListOfLines != null)
             {
 
-                foreach (LineInStation lineInSb in cuurentStation.ListOfLines)//נעבור על כל הקווים שעוברים בתחנה
+                foreach (LineInStation line in cuurentStation.ListOfLines)//נעבור על כל הקווים שעוברים בתחנה
                 {
                     LineTimingBO lineTiming = new LineTimingBO();
-                    lineTiming.IdentifyNumber = lineInSb.IdentifyNumber;
-                    lineTiming.LineNumber = lineInSb.LineNumber;
-                    lineTiming.LastStationName = lineInSb.LastStationName;
-                    Line curLine = GetOneBusLine(lineInSb.IdentifyNumber);
+                    lineTiming.IdentifyNumber = line.IdentifyNumber;
+                    lineTiming.LineNumber = line.LineNumber;
+                    lineTiming.LastStationName = line.LastStationName;
+                    Line curLine = GetOneBusLine(line.IdentifyNumber);
                     TimeSpan TimeTripFromStart = new TimeSpan(0, 0, 0);
-                    foreach (LineStation lineSt in curLine.ListOfStations)//חישוב כמה זמן לוקח לקו הספציפי להגיע לתחנה שלנו
+                    foreach (LineStation stationInLine in curLine.ListOfStations)//חישוב כמה זמן לוקח לקו הספציפי להגיע לתחנה שלנו
                     {
-                        if (lineSt.StationID == cuurentStation.Code)
-                            TimeTripFromStart = lineSt.TimeFromFirstStation;
+                        if (stationInLine.StationID == cuurentStation.Code)
+                            TimeTripFromStart = stationInLine.TimeFromFirstStation;
                     }
                     try
                     {
                         //נוצרת רשימה של יציאות הקו הרלוונטיות, כלומר שייכות לקו הנוכחי ועוברות בתחנה בחצי השעה הקרובה
-                        List<DO.BusOnTrip> relevantTripToLine = dl.getPartOfLineTrip(item => item.IdentifyNumber == lineInSb.IdentifyNumber && item.TripStart + TimeTripFromStart > now && item.TripStart + TimeTripFromStart < now + new TimeSpan(0, 30, 0)).ToList();
+                        List<DO.BusOnTrip> relevantTripToLine = dl.getPartOfLineTrip(item => item.IdentifyNumber == line.IdentifyNumber && item.TripStart + TimeTripFromStart > now && item.TripStart + TimeTripFromStart < now + new TimeSpan(0, 30, 0)).ToList();
                         foreach (DO.BusOnTrip lineTrip in relevantTripToLine)
                         {
                             lineTiming.TripStart = lineTrip.TripStart;

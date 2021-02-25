@@ -24,23 +24,23 @@
                 <TextBlock Grid.Column="3" Text=":המרחק מהתחנה הקודמת בק'מ" FontFamily="Ink Free" FontSize="12" Foreground="#FF0A0A0E" FontWeight="Bold"/>
                 <TextBlock Grid.Column="2"  Text="{Binding Path=Distance}" FontSize="11" Foreground="#FF0D0D12" />
                 <TextBlock Grid.Column="1" Text=":זמן הנסיעה הממוצע מהתחנה הקודמת" FontFamily="Ink Free" FontSize="12" Foreground="#FF0A0A0E" FontWeight="Bold"/>
-                <TextBlock Grid.Column="0"  Text="{Binding Path=TimeDriving}" FontSize="11" Foreground="#FF0D0D12" />
+                <TextBlock Grid.Column="0"  Text="{Binding Path=Time}" FontSize="11" Foreground="#FF0D0D12" />
             </Grid>
         </DataTemplate>
     </Window.Resources>
 
     <Grid>
         <ListBox x:Name="lbStationsInLineOnSystem" ItemTemplate="{StaticResource MyDataTemplateStationsInLine}"  HorizontalAlignment="Left" Height="243" Margin="36,62,0,0" VerticalAlignment="Top" Width="852"  SelectionMode="Single" ItemsSource="{Binding}" />
-        <TextBlock HorizontalAlignment="Left" Margin="828,20,0,0" TextWrapping="Wrap" Text=":נתוני הקו" VerticalAlignment="Top" Height="27" Width="132"/>
-        <TextBlock HorizontalAlignment="Left" Margin="707,20,0,0" TextWrapping="Wrap" Text=":מספר מזהה" VerticalAlignment="Top" Height="19" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="658,21,0,0" TextWrapping="Wrap" Text="{Binding IdentifyNumber}" VerticalAlignment="Top" Height="19" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="560,18,0,0" TextWrapping="Wrap" Text=":מספר קו" VerticalAlignment="Top" Height="19" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="517,18,0,0" TextWrapping="Wrap" Text="{Binding LineNumber}" VerticalAlignment="Top" Height="19" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="435,18,0,0" TextWrapping="Wrap" Text=":איזור" VerticalAlignment="Top" Height="19" Width="70"/>
-        <TextBlock HorizontalAlignment="Left" Margin="347,18,0,0" TextWrapping="Wrap" Text="{Binding Area}" VerticalAlignment="Top" Height="19" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="84,24,0,0" TextWrapping="Wrap" Text="Line data:" VerticalAlignment="Top" Height="27" Width="132"/>
+        <TextBlock HorizontalAlignment="Left" Margin="175,24,0,0" TextWrapping="Wrap" Text="Identification number" VerticalAlignment="Top" Height="19" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="272,24,0,0" TextWrapping="Wrap" Text="{Binding Id}" VerticalAlignment="Top" Height="19" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="342,24,0,0" TextWrapping="Wrap" Text="LineNumber" VerticalAlignment="Top" Height="19" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="436,24,0,0" TextWrapping="Wrap" Text="{Binding LineNumber}" VerticalAlignment="Top" Height="19" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="544,24,0,0" TextWrapping="Wrap" Text="Aera:" VerticalAlignment="Top" Height="19" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="614,24,0,0" TextWrapping="Wrap" Text="{Binding Aera}" VerticalAlignment="Top" Height="19" Width="70"/>
         <DataGrid x:Name="loozDG" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="243" Margin="919,62,0,0" VerticalAlignment="Top" Width="105">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="זמני יציאת הקו" Binding="{Binding TripStart}" />
+                <DataGridTextColumn Header="Line departure times" Binding="{Binding TripStart}" />
             </DataGrid.Columns>
         </DataGrid>
 
