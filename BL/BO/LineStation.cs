@@ -9,6 +9,7 @@ namespace BO
 {
     public class LineStation:IComparable<LineStation>
     {
+        public int Id { get; set; }
         public int LineNumber { get; set; }
         public int StationID { get; set; }
         public int LineStationIndex { get; set; }

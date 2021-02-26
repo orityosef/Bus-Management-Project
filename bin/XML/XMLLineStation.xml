@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <ArrayOfLineStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <LineStation>
+    <Id>1</Id>
     <LineNumber>836</LineNumber>
     <Station>852340</Station>
     <LineStationIndex>2</LineStationIndex>
@@ -8,6 +9,7 @@
     <NextStation>234567</NextStation>
   </LineStation>
   <LineStation>
+    <Id>1</Id>
     <LineNumber>836</LineNumber>
     <Station>234567</Station>
     <LineStationIndex>1</LineStationIndex>
@@ -15,6 +17,7 @@
     <NextStation>852340</NextStation>
   </LineStation>
   <LineStation>
+    <Id>1</Id>
     <LineNumber>836</LineNumber>
     <Station>303999</Station>
     <LineStationIndex>3</LineStationIndex>
@@ -22,6 +25,7 @@
     <NextStation>0</NextStation>
   </LineStation>
   <LineStation>
+    <Id>2</Id>
     <LineNumber>450</LineNumber>
     <Station>965320</Station>
     <LineStationIndex>2</LineStationIndex>
@@ -29,6 +33,7 @@
     <NextStation>987654</NextStation>
   </LineStation>
   <LineStation>
+    <Id>2</Id>
     <LineNumber>450</LineNumber>
     <Station>234567</Station>
     <LineStationIndex>1</LineStationIndex>
@@ -36,6 +41,7 @@
     <NextStation>965320</NextStation>
   </LineStation>
   <LineStation>
+    <Id>2</Id>
     <LineNumber>450</LineNumber>
     <Station>987654</Station>
     <LineStationIndex>3</LineStationIndex>
@@ -43,6 +49,7 @@
     <NextStation>0</NextStation>
   </LineStation>
   <LineStation>
+    <Id>3</Id>
     <LineNumber>56</LineNumber>
     <Station>764581</Station>
     <LineStationIndex>2</LineStationIndex>
@@ -50,6 +57,7 @@
     <NextStation>303988</NextStation>
   </LineStation>
   <LineStation>
+    <Id>3</Id>
     <LineNumber>56</LineNumber>
     <Station>246801</Station>
     <LineStationIndex>1</LineStationIndex>
@@ -57,6 +65,7 @@
     <NextStation>764581</NextStation>
   </LineStation>
   <LineStation>
+    <Id>3</Id>
     <LineNumber>56</LineNumber>
     <Station>303988</Station>
     <LineStationIndex>3</LineStationIndex>
@@ -64,6 +73,7 @@
     <NextStation>0</NextStation>
   </LineStation>
   <LineStation>
+    <Id>4</Id>
     <LineNumber>480</LineNumber>
     <Station>673029</Station>
     <LineStationIndex>2</LineStationIndex>
@@ -71,6 +81,7 @@
     <NextStation>303999</NextStation>
   </LineStation>
   <LineStation>
+    <Id>4</Id>
     <LineNumber>480</LineNumber>
     <Station>143998</Station>
     <LineStationIndex>1</LineStationIndex>
@@ -78,6 +89,7 @@
     <NextStation>673029</NextStation>
   </LineStation>
   <LineStation>
+    <Id>4</Id>
     <LineNumber>480</LineNumber>
     <Station>303999</Station>
     <LineStationIndex>3</LineStationIndex>

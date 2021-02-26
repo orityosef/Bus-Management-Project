@@ -396,25 +396,23 @@ namespace BL.BLAPI
             return (StationDo);
         }
         //המרה מ-DלB
-        private Station ConvertDtoB(DO.Station st)
+        private Station ConvertDtoB(DO.Station busStation)
         {
-            Station StationBo = new Station();
-
-            StationBo.Code = st.Code;
-            StationBo.Name = st.Name;
-            StationBo.Latitude = st.Latitude;
-            StationBo.Longitude = st.Longitude;
-            StationBo.StationInLineList = ((from ls in dl.GetAllLineStation()
-                                            let bls = ConvertDtoB(ls)
-                                            where (bls.StationID == st.Code)
-                                            select bls.LineNumber).ToList());
+            Station busStationBO = new Station
+            {
+                Code = busStation.Code,
+                Latitude = busStation.Latitude,
+                Longitude = busStation.Longitude,
+                Name = busStation.Name,
+              
+            };
             try
             {
-                IEnumerable<DO.LineStation> listLineStations = dl.getPartOfLineStations(item => item.Station == st.Code);//רשימה של תחנות קו המתאימות לתחנה הזאת
+                IEnumerable<DO.LineStation> listLineStations = dl.getPartOfLineStations(item => item.Station== busStation.Code);//רשימה של תחנות קו המתאימות לתחנה הזאת
                 IEnumerable<LineInStation> listOfLineInStation =
                 from lineStation in listLineStations
                 from BusLine1 in dl.GetAllBusesLine()
-                where lineStation.Station == BusLine1.Id
+                where lineStation.Id == BusLine1.Id
                 let result = new LineInStation
                 {
                     IdentifyNumber = BusLine1.Id,
@@ -423,13 +421,13 @@ namespace BL.BLAPI
                     LastStationNum = BusLine1.LastStation
                 }
                 select result;
-                StationBo.ListOfLines = listOfLineInStation;
-                return StationBo;
+                busStationBO.ListOfLines = listOfLineInStation;
+                return busStationBO;
             }
             catch//אין קווים שעוברים בתחנה
             {
-                StationBo.ListOfLines = null;
-                return StationBo;
+                busStationBO.ListOfLines = null;
+                return busStationBO;
             }
         }
 
@@ -666,7 +664,7 @@ namespace BL.BLAPI
         private LineStation ConvertDtoB(DO.LineStation linestation)
         {
             var LineStationBo = new LineStation();
-
+            LineStationBo.Id = linestation.Id;
             LineStationBo.LineNumber = linestation.LineNumber;
             LineStationBo.StationID = linestation.Station;
             LineStationBo.LineStationIndex = linestation.LineStationIndex;
@@ -703,6 +701,7 @@ namespace BL.BLAPI
         private DO.LineStation ConvertBtoD(LineStation LineStation)
         {
             DO.LineStation LineStationDo = new DO.LineStation();
+            LineStationDo.Id = LineStation.Id;
             LineStationDo.Station = LineStation.StationID;
             LineStationDo.LineNumber = LineStation.LineNumber;
             LineStationDo.LineStationIndex = LineStation.LineStationIndex;

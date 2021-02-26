@@ -218,12 +218,13 @@ namespace DL
         {
             List<Line> ListBusLines = XMLTools.LoadListFromXMLSerializer<Line>(linePath);
 
-            DO.Line line = ListBusLines.Find(p => p.LineNumber == LineNumber);
+            DO.Line line = ListBusLines.Find(p => p.Id == LineNumber);
             if (line != null)
                 return line; //no need to Clone()
             else
                 throw new DO.LineException("The Identify-Number-Line " + LineNumber + " not found");
         }
+
 
         #endregion Line
 
