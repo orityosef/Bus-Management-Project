@@ -968,6 +968,10 @@ namespace BL.BLAPI
                 int LocationFirst = 0;
                 bool ifLastIn = false;
                 int LocationLast = 0;
+                // LocationFirst = (from station in line.ListOfStations
+                //         where station.StationID == codeStation1
+                //         select station.LineStationIndex).FirstOrDefault();
+                //ifFirstIn = (LocationFirst != 0);
                 foreach (var station in line.ListOfStations)
                 {
                     if (station.StationID == codeStation1)
@@ -1019,6 +1023,7 @@ namespace BL.BLAPI
                     lineTiming.LastStationName = line.LastStationName;
                     Line curLine = GetOneBusLine(line.IdentifyNumber);
                     TimeSpan TimeTripFromStart = new TimeSpan(0, 0, 0);
+
                     foreach (LineStation stationInLine in curLine.ListOfStations)//חישוב כמה זמן לוקח לקו הספציפי להגיע לתחנה שלנו
                     {
                         if (stationInLine.StationID == cuurentStation.Code)
