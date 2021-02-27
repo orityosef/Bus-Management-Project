@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for ManagerAccessOption1.xaml
+    /// בדיקת גישה לחלון מנהל
     /// </summary>
     public partial class ManagerAccessOption : Window
     {
@@ -30,7 +30,7 @@ namespace PL
 
         }
 
-
+        // אחרי מילוי הפרטים בודק על רשימת המשתשמים אם הפרטים נכונים
         private void Button_ClickLogIn(object sender, RoutedEventArgs e)
         {
             try

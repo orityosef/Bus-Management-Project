@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace DO
 {
+    // מקביל לlineStation 
+    //נסיעת קו בודדת
     public class Trip
     {
         public int Id { get; set; }

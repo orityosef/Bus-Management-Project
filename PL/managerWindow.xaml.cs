@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for managerWindow.xaml
+    ///תפריט בחירת תצוגה 
     /// </summary>
     public partial class managerWindow : Window
     {

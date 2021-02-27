@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL.BO
 {
+    //ישות לסימולציה כדי לדעת פרטים על הקו- מתי הוא מגיע
     public class LineTimingBO
     {
         private static int counter = 0;

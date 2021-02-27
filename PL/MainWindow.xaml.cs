@@ -16,8 +16,9 @@ using System.Windows.Shapes;
 
 namespace PL
 {
+    
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// חלון ראשי פותח תפריט בחירה
     /// </summary>
     public partial class MainWindow : Window
     {

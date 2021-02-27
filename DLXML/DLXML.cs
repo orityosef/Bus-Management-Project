@@ -31,6 +31,7 @@ namespace DL
         #endregion
 
         #region Bus
+        //הוספת אוטובוס
         public bool addBus(Bus busNew)
         {
             XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
@@ -55,7 +56,7 @@ namespace DL
             return true;
         }
 
-
+        //מחיקת אוטובוס
         public bool deleteBus(Bus busNew)
         {
 
@@ -74,7 +75,7 @@ namespace DL
             else
                 throw new BusException("Does not exist in the system");
         }
-
+        //עדכון אוטובוס
         public bool updatingBus(Bus busNew)
         {
 
@@ -97,6 +98,7 @@ namespace DL
             else
                 throw new DO.BusException("The license number " + busNew.LicenseNum + " not found");
         }
+        //הבאת אוטובוס אחד על פי סימן מזהה
         public Bus GetOneBus(int License)
         {
             XElement busesRootElem = XMLTools.LoadListFromXMLElement(busPath);
@@ -116,6 +118,7 @@ namespace DL
                 throw new DO.BusException("license not found");
             return p;
         }
+        //הבאת כל רשימת האוטובוסים
         public IEnumerable<Bus> GetAllBuses()
         {
 
@@ -134,11 +137,7 @@ namespace DL
                     }
                    );
         }
-        //List<Bus> ListBuss = XMLTools.LoadListFromXMLSerializer<Bus>(busPath);
-        //    return from Bus in ListBuss
-        //           select Bus;
-
-        // }
+       
 
 
         #endregion Bus
@@ -304,6 +303,7 @@ namespace DL
             XMLTools.SaveListToXMLSerializer(ListLineStations, lineStationPath);
             return true;
         }
+        //הבאת חלק מרשימת ה(קו בתחנה) על פי פרדיקט
         public IEnumerable<LineStation> getPartOfLineStations(Predicate<LineStation> LineStationDAOCondition)
         {
 
@@ -413,8 +413,6 @@ namespace DL
             return from user in ListUsers
                    select user; //no need to Clone()
         }
-
-
 
         public User GetOneUser(string UsserName)
         {

@@ -12,9 +12,7 @@ namespace DS
 {
     public static class DataSource
     {
-        //******************************************
-        // how are you today?? <3
-        //*************************************
+
         /// <summary>
         /// DataSource-רשימות של בסיס הנתונים של הפרוייקט
         /// </summary>

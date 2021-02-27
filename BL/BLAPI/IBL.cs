@@ -71,17 +71,17 @@ namespace BL.BLAPI
         bool existingUser(string userName, string passWord);
 
         #endregion
-        //עבור לוח אלקטרוני
-        IEnumerable<LineTimingBO> GetLineTimingsPerStation(Station cuurentStation, TimeSpan now);
-        bool addLineTrip(BusOnTrip lineTrip);
-        bool deleteLineTrip(BusOnTrip lineTrip);
-     
-
+      
         # region  MiniStation
         IEnumerable<MiniStation> GetAllMiniStations();
         IEnumerable<MiniStation> GetListMiniStationsByLine(Line line);//מחזירה את רשימת המיני תחנות של קו ספציפי
 
         #endregion
+
+        //עבור לוח אלקטרוני
+        IEnumerable<LineTimingBO> GetLineTimingsPerStation(Station cuurentStation, TimeSpan now);
+        bool addLineTrip(BusOnTrip lineTrip);
+        bool deleteLineTrip(BusOnTrip lineTrip);
         List<WayForPass> GetRelevantWays(int codeStation1, int codeStation2);
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DO
 {
+    //נתןנים בסיסים של קו בנסיעה-מה שנמשך מקובץ אקסמל
     public class BusOnTrip
     {
         public int IdentifyNumber { get; set; } //מספר מזהה קו

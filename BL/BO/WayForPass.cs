@@ -7,6 +7,7 @@ using BL.BO;
 
 namespace BO
 {
+    //ישות עזר מציגה פרטים נוספים על קו ועל זמנים
     public class WayForPass
     {
         public int LineNumber { get; set; }//מספר קו

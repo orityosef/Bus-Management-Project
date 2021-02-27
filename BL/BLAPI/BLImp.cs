@@ -906,7 +906,58 @@ namespace BL.BLAPI
         }
 
         #endregion
+
+
+        #region BusOnTrip
+        private DO.BusOnTrip ConvertBtoD(BusOnTrip lineTrip)
+        {
+            DO.BusOnTrip lineTripDAO = new DO.BusOnTrip
+            {
+                IdentifyNumber = lineTrip.IdentifyNumber,
+                TripStart = lineTrip.TripStart,
+            };
+            return lineTripDAO;
+        }
+        private BusOnTrip ConvertDtoB(DO.BusOnTrip lineTrip)
+        {
+            BusOnTrip result = new BusOnTrip
+            {
+                IdentifyNumber = lineTrip.IdentifyNumber,
+                TripStart = lineTrip.TripStart,
+            };
+            return result;
+        }
+        public bool addLineTrip(BusOnTrip lineTrip)
+        {
+            bool result;
+            try
+            {
+                result = dl.addLineTrip(ConvertBtoD(lineTrip));
+            }
+            catch (DO.BusOnTripException ex)
+            {
+                throw new BusOnTripException("יציאת הקו כבר קיימת במערכת", ex);
+            }
+            return result;
+        }
+        public bool deleteLineTrip(BusOnTrip lineTrip)
+        {
+            bool result;
+            try
+            {
+                result = dl.deleteLineTrip(ConvertBtoD(lineTrip));
+            }
+            catch (DO.BusOnTripException ex)
+            {
+                throw new BusOnTripException("Does not exist in the system", ex);
+            }
+            return result;
+        }
+        #endregion
+
         //פונקציות עבור לוח אלקטרוני
+
+        // מקבל 2 תחנות ומחזיר את הקו שעובר  בניהם לא מחזיר כלום אם לא קיים קו
         public List<WayForPass> GetRelevantWays(int codeStation1, int codeStation2)
         {
             List<WayForPass> result = new List<WayForPass>();
@@ -952,7 +1003,8 @@ namespace BL.BLAPI
             return orderList.ToList();
 
         }
-
+        //מקבל את הזמן עכשיו ומספר תחנה
+        //מחזיר רשימה של הקויים הרלוונטים לתחנה שעוברים בה ואת הזמן עד שהם יגיעו
         public IEnumerable<LineTimingBO> GetLineTimingsPerStation(Station cuurentStation, TimeSpan now)
         {
             List<LineTimingBO> result = new List<LineTimingBO>();
@@ -989,50 +1041,7 @@ namespace BL.BLAPI
             }
             return result;
         }
-        private DO.BusOnTrip ConvertBtoD(BusOnTrip lineTrip)
-        {
-            DO.BusOnTrip lineTripDAO = new DO.BusOnTrip
-            {
-                IdentifyNumber = lineTrip.IdentifyNumber,
-                TripStart = lineTrip.TripStart,
-            };
-            return lineTripDAO;
-        }
-        private BusOnTrip ConvertDtoB(DO.BusOnTrip lineTrip)
-        {
-            BusOnTrip result = new BusOnTrip
-            {
-                IdentifyNumber = lineTrip.IdentifyNumber,
-                TripStart = lineTrip.TripStart,
-            };
-            return result;
-        }
-        public bool addLineTrip(BusOnTrip lineTrip)
-        {
-            bool result;
-            try
-            {
-                result = dl.addLineTrip(ConvertBtoD(lineTrip));
-            }
-            catch (DO.BusOnTripException ex)
-            {
-                throw new BusOnTripException("יציאת הקו כבר קיימת במערכת", ex);
-            }
-            return result;
-        }
-        public bool deleteLineTrip(BusOnTrip lineTrip)
-        {
-            bool result;
-            try
-            {
-                result = dl.deleteLineTrip(ConvertBtoD(lineTrip));
-            }
-            catch (DO.BusOnTripException ex)
-            {
-                throw new BusOnTripException("Does not exist in the system", ex);
-            }
-            return result;
-        }
+
 
     }
 }

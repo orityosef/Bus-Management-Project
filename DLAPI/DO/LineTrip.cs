@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DO
 {
+    //נסיעת קו בודד (מקביל Line)
     public class LineTrip
     {
         public int Id { get; set; }

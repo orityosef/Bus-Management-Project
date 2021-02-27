@@ -66,7 +66,7 @@ namespace DLAPI
         IEnumerable<AdjacentStation> GetAllAdjacentStation();
         AdjacentStation GetOneAdjacentStation(int Station1, int Station2);
         #endregion AdjacentStation
-
+        //זמני קו
         #region BusOnTrip
         bool addLineTrip(BusOnTrip lineTrip);
         bool updateLineTrip(BusOnTrip lineTrip);

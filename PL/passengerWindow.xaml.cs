@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for passengerWindow.xaml
+    /// חלון מידע לנוסע מציג קו בין תחנות ואת זמן נסיעה בניהם
     /// </summary>
     public partial class passengerWindow : Window
     {
@@ -27,9 +27,10 @@ namespace PL
         public passengerWindow()
         {
             InitializeComponent();
-            lastStationCB.ItemsSource = bl.GetAllMiniStations();
+            lastStationCB.ItemsSource = bl.GetAllMiniStations();//מציג רשימה של תחנות
             firstStationCB.ItemsSource = bl.GetAllMiniStations();
         }
+        //בחירת תחנה ראשונה
         private void firstStationCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -39,6 +40,7 @@ namespace PL
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
+        //בחירת תחנה אחרונה
         private void lastStationCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try

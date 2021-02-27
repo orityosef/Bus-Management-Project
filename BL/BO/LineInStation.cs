@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    //קו בתחנה
+    //הישות שיש בתוך הרשימה שנמצאת באובייקט תחנה ומכילה את הקויים
     public class LineInStation
     {
         public int IdentifyNumber { get; set; }//מזהה קו
